@@ -4,7 +4,7 @@ The composition operators, and the witness that says where a maximum occurs.
 
 - **Who**: [Ines](../../cast/ines.md), who needs a worst case found without
   having guessed where to look for it.
-- **What**: the specs under `spec/`, which discharge K3 and K4.
+- **What**: the specs under `spec/`, which discharge accumulator fit and attainment.
 - **Why**: this is the milestone that makes the tool worth more than a sweep.
 
 ## The increment
@@ -30,12 +30,12 @@ it cannot, it searches the domain.
 
 ## Obligations
 
-### K3, composition fits its accumulator
+### Composition fits its accumulator
 
 The accumulator type is wide enough for every reachable composition, and the
 tool checks that rather than hoping for it.
 
-### K4, attainment
+### Attainment
 
 The reported maximum is a true maximum over the declared domain. A solver earns
 its keep over a sweep precisely here.

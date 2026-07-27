@@ -975,9 +975,11 @@ and the proofs are `cargo kani`. The arithmetic is the verified part, and the
 register it computes over is a human's declaration, so a discharged obligation
 is a claim about the model and never about the firmware the model describes.
 
-The seven proof obligations are named `K1` through `K7`, and those identifiers
-are project vocabulary. A milestone under `plan/` states which it discharges,
-and the numbering is fixed so that a reference stays stable.
+The seven proof obligations are named for what each asserts: termination,
+counter fit, accumulator fit, attainment, unit soundness, provenance
+monotonicity, and interval soundness. A milestone under `plan/` states which it
+discharges. They are never numbered, in prose or in an identifier, because an
+ordinal label is a tell and `host-lint` reports it as one.
 
 ### Two surfaces, one rule
 

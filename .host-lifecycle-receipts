@@ -65,3 +65,15 @@
     evidence = post-upgrade sweep green at baseline GATE-refs-in-verify: validate plan/ + call/ ok; prose clean; refs --gate clean over 19 tracked docs; reconcile clean; book --check renders every room; verify-setup complete; 0 hazards
     tool = host-lifecycle@0.46.0
     recorded = 2026-07-27
+
+[receipt "remap"]
+    disposition = done
+    evidence = greenfield host: no ordinal-named files; the two physical figures in call/0007 are sanctioned in LEXICON
+    tool = host-lifecycle@0.47.0
+    recorded = 2026-07-27
+
+[receipt "verify"]
+    disposition = done
+    evidence = post-widening sweep green: validate plan/ + call/ ok; prose clean; refs --gate clean over 23 docs; reconcile clean; book --check renders every room; software --check 0 hazards; 32 tests and 12 proof harnesses pass
+    tool = host-lifecycle@0.47.0
+    recorded = 2026-07-27

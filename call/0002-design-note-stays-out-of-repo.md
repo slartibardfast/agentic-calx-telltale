@@ -35,7 +35,7 @@ suite name whether real or pseudonymous.
 Acceptance criteria that depend on figures from the investigation are held with
 the note rather than here. A milestone's acceptance criteria in `plan/` are
 therefore stated as properties (a short-circuit reports its expensive branch, a
-wrapping measure fails K1) rather than as expected numbers.
+wrapping measure fails termination) rather than as expected numbers.
 
 If the note ever moves into a repository, it needs review against the
 non-disclosure terms first, and the operator makes that call.

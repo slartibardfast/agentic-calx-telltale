@@ -36,7 +36,7 @@ that cost carries and the input that attains it.
 
 ## Consequences
 
-- Good: K6 is observable from either surface, so the property the name promises
+- Good: provenance monotonicity is observable from either surface, so the property the name promises
   can be checked by the persona that reads it.
 - Good: the structured output shape becomes a compatibility commitment, which is
   what makes an agent's loop safe across releases.

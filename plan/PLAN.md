@@ -12,10 +12,10 @@ them.
 - [0001 register-schema-and-census](0001-register-schema-and-census/README.md),
   the declaration format and the ELF adapter that emits a skeleton of it.
 - [0002 units-provenance-intervals](0002-units-provenance-intervals/README.md),
-  the `Quantity` core and its three obligations (K5, K6, K7).
+  the `Quantity` core and its three obligations over units, provenance and intervals.
 - [0003 composition-and-attainment](0003-composition-and-attainment/README.md),
-  the composition operators and the witness (K3, K4).
+  the composition operators, accumulator fit, and the witness.
 - [0004 termination-and-counter-fit](0004-termination-and-counter-fit/README.md),
-  well-foundedness and counter-type fit (K1, K2), which need loop contracts.
+  well-foundedness and counter-type fit, which need loop contracts.
 - [0005 deadlines-and-response-time](0005-deadlines-and-response-time/README.md),
   the armed-deadline comparison, and after it interrupt response time.

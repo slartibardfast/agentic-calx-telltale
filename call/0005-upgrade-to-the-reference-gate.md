@@ -20,8 +20,8 @@ pointer and then find `software --check` invoking a mode its binary lacks.
 
 ## Decision
 
-Upgrade to `32e655f113d908f2a0c43cef8dcf0efaaefc2739`, baseline
-`GATE-refs-in-verify`, nothing pending.
+Upgrade to `32e655f113d908f2a0c43cef8dcf0efaaefc2739`. The baseline becomes
+`GATE-refs-in-verify` and the ledger empties.
 
 The ordering hazard did not apply here. This host already pins host-lifecycle at
 `8b68284`, which is v0.46.0, so the required capability was present before the
@@ -34,9 +34,10 @@ new `recheck`. `STRUCTURE.md` needed no edit, because the upstream fix and the
 local one made at adoption are the same change.
 
 `.host-lintignore` was not taken from the template. The template now ships one
-that excludes `UPGRADING.md`, which is the template's own record layer. This
-host has no `UPGRADING.md` at its root, so the exclusion would name nothing.
-Each project owns this file, and ours excludes `MEMORY.md` as before.
+that excludes `UPGRADING.md`, which is the template's own record layer. That
+exclusion names a path at the repository root, and this host keeps the ledger
+inside the template submodule, where the sweep already leaves it alone. Each
+project owns this file, and ours excludes `MEMORY.md` as before.
 
 ## Consequences
 

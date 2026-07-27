@@ -13,7 +13,7 @@ decision to cite.
 
 ## Decision
 
-Both `release` receipts are recorded as `skip`, citing this record.
+Both `release` receipts are recorded as `skip`, and each cites this record.
 
 **calx-telltale** is greenfield. The design is settled and no implementation
 exists, so there is no binary to tag, no artifact hash to re-derive, and nothing

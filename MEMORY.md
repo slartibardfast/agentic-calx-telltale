@@ -54,3 +54,27 @@
 - Re-applying the spine is safe here because `CLAUDE.md` is exactly template-plus-appended-section: the
   spine portion diffs clean against the adopted revision, so it can be regenerated and the
   project-specifics re-appended. **Keep it that way** rather than editing the spine in place.
+
+### 2026-07-28 — the verified core, and a width reversal
+
+- Built the `Quantity` core in calx-telltale: intervals carrying a unit and a provenance, exact rational
+  clock rates, the per-register base, the tree of derived clocks, and the delay forms. 32 tests, 12 Kani
+  harnesses, all green. Pinned at `41794e6`.
+- **Timing sources are declared, never built in** (call/0006). The crate contains no PIT or HPET; those
+  appear only as test fixtures. That is what makes it usable on arbitrary embedded parts.
+- **Rates are exact rationals** (call/0007). The interval timer is `13125000/11` Hz. The integer figures
+  usually quoted for it and for an event timer are *themselves* roundings, so a base derived from them is
+  a base for clocks that do not exist. A register composes in the LCM base, after `flicks`.
+- **The stored width was reversed from 64 to 128 bits mid-session, and the reason matters.** The narrow
+  store was justified on proof cost. That was tested and disproved: multiplication over the full domain
+  defeats the solver at *either* width, under SAT and under SMT, so the obligation needs a bounded domain
+  regardless and width buys nothing. Meanwhile the narrow store capped how fine a base could be
+  (five hours at femtosecond resolution) and made base derivation give up early. **Do not re-narrow it
+  on a proof-cost argument without re-running the experiment.**
+- **Multiplication is proved at boundary values, not exhaustively** (call/0009). The property is textbook
+  interval arithmetic; what needs checking is the transcription, and that shows at the identities, the
+  fitting boundary, and the extremes. Whole suite went from never-terminating to 49 seconds.
+- An external SMT solver was installed, measured against the unbounded harness, found not to help, and
+  removed. **Do not reach for a bigger solver here; the domain is the problem, not the back end.**
+- Ordinal labels for the obligations were removed throughout after host-lint flagged every one of them.
+  Obligations are named for what they assert. Never number them.

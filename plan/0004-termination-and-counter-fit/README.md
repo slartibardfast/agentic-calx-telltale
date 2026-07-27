@@ -5,23 +5,23 @@ holding it.
 
 - **Who**: [Ines](../../cast/ines.md), who needs to know that a declared timeout
   can actually fire.
-- **What**: the specs under `spec/`, which discharge K1 and K2.
+- **What**: the specs under `spec/`, which discharge termination and counter fit.
 - **Why**: a wait whose measure wraps has a bound in its documentation and none
   in its behaviour.
 
 ## The increment
 
-### K1, termination
+### Termination
 
 For every `Wait`, the measure is well-founded and strictly decreasing on every
 path through the body. This is expressed with a `loop_decreases` clause, which
 is the reason the approach is worth its cost: without it, a loop contract
 establishes partial correctness only and says nothing at all about
 non-termination. A teardown loop that states a bound of ten thousand,
-post-decrements its counter, and then tests it against zero fails K1 by
+post-decrements its counter, and then tests it against zero fails termination by
 construction, because the counter wraps past the test.
 
-### K2, the budget fits its counter
+### The budget fits its counter
 
 The declared budget is at most the counter type's maximum, checked at
 declaration. A retry counter held in a `uint16_t` carrying a budget of `0x2000`
@@ -33,8 +33,8 @@ why it sits after the two milestones whose harnesses are small and bounded.
 
 ## Acceptance
 
-- A wait declaring a post-decrement measure with a zero test fails K1, and the
+- A wait declaring a post-decrement measure with a zero test fails termination, and the
   failure names the declaration.
-- Raising a budget above its declared counter type's maximum fails K2.
-- A wait with a well-founded decreasing measure discharges K1 without unrolling
+- Raising a budget above its declared counter type's maximum fails counter fit.
+- A wait with a well-founded decreasing measure discharges termination without unrolling
   its full budget.

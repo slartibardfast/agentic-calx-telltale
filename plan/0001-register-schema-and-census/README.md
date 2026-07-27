@@ -8,19 +8,35 @@ The declaration everything else computes over, and the adapter that drafts it.
 - **What**: the specs under `spec/`.
 - **Why**: [call/0002](../../call/0002-design-note-stays-out-of-repo.md) records
   where the design this milestone implements is held.
+  [call/0006](../../call/0006-sources-are-declared-and-delays-name-them.md) adds
+  timing sources and delays to the schema this milestone defines.
 
 ## The increment
 
-A register file declares waits, windows, deadlines, compositions and
+A register file declares sources, waits, windows, deadlines, compositions and
 conversions. It is hand-authorable, diffable and reviewable, and it is the
 artefact that gets committed alongside the image it describes.
 
+A `Source` is a declared clock. It carries a nominal frequency as a `Quantity`,
+a counter width, a read cost, and the interval over which it is trustworthy.
+The core knows no particular clock: a Programmable Interval Timer, a High
+Precision Event Timer and a part-specific timer an adopter alone has are all
+declarations of the same shape. This milestone owns the declaration format and
+ships worked examples rather than built-in variants.
+
 A `Wait` carries a name, a budget, the counter type that budget is held in, a
-measure, a cost per iteration, what happens on exhaustion, and the interrupt
-state it runs under. The measure is first-class because a post-decrement that
-wraps its counter and then tests against zero has a timeout that can never fire,
-and the tool has to know which form it is looking at before it can say anything
-about termination.
+measure, a cost per iteration, what happens on exhaustion, the interrupt state
+it runs under, and its delay. The measure is first-class because a post-decrement
+that wraps its counter and then tests against zero has a timeout that can never
+fire, and the tool has to know which form it is looking at before it can say
+anything about termination.
+
+The delay is first-class because it is what binds a wait to a clock. A bare spin
+names no source and yields a count that has no conversion to time. A calibrated
+busy loop names the source its calibration came from. A timer-backed sleep names
+its source, the granularity of one tick, and its rounding, because a primitive
+that rounds up to a whole tick costs up to a full granularity more than it was
+asked for and a bound has to take the ceiling.
 
 `census` walks an ELF and emits a skeleton register. It can supply the loops,
 the back edges, the interrupts-off regions and the accesses that reach
@@ -37,3 +53,7 @@ does emit is marked `Extracted` with the file and symbol it came from.
   naming the declaration, rather than defaulted.
 - The freeze set the adapter reports is documented as a lower bound, because
   indirect calls through ops tables leave reachability unresolved.
+- A tick-valued or cycle-valued declaration naming no source is refused at parse
+  time, so a rate can never reach the model as a bare integer.
+- A worked register declaring a Programmable Interval Timer and a High Precision
+  Event Timer parses, and neither is known to the core as a variant.
