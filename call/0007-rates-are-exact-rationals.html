@@ -1,0 +1,347 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>A rate is an exact rational, and the division is deferred - agentic-calx-telltale</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">agentic-calx-telltale</a></li><li class="chapter-item expanded affix "><li class="part-title">Cast: who</li><li class="chapter-item expanded "><a href="../cast/index.html"><strong aria-hidden="true">1.</strong> Cast: the project's Who</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cast/applying-personas.html"><strong aria-hidden="true">1.1.</strong> Applying personas during planning</a></li><li class="chapter-item expanded "><a href="../cast/ines.html"><strong aria-hidden="true">1.2.</strong> Ines: the Human Operator</a></li><li class="chapter-item expanded "><a href="../cast/tarn.html"><strong aria-hidden="true">1.3.</strong> Tarn: the Agentic Model User</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Plan: what & when</li><li class="chapter-item expanded "><a href="../plan-index.html"><strong aria-hidden="true">2.</strong> Plan</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plan/0001-register-schema-and-census/index.html"><strong aria-hidden="true">2.1.</strong> 0001 register-schema-and-census</a></li><li class="chapter-item expanded "><a href="../plan/0002-units-provenance-intervals/index.html"><strong aria-hidden="true">2.2.</strong> 0002 units-provenance-intervals</a></li><li class="chapter-item expanded "><a href="../plan/0003-composition-and-attainment/index.html"><strong aria-hidden="true">2.3.</strong> 0003 composition-and-attainment</a></li><li class="chapter-item expanded "><a href="../plan/0004-termination-and-counter-fit/index.html"><strong aria-hidden="true">2.4.</strong> 0004 termination-and-counter-fit</a></li><li class="chapter-item expanded "><a href="../plan/0005-deadlines-and-response-time/index.html"><strong aria-hidden="true">2.5.</strong> 0005 deadlines-and-response-time</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Software: where</li><li class="chapter-item expanded "><a href="../where.html"><strong aria-hidden="true">3.</strong> Software</a></li><li class="chapter-item expanded affix "><li class="part-title">Call: why</li><li class="chapter-item expanded "><a href="../call/0000-use-markdown-decision-records.html"><strong aria-hidden="true">4.</strong> Use Markdown decision records (MADR)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../call/0001-adopt-host-template.html"><strong aria-hidden="true">4.1.</strong> Adopt the host template at c8fc28c</a></li><li class="chapter-item expanded "><a href="../call/0002-design-note-stays-out-of-repo.html"><strong aria-hidden="true">4.2.</strong> The founding design note stays outside this repository</a></li><li class="chapter-item expanded "><a href="../call/0003-cast-modalities.html"><strong aria-hidden="true">4.3.</strong> calx-telltale owes an accommodation to each modality</a></li><li class="chapter-item expanded "><a href="../call/0004-nothing-to-release-yet.html"><strong aria-hidden="true">4.4.</strong> Neither component is released by this host</a></li><li class="chapter-item expanded "><a href="../call/0005-upgrade-to-the-reference-gate.html"><strong aria-hidden="true">4.5.</strong> Upgrade to 32e655f: the reference sweep joins the verify gate</a></li><li class="chapter-item expanded "><a href="../call/0006-sources-are-declared-and-delays-name-them.html"><strong aria-hidden="true">4.6.</strong> Timing sources are declared, and a delay names the source it rides on</a></li><li class="chapter-item expanded "><a href="../call/0007-rates-are-exact-rationals.html" class="active"><strong aria-hidden="true">4.7.</strong> A rate is an exact rational, and the division is deferred</a></li><li class="chapter-item expanded "><a href="../call/0008-interrupts-are-declared-and-answerability-is-a-verdict.html"><strong aria-hidden="true">4.8.</strong> Interrupts are declared, and whether a window can be judged is itself a verdict</a></li><li class="chapter-item expanded "><a href="../call/0009-multiplication-is-proved-at-the-boundaries.html"><strong aria-hidden="true">4.9.</strong> Multiplication is proved at the boundaries, and the rung is spent elsewhere</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Reference: how</li><li class="chapter-item expanded "><a href="../CLAUDE.html"><strong aria-hidden="true">5.</strong> CLAUDE.md: operating manual for an agentic project</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../STRUCTURE.html"><strong aria-hidden="true">5.1.</strong> Structure</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Memory</li><li class="chapter-item expanded "><a href="../MEMORY.html"><strong aria-hidden="true">6.</strong> Memory</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">agentic-calx-telltale</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="a-rate-is-an-exact-rational-and-the-division-is-deferred"><a class="header" href="#a-rate-is-an-exact-rational-and-the-division-is-deferred">A rate is an exact rational, and the division is deferred</a></h1>
+<ul>
+<li>Status: accepted</li>
+<li>Scope: software</li>
+<li>Date: 2026-07-27</li>
+</ul>
+<h2 id="context-and-problem-statement"><a class="header" href="#context-and-problem-statement">Context and Problem Statement</a></h2>
+<p><a href="0006-sources-are-declared-and-delays-name-them.html">call/0006</a> makes a source
+carry a nominal frequency. It does not say how that frequency is held, and the
+obvious answers are all lossy.</p>
+<p>The Programmable Interval Timer settles the question on its own. It runs at a
+third of the NTSC colour-burst frequency, which is exactly <code>105/88</code> MHz, or
+<code>13125000/11</code> Hz. No integer count of hertz represents it, so the <code>per_sec: u32</code>
+the founding note sketched cannot express the single most common timer on the
+architecture the operator named. Storing nanoseconds per tick fails the same way
+and in the same place, because the period is 838.0952… nanoseconds.</p>
+<p>Once a rate is stored rounded, every conversion that uses it starts from a value
+that is already wrong, and the error compounds through a composition. Precision
+lost in the rate is precision lost everywhere downstream of it, and a tool built
+to report the standing of its own numbers cannot afford that.</p>
+<h2 id="prior-art"><a class="header" href="#prior-art">Prior art</a></h2>
+<p>Facebook's <code>flicks</code> addresses the same problem from the media end. It fixes a
+single time base of 705600000 Hz, chosen so that the frame rates and audio
+sample rates that matter divide it exactly. Conversions then become exact integer
+arithmetic and no rounding error accumulates across a pipeline.</p>
+<p>The same instinct shows up in the hardware this tool models. The High Precision
+Event Timer does not report a frequency at all: it reports its period in
+femtoseconds, in a capability register, which is a base fine enough to carry the
+periods it needs to express.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p>The <code>flicks</code> trick does not transfer wholesale, and it is worth being precise
+about why. A fixed base works when the set of rates is known and finite, which is
+true of media and false here. call/0006 makes the source set open by
+construction, so an adopter's part-specific timer at some arbitrary division of a
+phase-locked loop defeats any constant this project could pick in advance.</p>
+<p>What transfers is the underlying move, which is to carry the rate exactly and
+defer the division:</p>
+<ul>
+<li>A frequency is held as a reduced rational, a numerator and a denominator in
+hertz. The Programmable Interval Timer is <code>13125000/11</code> and loses nothing.</li>
+<li>Conversions are exact rational arithmetic in a wider intermediate, and they
+round only where an integer result is demanded.</li>
+<li>Where rounding is demanded, it goes outward. A lower endpoint takes the floor
+and an upper endpoint takes the ceiling, so interval conservatism holds by
+construction rather than by adding slack after the fact.</li>
+<li>A tolerance in parts per million widens the result, because a crystal has one
+and a bound that ignored it would be narrower than the hardware.</li>
+</ul>
+<h3 id="the-registers-base-and-the-finest-one-that-fits"><a class="header" href="#the-registers-base-and-the-finest-one-that-fits">The register's base, and the finest one that fits</a></h3>
+<p><code>flicks</code> fixes its base for the world. This tool derives one per register, which
+is the scope at which the rate set really is finite, and it prefers the finest
+base it can hold. Where a register declares a set of sources, the tool derives
+the base by default and reports it, rather than offering it as an extra.</p>
+<p>A base is a frequency in which every declared source's period is a whole number
+of base ticks. Reduce each declared frequency to <code>n/d</code> hertz, and any common
+multiple of the numerators serves. The least of them is the coarsest base that
+works, and it is already at least as fine as the finest source, so nothing is
+lost by taking it.</p>
+<p>Two of the timers the operator named work the example. The Programmable Interval
+Timer runs at a third of the colour burst, exactly <code>105/88</code> MHz, which reduces to
+<code>13125000/11</code> Hz. An event timer at four times the colour burst is
+<code>157500000/11</code> Hz. The second numerator is twelve times the first, so the base is
+157500000 Hz, a tick of about 6.35 nanoseconds. In it the interval timer's period
+is exactly 132 ticks and the event timer's is exactly 11.</p>
+<p>Note what the rounded figures would have done. The frequencies usually quoted for
+those two parts, 1193182 Hz and 14318180 Hz, are both roundings of the rationals
+above, and a base derived from them is a base for two clocks that do not exist.
+Carrying the rate exactly is what makes the base correct rather than merely
+plausible.</p>
+<p>Composition then runs in base ticks, where it is exact integer arithmetic and
+introduces no rounding at all. A quantity is converted once on the way in and
+once on the way out, so a bound built from several sources widens only for the
+tolerances actually declared, rather than for every division along the way.</p>
+<p>The derivation is guarded. The least common multiple of arbitrary numerators
+grows without bound, and a register can declare sources whose base does not fit
+in the width the core holds. Where that happens the tool says so, names the
+sources that forced it, and stays with per-conversion rational arithmetic, which
+is correct but wider.</p>
+<h3 id="width-128-bits-stored-and-no-floating-point"><a class="header" href="#width-128-bits-stored-and-no-floating-point">Width: 128 bits stored, and no floating point</a></h3>
+<p>Every stored count is a <code>u128</code>, behind a single alias so the width is one point
+of change. Arithmetic refuses rather than wraps: a computation that would leave
+the width returns an error, whether it takes its headroom in a wider
+intermediate or in a checked operation of the stored width.</p>
+<p><strong>This reverses an earlier decision in this same record, and the reason is worth
+keeping.</strong> The store was first set at 64 bits, on the argument that interval
+soundness is a property of multiplication, that a model checker bit-blasts what
+it proves, and that a narrower multiply would therefore discharge more cheaply.
+That argument was tested and it is false. Multiplication over the full domain
+defeats the solver at 64 bits and at 128, with a SAT back end and with an SMT
+one, so the obligation needs a bounded domain at any width and the width buys
+nothing. The saving that justified the narrower store never existed.</p>
+<p>What the narrower store did do was fight the design. The register composes in
+the finest base it can derive, and the finer the base the shorter the span a
+fixed width can express: a femtosecond base, which is the unit an event timer
+reports its own period in, left about five hours. Base derivation suffered the
+same way, and gave up on least common multiples it should have carried. A width
+chosen to make proofs cheap was making the tool worse at the thing it exists to
+do, in exchange for nothing.</p>
+<p>The wide store still has a limit, and the tool still reports it. Where a
+register's declared windows run past the span its base implies, it says so as it
+derives the base.</p>
+<p>No part of this is floating point at any width. Quad precision would reintroduce
+exactly the rounding this record exists to remove, and an interval that claims to
+contain every point evaluation cannot rest on a representation that rounds where
+it chooses. A range problem here is answered with wider integers.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<ul>
+<li>Good: the most common timer on the architecture the operator named becomes
+representable, which the sketched schema could not manage.</li>
+<li>Good: conservatism is a property of the conversion rather than a margin
+somebody chose, so interval soundness is provable about the arithmetic itself.</li>
+<li>Also good: a tolerance has somewhere to live, so a bound reflects the crystal
+rather than the datasheet's headline figure.</li>
+<li>Bad: the intermediate arithmetic needs more width than the values do, and
+every conversion has an overflow path that has to be handled rather than
+assumed away.</li>
+<li>Neutral: the common-base derivation is optional. Nothing depends on it, and a
+register whose sources share no usable base loses only the exact cross-source
+comparison.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../call/0006-sources-are-declared-and-delays-name-them.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../call/0008-interrupts-are-declared-and-answerability-is-a-verdict.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../call/0006-sources-are-declared-and-delays-name-them.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../call/0008-interrupts-are-declared-and-answerability-is-a-verdict.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
