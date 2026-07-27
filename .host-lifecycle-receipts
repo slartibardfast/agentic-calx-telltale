@@ -77,3 +77,9 @@
     evidence = post-widening sweep green: validate plan/ + call/ ok; prose clean; refs --gate clean over 23 docs; reconcile clean; book --check renders every room; software --check 0 hazards; 32 tests and 12 proof harnesses pass
     tool = host-lifecycle@0.47.0
     recorded = 2026-07-27
+
+[receipt "verify"]
+    disposition = done
+    evidence = interrupt verdicts landed: validate ok; prose clean; refs --gate clean; reconcile clean; book renders; 0 hazards; 42 tests and 14 harnesses green at pin ce43c75
+    tool = host-lifecycle@0.47.0
+    recorded = 2026-07-27

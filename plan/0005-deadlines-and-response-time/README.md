@@ -26,10 +26,31 @@ The register measures how long interrupts are off. It says nothing about whether
 any interrupt misses a deadline, which is a different calculation needing
 per-source arrival rates and per-source deadlines.
 
-The sharper form of the question is buffer overflow rather than latency. An ISR
-that drops entries when its ring fills and only logs the fact has a failure that
-arrival rate and buffer depth predict, and that a latency figure does not. This
-is the least developed part of the design, and it is deliberately last.
+The sharper form of the question is buffer overflow rather than latency. A
+handler that drops entries when its ring fills and only logs the fact has a
+failure that arrival rate and buffer depth predict, and that a latency figure
+does not.
+
+An interrupt therefore declares an arrival model, a deadline, and the depth of
+the buffer behind it. Two verdicts follow. Latency asks whether the blackout
+outlasts the deadline. Occupancy asks whether more arrivals land during the
+blackout than the buffer holds, where a window of length `b` admits at most
+`floor(b / gap) + 1` of them, one at the instant it opens and the rest no faster
+than the shortest declared gap.
+
+Both verdicts can be withheld, and a withheld verdict is a verdict rather than
+an error ([call/0008](../../call/0008-interrupts-are-declared-and-answerability-is-a-verdict.md)).
+A blackout counted in loop passes cannot be compared against a deadline in
+nanoseconds, and a run reports how many comparisons it withheld so that an
+exclusion never reads as a clean sweep.
+
+**Built**: both verdicts, the arrival count, the withheld cases, and the sweep
+that reports them. Two proof harnesses hold the parts that matter, which are
+that a window with no path to a time is never resolved either way, and that a
+verdict never outranks the weakest declaration it rests on.
+
+**Outstanding**: the armed-interval comparison below, and the arrival adapter
+that would populate rates from something other than a human's declaration.
 
 ## Acceptance
 

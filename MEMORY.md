@@ -78,3 +78,17 @@
   removed. **Do not reach for a bigger solver here; the domain is the problem, not the back end.**
 - Ordinal labels for the obligations were removed throughout after host-lint flagged every one of them.
   Obligations are named for what they assert. Never number them.
+
+### 2026-07-28 — the interrupt verdicts
+
+- Built latency and occupancy in calx-telltale, pinned at `ce43c75`. 42 tests, 14 proof harnesses.
+- **Occupancy is the verdict that bites**, not latency: a handler dropping ring entries fails without
+  ever missing a latency figure. A window of length `b` admits at most `floor(b / gap) + 1` arrivals,
+  counting the one that lands as the window opens.
+- **A withheld verdict is a verdict, not an error** (call/0008), and it is the design's whole point. A
+  blackout counted in loop passes, because its clock was mid-reconfiguration, has no path to a deadline
+  in nanoseconds. The tool names the missing piece and declines. `Sweep` reports the withheld count so
+  an exclusion never reads as a clean pass. **Do not "improve" this by defaulting to a rate.**
+- `PLAN.md` now runs 0002, 0005, 0001, 0003, 0004. The response-time work moved ahead of termination per
+  call/0008: it needs composition rather than loop contracts. Folder numbers are identity, so only the
+  index moved.
