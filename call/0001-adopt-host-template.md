@@ -48,7 +48,11 @@ One spine document was corrected on copy. The template's `STRUCTURE.md` cites
 rather than one an adopter receives, so `refs --check` reads it as a dead
 pointer. The citation is dropped here and the statement it annotated is kept.
 `CLAUDE.md` already holds that a reference host's own rooms bind no adopter, so
-this is that rule applied rather than a departure from the spine.
+this is that rule applied rather than a departure from the spine. Reported
+upstream as [connollydavid/host#19](https://github.com/connollydavid/host/issues/19),
+where the same sweep run against the template itself reports eleven dead
+pointers; only this one reaches an adopter, because `STRUCTURE.md` is copied to
+the repo root while `UPGRADING.md` stays inside the submodule.
 
 Three phrases were sanctioned in `LEXICON` through `host-lint lexicon add`, each
 one the spine's own vocabulary in either the proof-tool or the agent-tool sense.

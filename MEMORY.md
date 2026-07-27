@@ -24,6 +24,10 @@
   figures, that needs an operator ruling first, not a judgement call.**
 - The template's `STRUCTURE.md` cites `call/0039` for the bare-store layout, which is a record in the
   reference host and not one an adopter receives. `refs --check` gates on it as a dead pointer. Dropped
-  the citation on copy; any host adopting this template revision will hit the same thing.
+  the citation on copy; any host adopting this template revision will hit the same thing. Reported as
+  [connollydavid/host#19](https://github.com/connollydavid/host/issues/19). Rewriting it as a link does
+  not help: the checker matches the literal `call/NNNN` token inside link text and inside the URL path
+  alike, so dropping it is the only local fix. The same sweep run against the template itself reports
+  eleven dead pointers, ten of them in `UPGRADING.md`, which does not reach adopters.
 - `calx-telltale` is greenfield, so its `.host-software` stanza carries no `build` and no `artifact`.
   Those get added, with a pinned toolchain and a recorded hash, by the first milestone producing a binary.
