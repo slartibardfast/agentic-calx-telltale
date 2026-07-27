@@ -218,7 +218,11 @@ This follows the arrangement already used for calx-mill.</p>
 rather than one an adopter receives, so <code>refs --check</code> reads it as a dead
 pointer. The citation is dropped here and the statement it annotated is kept.
 <code>CLAUDE.md</code> already holds that a reference host's own rooms bind no adopter, so
-this is that rule applied rather than a departure from the spine.</p>
+this is that rule applied rather than a departure from the spine. Reported
+upstream as <a href="https://github.com/connollydavid/host/issues/19">connollydavid/host#19</a>,
+where the same sweep run against the template itself reports eleven dead
+pointers; only this one reaches an adopter, because <code>STRUCTURE.md</code> is copied to
+the repo root while <code>UPGRADING.md</code> stays inside the submodule.</p>
 <p>Three phrases were sanctioned in <code>LEXICON</code> through <code>host-lint lexicon add</code>, each
 one the spine's own vocabulary in either the proof-tool or the agent-tool sense.
 <code>LEXICON</code> carries the list, so it is not restated here.</p>

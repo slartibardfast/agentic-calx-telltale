@@ -198,7 +198,11 @@ numbers. Recorded in call/0002. <strong>If a future session is asked to add fixt
 figures, that needs an operator ruling first, not a judgement call.</strong></li>
 <li>The template's <code>STRUCTURE.md</code> cites <code>call/0039</code> for the bare-store layout, which is a record in the
 reference host and not one an adopter receives. <code>refs --check</code> gates on it as a dead pointer. Dropped
-the citation on copy; any host adopting this template revision will hit the same thing.</li>
+the citation on copy; any host adopting this template revision will hit the same thing. Reported as
+<a href="https://github.com/connollydavid/host/issues/19">connollydavid/host#19</a>. Rewriting it as a link does
+not help: the checker matches the literal <code>call/NNNN</code> token inside link text and inside the URL path
+alike, so dropping it is the only local fix. The same sweep run against the template itself reports
+eleven dead pointers, ten of them in <code>UPGRADING.md</code>, which does not reach adopters.</li>
 <li><code>calx-telltale</code> is greenfield, so its <code>.host-software</code> stanza carries no <code>build</code> and no <code>artifact</code>.
 Those get added, with a pinned toolchain and a recorded hash, by the first milestone producing a binary.</li>
 </ul>
