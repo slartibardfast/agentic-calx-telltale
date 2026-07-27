@@ -1,0 +1,4 @@
+# Paths excluded from the host-lint naming + prose audits.
+# The append-only record (the agent's working memory) is history, not authored
+# prose, so it is excluded rather than rewritten.
+MEMORY.md

@@ -10,3 +10,6 @@
 # opt into escalation by adding one of these directive lines (drop the leading #):
 #   host-lint: strict            an undeclared tell-shaped token blocks, not warns
 #   host-lint: jira-key PROJ     gate a tracker key: PROJ-NNNN entries need a URL
+kani:<harness>
+vendor harness
+operator on a harness

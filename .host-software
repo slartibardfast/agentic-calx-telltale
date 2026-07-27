@@ -1,0 +1,32 @@
+# .host-software — the Where room recipe. One [software "<name>"] stanza per
+# component. The trees are gitignored (materialised locally by
+# `host-lifecycle software --materialize`); this recipe is the audit anchor.
+
+# The software under development. Greenfield: the design is settled and the
+# implementation is not yet written, so the stanza carries no build or artifact
+# until there is a binary to re-derive. See plan/ for the milestones.
+[software "calx-telltale"]
+	url       = https://github.com/slartibardfast/calx-telltale.git
+	pin       = cef75e876cf05a0237de97dc7f88098e4bd7127c
+	worktrees =
+
+# The gating tool. Its source is also the tools/host-lint submodule (for skills
+# and reference); recorded here so --install-hooks builds the verified binary and
+# installs the commit hooks. Pinned to the revision the adopted template
+# references. Its own .allium is discharged by the host-lint repo's CI, not
+# re-wired here.
+[software "host-lint"]
+	url       = https://github.com/connollydavid/host-lint.git
+	pin       = bb16c466e0062dad83537007bba6620162ea82a1
+	worktrees =
+	toolchain = docker.io/clux/muslrust:1.95.0-stable@sha256:15a72a4abf1c593b0bea63a4a8f20e95c1e5a0696d7051eca87b9b850b2d7e43
+	build     = RUSTUP_TOOLCHAIN=stable CARGO_INCREMENTAL=0 cargo build --release --locked --offline --target x86_64-unknown-linux-musl
+	deploy    = host-lint
+	artifact  = target/x86_64-unknown-linux-musl/release/host-lint 2451a2a2777412eaee7805ee6dabe8385265659050f790a8de38664b5d36d40a
+	deps-bundle = https://github.com/connollydavid/host-lint/releases/download/vendor-v4/vendor.tar.gz 6a463a09d45f057486f8f285d5a86b86999c9be16a714dc51f8b2a8d5e3491f2
+	hooks     = pre-commit
+
+# The verification ladder's drivers for this project. A doc that names the
+# verifiers must name this whole set.
+[verification]
+	drivers = host-lint allium specula

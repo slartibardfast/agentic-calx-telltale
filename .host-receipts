@@ -1,0 +1,13 @@
+
+
+[receipt "adopt"]
+    disposition = done
+    evidence = .host stamp: connollydavid/host-template @ c8fc28cd6f7062944a2f046003fa13135a0fc039, adopted 2026-07-27; baseline REFS-a-number-resolves
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "upgrade"]
+    disposition = done
+    evidence = ledger fully applied: baseline REFS-a-number-resolves, 0 pending, 0 applied out of order
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27

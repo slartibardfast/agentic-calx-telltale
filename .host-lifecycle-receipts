@@ -1,0 +1,61 @@
+[receipt "materialize" "calx-telltale"]
+    disposition = done
+    evidence = 2 item(s) realized for calx-telltale at pin cef75e876cf0 (reference)
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "materialize" "host-lint"]
+    disposition = done
+    evidence = 2 item(s) realized for host-lint at pin bb16c466e006 (reference); toolchain docker.io/clux/muslrust:1.95.0-stable
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "classify"]
+    disposition = done
+    evidence = case (a): target empty and named agentic-calx-telltale; no CLAUDE.md to merge; greenfield, so no rename map
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "embed" "calx-telltale"]
+    disposition = done
+    evidence = bare store + worktree at pin cef75e876cf05a0237de97dc7f88098e4bd7127c; greenfield, no artifact recorded yet
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "embed" "host-lint"]
+    disposition = done
+    evidence = bare store + worktree at pin bb16c466e0062dad83537007bba6620162ea82a1; artifact 2451a2a27774 reproduced in the recorded toolchain
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "remap"]
+    disposition = done
+    evidence = greenfield host: no ordinal-named files, so no .host-remap dictionary; host-lint --all and refs --check clean
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "publish"]
+    disposition = done
+    evidence = host-lifecycle book generates 19 pages; book --check renders every room with source; Site workflow wired at .github/workflows/site.yml
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "release" "calx-telltale"]
+    disposition = skip
+    evidence = greenfield: no implementation and no artifact yet
+    reason = call/0004
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "release" "host-lint"]
+    disposition = skip
+    evidence = consumed gating tool, released by its own repository
+    reason = call/0004
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
+
+[receipt "verify"]
+    disposition = done
+    evidence = gate sweep green: validate plan/ + call/ ok; prose clean; refs --check clean; reconcile clean; book --check renders every room; verify-setup complete; artifact 2451a2a27774 reproduced in the recorded toolchain
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
