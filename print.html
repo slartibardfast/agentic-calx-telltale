@@ -631,10 +631,27 @@ interval that projection covers.</p>
 <p>The register measures how long interrupts are off. It says nothing about whether
 any interrupt misses a deadline, which is a different calculation needing
 per-source arrival rates and per-source deadlines.</p>
-<p>The sharper form of the question is buffer overflow rather than latency. An ISR
-that drops entries when its ring fills and only logs the fact has a failure that
-arrival rate and buffer depth predict, and that a latency figure does not. This
-is the least developed part of the design, and it is deliberately last.</p>
+<p>The sharper form of the question is buffer overflow rather than latency. A
+handler that drops entries when its ring fills and only logs the fact has a
+failure that arrival rate and buffer depth predict, and that a latency figure
+does not.</p>
+<p>An interrupt therefore declares an arrival model, a deadline, and the depth of
+the buffer behind it. Two verdicts follow. Latency asks whether the blackout
+outlasts the deadline. Occupancy asks whether more arrivals land during the
+blackout than the buffer holds, where a window of length <code>b</code> admits at most
+<code>floor(b / gap) + 1</code> of them, one at the instant it opens and the rest no faster
+than the shortest declared gap.</p>
+<p>Both verdicts can be withheld, and a withheld verdict is a verdict rather than
+an error (<a href="plan/0005-deadlines-and-response-time/../../call/0008-interrupts-are-declared-and-answerability-is-a-verdict.html">call/0008</a>).
+A blackout counted in loop passes cannot be compared against a deadline in
+nanoseconds, and a run reports how many comparisons it withheld so that an
+exclusion never reads as a clean sweep.</p>
+<p><strong>Built</strong>: both verdicts, the arrival count, the withheld cases, and the sweep
+that reports them. Two proof harnesses hold the parts that matter, which are
+that a window with no path to a time is never resolved either way, and that a
+verdict never outranks the weakest declaration it rests on.</p>
+<p><strong>Outstanding</strong>: the armed-interval comparison below, and the arrival adapter
+that would populate rates from something other than a human's declaration.</p>
 <h2 id="acceptance-4"><a class="header" href="#acceptance-4">Acceptance</a></h2>
 <ul>
 <li>A projection covering an interval where no deadline is armed reports that
@@ -665,7 +682,7 @@ already spent.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>41794e6df0f9d351050e49bdfeae1c9df61b5011</code></li>
+<li>pin: <code>ce43c756fb210e4cdaad15889d11c2a259085abf</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -2356,6 +2373,20 @@ fitting boundary, and the extremes. Whole suite went from never-terminating to 4
 removed. <strong>Do not reach for a bigger solver here; the domain is the problem, not the back end.</strong></li>
 <li>Ordinal labels for the obligations were removed throughout after host-lint flagged every one of them.
 Obligations are named for what they assert. Never number them.</li>
+</ul>
+<h3 id="2026-07-28--the-interrupt-verdicts"><a class="header" href="#2026-07-28--the-interrupt-verdicts">2026-07-28 — the interrupt verdicts</a></h3>
+<ul>
+<li>Built latency and occupancy in calx-telltale, pinned at <code>ce43c75</code>. 42 tests, 14 proof harnesses.</li>
+<li><strong>Occupancy is the verdict that bites</strong>, not latency: a handler dropping ring entries fails without
+ever missing a latency figure. A window of length <code>b</code> admits at most <code>floor(b / gap) + 1</code> arrivals,
+counting the one that lands as the window opens.</li>
+<li><strong>A withheld verdict is a verdict, not an error</strong> (call/0008), and it is the design's whole point. A
+blackout counted in loop passes, because its clock was mid-reconfiguration, has no path to a deadline
+in nanoseconds. The tool names the missing piece and declines. <code>Sweep</code> reports the withheld count so
+an exclusion never reads as a clean pass. <strong>Do not "improve" this by defaulting to a rate.</strong></li>
+<li><code>PLAN.md</code> now runs 0002, 0005, 0001, 0003, 0004. The response-time work moved ahead of termination per
+call/0008: it needs composition rather than loop contracts. Folder numbers are identity, so only the
+index moved.</li>
 </ul>
 
                     </main>
