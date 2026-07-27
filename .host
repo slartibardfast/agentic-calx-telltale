@@ -1,4 +1,4 @@
 template = "https://github.com/connollydavid/host-template"
 revision = "c8fc28cd6f7062944a2f046003fa13135a0fc039"
 adopted  = "2026-07-27"
-baseline = "REFS-a-number-resolves"
+baseline = "GATE-refs-in-verify"

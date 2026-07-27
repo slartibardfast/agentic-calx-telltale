@@ -149,6 +149,22 @@ Write references so they resolve, and let the tool do the resolving.
   why the issue half advises rather than blocks. Remediate live documents as you
   touch them and leave the records alone. There is no fix flag, and the refusal says
   so: only the author knows which tracker a bare number meant.
+- **The gate runs it, over the project's record.** `host-lifecycle refs --gate .` is
+  a clause of the `verify` phase's `recheck`, so a dead pointer or a document that
+  cannot be read re-opens the verify receipt and stops a component release at its
+  first step. It reads **tracked** documents only: a gate judges what the project
+  recorded, and reddening over an uncommitted note would assert something no clone
+  can re-derive and block a release over a file the release does not ship. The gate
+  never returns the advisory code and never prints the per-file census; it discloses
+  the debt as a count. `refs --check` keeps the whole working tree, drafts included,
+  and is where you ask for the census, because that is a question about references
+  rather than a question about whether you are done.
+- **Do not repair the asymmetry between the two clauses.** In the same `recheck`, a
+  prose trope blocks and a bare issue number does not, and that looks like an
+  inconsistency until you have the reason: a prose trope is your own text and is
+  always rewordable, while only the author knows which tracker a bare number meant.
+  Adding the reference clause's tolerance to the prose clause would disarm the gate
+  a whole upgrade entry exists to install.
 
 ## Decisions: `call/`
 

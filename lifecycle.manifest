@@ -51,6 +51,16 @@
 	evidence = .host-remap dictionary applied; naming audit clean
 	recheck  = host-lifecycle remap --check .
 
+# The `refs --gate` clause judges the RECORD, not the working tree, so an uncommitted
+# note cannot re-open this receipt or stop a release over a file the release does not
+# ship. It reports and fails only on a reference naming a record that does not exist,
+# or a listed document it could not read. A bare issue number stays advisory there and
+# never reaches this chain: only the author knows which tracker a bare number meant, so
+# a gate that blocked on it would be a wall on the day it landed. Do not read that
+# against the `prose` clause, which DOES block on its advisory tier: a prose trope is
+# the author's own text and is always rewordable. The two are not inconsistent, and
+# tolerating a prose warn here would disarm the gate its own ledger entry installs
+# (agentic-host call/0048).
 [phase "verify"]
 	order     = 5
 	modality  = unconditional
@@ -58,7 +68,7 @@
 	skill     = verify
 	evidence  = gate sweep green (validate, software --check, book --check, hook tell test)
 	skippable = false
-	recheck   = host-lifecycle validate plan/ call/ && host-lifecycle prose . && host-lifecycle reconcile .
+	recheck   = host-lifecycle validate plan/ call/ && host-lifecycle prose . && host-lifecycle reconcile . && host-lifecycle refs --gate .
 
 [phase "publish"]
 	order    = 6

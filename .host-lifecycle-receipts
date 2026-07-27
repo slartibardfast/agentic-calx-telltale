@@ -59,3 +59,9 @@
     evidence = gate sweep green: validate plan/ + call/ ok; prose clean; refs --check clean; reconcile clean; book --check renders every room; verify-setup complete; artifact 2451a2a27774 reproduced in the recorded toolchain
     tool = host-lifecycle@0.46.0
     recorded = 2026-07-27
+
+[receipt "verify"]
+    disposition = done
+    evidence = post-upgrade sweep green at baseline GATE-refs-in-verify: validate plan/ + call/ ok; prose clean; refs --gate clean over 19 tracked docs; reconcile clean; book --check renders every room; verify-setup complete; 0 hazards
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27

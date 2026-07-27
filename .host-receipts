@@ -11,3 +11,9 @@
     evidence = ledger fully applied: baseline REFS-a-number-resolves, 0 pending, 0 applied out of order
     tool = host-lifecycle@0.46.0
     recorded = 2026-07-27
+
+[receipt "upgrade"]
+    disposition = done
+    evidence = upgraded to template 32e655f; GATE-refs-in-verify recorded via its capability check and baseline advanced; 0 pending
+    tool = host-lifecycle@0.46.0
+    recorded = 2026-07-27
