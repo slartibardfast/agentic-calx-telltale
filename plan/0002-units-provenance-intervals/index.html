@@ -214,6 +214,15 @@ every point-valued evaluation within the input intervals. An interval that
 narrowed under composition would be claiming a precision its inputs never had.</p>
 <p>All three are small bounded harnesses with modest unwinding, so this milestone
 does not wait on loop contracts.</p>
+<h2 id="where-it-stands"><a class="header" href="#where-it-stands">Where it stands</a></h2>
+<p><strong>Built.</strong> The <code>Quantity</code> core holds an interval, a unit and a provenance, and
+the three obligations are proved over everything their types admit. Every stored
+count is a <code>u128</code> behind a single alias, and arithmetic refuses rather than
+wraps.</p>
+<p>The width was reversed here after the fact, and the reasoning is kept in
+<a href="../../call/0007-rates-are-exact-rationals.html">call/0007</a>: a narrower store was
+chosen to make the proofs cheaper, the saving was measured and found not to
+exist, and the narrow store had meanwhile been capping how fine a base could be.</p>
 <h2 id="acceptance"><a class="header" href="#acceptance">Acceptance</a></h2>
 <ul>
 <li>A conversion applied without a declaration fails to compile or fails unit soundness.</li>

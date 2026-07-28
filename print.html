@@ -616,6 +616,15 @@ every point-valued evaluation within the input intervals. An interval that
 narrowed under composition would be claiming a precision its inputs never had.</p>
 <p>All three are small bounded harnesses with modest unwinding, so this milestone
 does not wait on loop contracts.</p>
+<h2 id="where-it-stands-1"><a class="header" href="#where-it-stands-1">Where it stands</a></h2>
+<p><strong>Built.</strong> The <code>Quantity</code> core holds an interval, a unit and a provenance, and
+the three obligations are proved over everything their types admit. Every stored
+count is a <code>u128</code> behind a single alias, and arithmetic refuses rather than
+wraps.</p>
+<p>The width was reversed here after the fact, and the reasoning is kept in
+<a href="plan/0002-units-provenance-intervals/../../call/0007-rates-are-exact-rationals.html">call/0007</a>: a narrower store was
+chosen to make the proofs cheaper, the saving was measured and found not to
+exist, and the narrow store had meanwhile been capping how fine a base could be.</p>
 <h2 id="acceptance-1"><a class="header" href="#acceptance-1">Acceptance</a></h2>
 <ul>
 <li>A conversion applied without a declaration fails to compile or fails unit soundness.</li>
@@ -653,7 +662,7 @@ tool checks that rather than hoping for it.</p>
 <h3 id="attainment"><a class="header" href="#attainment">Attainment</a></h3>
 <p>The reported maximum is a true maximum over the declared domain. A solver earns
 its keep over a sweep precisely here.</p>
-<h2 id="where-it-stands-1"><a class="header" href="#where-it-stands-1">Where it stands</a></h2>
+<h2 id="where-it-stands-2"><a class="header" href="#where-it-stands-2">Where it stands</a></h2>
 <p><strong>Built</strong>: the five expression forms, evaluation at a latency, and the search
 over the domain that returns both the worst case and the latency attaining it.
 A composition reports whether its maximum is interior, which is the finding a
@@ -668,8 +677,18 @@ turns on that boundary: one step earlier the body runs and the cost compounds,
 one step later the whole composition unwinds, so an off-by-one there would move
 the worst case. The tree itself is heap-allocated and carried by tests, on the
 reasoning in <a href="plan/0003-composition-and-attainment/../../call/0009-multiplication-is-proved-at-the-boundaries.html">call/0009</a>.</p>
-<p><strong>Outstanding</strong>: monotonicity reported as a proved property where the tool can
-establish it, rather than the search running unconditionally.</p>
+<p><strong>Monotonicity is now established rather than assumed.</strong> A composition reports
+whether its answer was established or searched for. Where the cost cannot fall,
+the worst case is at the top of the domain by construction and no search runs.</p>
+<p>The claim rests on the leaf, and the leaf is proved: a wait polls
+<code>min(latency, budget)</code> times, so its cost never falls as the world gets slower.
+From there it propagates structurally. A branch of monotone arms stays monotone,
+and a sequence, a retry or a short circuit takes the whole composition into the
+searched case, because each of them stops early.</p>
+<p>The rule is conservative in the safe direction: anything that might stop early
+is treated as stopping early, so monotonicity is never claimed for a composition
+that could break it. A test holds the established answer to what the search
+would have found.</p>
 <h2 id="acceptance-2"><a class="header" href="#acceptance-2">Acceptance</a></h2>
 <ul>
 <li>A <code>ShortCircuit</code> whose guard succeeds expensively reports the expensive
@@ -705,7 +724,7 @@ passes today, and sits one doubling away from wrapping in silence.</p>
 <p>This milestone needs loop contracts rather than unrolling, because realistic
 budgets run to thousands of iterations and unrolling them is not viable. That is
 why it sits after the two milestones whose harnesses are small and bounded.</p>
-<h2 id="where-it-stands-2"><a class="header" href="#where-it-stands-2">Where it stands</a></h2>
+<h2 id="where-it-stands-3"><a class="header" href="#where-it-stands-3">Where it stands</a></h2>
 <p><strong>Built</strong>, and more cheaply than this milestone expected. The entry assumed loop
 contracts, because proving termination of a loop is a statement about the loop.
 Declaring how the counter moves changes the question: a counter tested after it
@@ -782,9 +801,20 @@ way, a verdict never outranks the weakest declaration it rests on, and priority
 is a strict order, which is what lets the recurrence partition the set. The
 recurrence itself walks a heap-allocated set and is covered by tests, on the
 same reasoning as <a href="plan/0005-deadlines-and-response-time/../../call/0009-multiplication-is-proved-at-the-boundaries.html">call/0009</a>.</p>
-<p><strong>Outstanding</strong>: the armed-interval comparison below, release jitter, nesting
-within a priority level, and the arrival adapter that would populate rates from
-something other than a human's declaration.</p>
+<p>Arming, jitter and nesting have since landed, and each removed a limit the tool
+had been declaring rather than modelling.</p>
+<p>A deadline now carries the span it is in force over. A window outside that span
+gets its own verdict rather than a pass, because an unbounded stretch is worse
+than a bounded one and reporting it as met would say the opposite of what is
+true. It counts with the withheld rather than the passes.</p>
+<p>An arrival may declare how late a release can be. A source that is periodic in
+the long run still bunches, and a burst puts more arrivals into a window than
+even spacing would, which can overrun a ring the even case fits.</p>
+<p>A handler may declare that it re-enables interrupts inside itself, and the
+interference set then widens to its own priority level. A flat model misses that
+entirely.</p>
+<p><strong>Outstanding</strong>: the arrival adapter that would populate rates from something
+other than a human's declaration.</p>
 <h2 id="acceptance-4"><a class="header" href="#acceptance-4">Acceptance</a></h2>
 <ul>
 <li>A projection covering an interval where no deadline is armed reports that
@@ -803,8 +833,10 @@ convert to a time on such a part, so a byte count stays a byte count.</li>
 back-edge census and still hangs a boot.</li>
 <li>Unresolved indirect calls, which make any freeze set a lower bound.</li>
 <li>Windows that open in one stack frame and close in another.</li>
-<li>Correlated failure. Each wait's latency is modelled independently, and one
-unclocked block makes every register behind it misbehave together.</li>
+<li>A common-mode excursion. A comparison between clocks off one root is exact,
+because the root's error moves both and cancels. What stays outside the model
+is the root leaving its own declared tolerance, which would move every clock
+beneath it at once.</li>
 <li>Nested budgets. Each wait is priced in ignorance of what its callers have
 already spent.</li>
 </ul>
@@ -841,7 +873,7 @@ this milestone is first.</li>
 over weeks, and a citation is what lets her check one she no longer remembers.</li>
 <li><strong>Tarn</strong> gains a field, and the structured surface carries it like any other.</li>
 </ul>
-<h2 id="where-it-stands-3"><a class="header" href="#where-it-stands-3">Where it stands</a></h2>
+<h2 id="where-it-stands-4"><a class="header" href="#where-it-stands-4">Where it stands</a></h2>
 <p><strong>Built.</strong> A wait may carry <code>file=</code> and <code>symbol=</code>, and both report through the
 prose surface and the structured one. The grammar the tool prints documents
 them, so an agent learns the fields from the binary.</p>
@@ -906,7 +938,7 @@ route around.</li>
 <p>This sits behind 0006 deliberately. Every verb here prints a verdict, and a
 verdict should carry its citation from the first version rather than gain one
 afterwards. Building the surface first would mean reworking all of it.</p>
-<h2 id="where-it-stands-4"><a class="header" href="#where-it-stands-4">Where it stands</a></h2>
+<h2 id="where-it-stands-5"><a class="header" href="#where-it-stands-5">Where it stands</a></h2>
 <p><strong>Built</strong>: <code>project</code>, <code>attain</code>, <code>deadline</code>, <code>overrun</code> and <code>diff</code>, each answering
 to the structured surface as well as the prose one. The register grew the
 declarations they operate on, which are compositions, interrupts and blackout
@@ -931,7 +963,8 @@ reviewer sees the change rather than the state.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="0008-census-adapter"><a class="header" href="#0008-census-adapter">0008 census-adapter</a></h1>
 <p>A register authored entirely by hand is a register nobody keeps current. The
-adapter drafts one from the image, leaving blanks where a human has to decide.</p>
+adapter drafts one from the image and leaves a blank wherever a human has to
+decide.</p>
 <ul>
 <li><strong>Who</strong>: <a href="plan/0008-census-adapter/../../cast/ines.html">Ines</a>, who curates rather than authors, and
 <a href="plan/0008-census-adapter/../../cast/marek.html">Marek</a>, for whom a register large enough to maintain by
@@ -969,6 +1002,24 @@ which is the difference between a review artefact and a stale document.</li>
 <li><strong>Tarn</strong> gains the loop this milestone was always for: run the adapter,
 fill what can be filled, check, repeat until the obligations discharge.</li>
 </ul>
+<h2 id="where-it-stands-6"><a class="header" href="#where-it-stands-6">Where it stands</a></h2>
+<p><strong>Built</strong>: the adapter, as a workspace member beside the core. It reads an
+image's function symbols and drafts a register from them, with a citation on
+every entry and a <code>?</code> wherever a decision belongs to a human.</p>
+<p>The object-format reader is written here rather than taken as a dependency,
+which is <a href="plan/0008-census-adapter/../../call/0011-the-adapter-sits-beside-the-core.html">call/0011</a>
+applied at the line that record drew: parsing an object file is bounded work
+against a published layout. Every field is read with a bounds check, because the
+input is a binary somebody else built and a census that panicked on a malformed
+image would be worse than one that declined. A file that is not an image, is the
+wrong width, or is truncated is declined by name.</p>
+<p>The core's dependency list is still empty and the canonical artifact is still
+built with <code>-p calx-telltale</code>, so the offline release build is untouched.</p>
+<p><strong>Outstanding, and stated on every draft</strong>: these are candidates rather than
+waits. Finding the polling loops inside a function needs a disassembler, which
+is the unbounded half call/0011 keeps out, so what the adapter misses it misses
+silently. The draft says so in its own header rather than leaving a reader to
+discover it.</p>
 <h2 id="acceptance-7"><a class="header" href="#acceptance-7">Acceptance</a></h2>
 <ul>
 <li>A skeleton carries <code>extracted</code> provenance with a citation on every value it
@@ -985,7 +1036,7 @@ the adapter could not determine is silently invented.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>0249f93d7e937c23d502615a927afdd93916f41d</code></li>
+<li>pin: <code>ac3175d1a09501bf6eb22313d04d434660eb7687</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -3007,6 +3058,32 @@ vendored bundle. The adapter belongs beside the core, and that placement wants a
 <li><strong>The non-disclosure constraint in call/0002 is lifted by operator ruling.</strong> The note was already
 heavily redacted and was never committed. Acceptance criteria stay stated as properties anyway, because
 a property holds across images and a figure holds for one.</li>
+</ul>
+<h3 id="2026-07-28--every-plan-milestone-closed-and-v030"><a class="header" href="#2026-07-28--every-plan-milestone-closed-and-v030">2026-07-28 — every plan milestone closed, and v0.3.0</a></h3>
+<ul>
+<li>All eight open items closed. calx-telltale <strong>v0.3.0</strong> released, pin <code>ac3175d</code>, artifact <code>babfff8</code>.
+91 tests, 20 harnesses, both lanes green, 0 hazards.</li>
+<li><strong>call/0011</strong>: the census adapter sits beside the core as a workspace member, out of the canonical
+artifact, which is built with <code>-p calx-telltale</code>. The record drew the line at <em>parsing is bounded,
+disassembly is not</em> — so the ELF reader is hand-written and the adapter ended up with <strong>no external
+dependencies either</strong>, which is better than the record anticipated.</li>
+<li><strong>0006 citations</strong>: a wait carries <code>file=</code>/<code>symbol=</code>; a failing verdict now names a site rather than an
+identifier. Citations sit <em>beside</em> the declarations so the verified types stay free of text.</li>
+<li><strong>0007 verbs</strong>: project, attain, deadline, overrun, diff, each with <code>--json</code>. The register grew
+compositions (operands by reference, resolved top down), interrupts and windows.</li>
+<li><strong>0005 remainder</strong>: armed deadlines get their own <code>Unarmed</code> verdict — <em>an unbounded span is not a pass</em>
+and counts with the withheld. Jitter widens the burst window. A handler declaring <code>reenables</code> is
+interfered with by its own priority level. Two limits became model.</li>
+<li><strong>Correlated failure carried into the arithmetic</strong>: two clocks off one root are exact multiples, so the
+root's error cancels in a comparison between them. <code>exact_ratio</code> returns the exact ratio where a root
+is shared and <code>None</code> where it is not. The limit narrowed to <em>common-mode excursion</em>, which is the root
+leaving its own tolerance — a genuinely different failure.</li>
+<li><strong>0003 monotonicity</strong>: established rather than searched where the cost cannot fall, resting on a
+<strong>proved</strong> leaf case and propagating structurally. Conservative in the safe direction; a test holds the
+established answer to what a search would have found.</li>
+<li><strong>0008 census</strong>: drafts a register from an image's function symbols with citations and <code>?</code> blanks.
+Emits candidates rather than waits, and <strong>says so in its own header</strong>, because what it misses without a
+disassembler it misses silently.</li>
 </ul>
 
                     </main>

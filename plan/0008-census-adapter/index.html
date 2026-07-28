@@ -175,7 +175,8 @@
                     <main>
                         <h1 id="0008-census-adapter"><a class="header" href="#0008-census-adapter">0008 census-adapter</a></h1>
 <p>A register authored entirely by hand is a register nobody keeps current. The
-adapter drafts one from the image, leaving blanks where a human has to decide.</p>
+adapter drafts one from the image and leaves a blank wherever a human has to
+decide.</p>
 <ul>
 <li><strong>Who</strong>: <a href="../../cast/ines.html">Ines</a>, who curates rather than authors, and
 <a href="../../cast/marek.html">Marek</a>, for whom a register large enough to maintain by
@@ -213,6 +214,24 @@ which is the difference between a review artefact and a stale document.</li>
 <li><strong>Tarn</strong> gains the loop this milestone was always for: run the adapter,
 fill what can be filled, check, repeat until the obligations discharge.</li>
 </ul>
+<h2 id="where-it-stands"><a class="header" href="#where-it-stands">Where it stands</a></h2>
+<p><strong>Built</strong>: the adapter, as a workspace member beside the core. It reads an
+image's function symbols and drafts a register from them, with a citation on
+every entry and a <code>?</code> wherever a decision belongs to a human.</p>
+<p>The object-format reader is written here rather than taken as a dependency,
+which is <a href="../../call/0011-the-adapter-sits-beside-the-core.html">call/0011</a>
+applied at the line that record drew: parsing an object file is bounded work
+against a published layout. Every field is read with a bounds check, because the
+input is a binary somebody else built and a census that panicked on a malformed
+image would be worse than one that declined. A file that is not an image, is the
+wrong width, or is truncated is declined by name.</p>
+<p>The core's dependency list is still empty and the canonical artifact is still
+built with <code>-p calx-telltale</code>, so the offline release build is untouched.</p>
+<p><strong>Outstanding, and stated on every draft</strong>: these are candidates rather than
+waits. Finding the polling loops inside a function needs a disassembler, which
+is the unbounded half call/0011 keeps out, so what the adapter misses it misses
+silently. The draft says so in its own header rather than leaving a reader to
+discover it.</p>
 <h2 id="acceptance"><a class="header" href="#acceptance">Acceptance</a></h2>
 <ul>
 <li>A skeleton carries <code>extracted</code> provenance with a citation on every value it
