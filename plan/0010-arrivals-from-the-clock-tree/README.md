@@ -4,7 +4,7 @@ An interrupt's arrival period is declared by hand today, even where the register
 already declares the clock that produces it.
 
 - **Who**: [Marek](../../cast/marek.md), primary here.
-- **What**: the specs under `spec/`.
+- **What**: the acceptance below, discharged by the tests and proofs in the software repo.
 - **Why**: the derivation machinery this needs already exists, and it is aimed
   at the frustration the cast records most sharply.
 

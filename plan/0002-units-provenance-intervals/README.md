@@ -5,7 +5,7 @@ obligations that hold them together.
 
 - **Who**: [Ines](../../cast/ines.md), who needs to tell a derived number from a
   guess while reading one result.
-- **What**: the specs under `spec/`, which discharge unit soundness, provenance monotonicity and interval soundness.
+- **What**: the acceptance below, and the obligations it discharges: unit soundness, provenance monotonicity and interval soundness.
 - **Why**: [call/0003](../../call/0003-cast-modalities.md) requires the
   provenance to reach both the printed report and the structured output.
 

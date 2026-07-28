@@ -5,7 +5,7 @@ The declaration everything else computes over, and the adapter that drafts it.
 - **Who**: [Ines](../../cast/ines.md), who curates a register rather than
   authoring one from nothing, and [Tarn](../../cast/tarn.md), who edits and
   re-checks it in a loop.
-- **What**: the specs under `spec/`.
+- **What**: the acceptance below, discharged by the tests and proofs in the software repo.
 - **Why**: [call/0002](../../call/0002-design-note-stays-out-of-repo.md) records
   where the design this milestone implements is held.
   [call/0006](../../call/0006-sources-are-declared-and-delays-name-them.md) adds

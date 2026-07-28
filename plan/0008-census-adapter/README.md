@@ -7,7 +7,7 @@ decide.
 - **Who**: [Ines](../../cast/ines.md), who curates rather than authors, and
   [Marek](../../cast/marek.md), for whom a register large enough to maintain by
   hand becomes its own job and therefore stops being maintained.
-- **What**: the specs under `spec/`.
+- **What**: the acceptance below, discharged by the tests and proofs in the software repo.
 - **Why**: every other milestone assumes a register exists. This is where one
   comes from.
 

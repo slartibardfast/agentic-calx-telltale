@@ -5,7 +5,7 @@ names the operation that failed and not the line that wrote it.
 
 - **Who**: [Tarn](../../cast/tarn.md) is primary, with
   [Ines](../../cast/ines.md) behind him.
-- **What**: the specs under `spec/`.
+- **What**: the acceptance below, discharged by the tests and proofs in the software repo.
 - **Why**: the refusal is right and unactionable, which is a diagnostics fault
   rather than a modelling one.
 

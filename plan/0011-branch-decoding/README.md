@@ -5,7 +5,7 @@ polling loops inside those functions is what would make it a census.
 
 - **Who**: [Ines](../../cast/ines.md) is primary, with
   [Marek](../../cast/marek.md) behind her.
-- **What**: the specs under `spec/`.
+- **What**: the acceptance below, discharged by the tests and proofs in the software repo.
 - **Why**: every milestone so far assumes a register exists, and this is the one
   that would produce a real one.
 

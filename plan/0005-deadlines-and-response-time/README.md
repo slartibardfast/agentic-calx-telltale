@@ -7,7 +7,7 @@ started from.
   breaches a deadline that is only armed for part of a run, and
   [Marek](../../cast/marek.md), who has to choose between deepening a buffer and
   shortening the window that overruns it.
-- **What**: the specs under `spec/`.
+- **What**: the acceptance below, discharged by the tests and proofs in the software repo.
 - **Why**: the interval a deadline is armed over changes the verdict, and prose
   has been carrying that distinction so far.
 

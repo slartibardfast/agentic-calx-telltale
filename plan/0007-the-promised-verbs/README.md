@@ -7,7 +7,7 @@ gap by building what was promised.
 - **Who**: [Ines](../../cast/ines.md), primary here. The verbs she works
   through are the ones missing, so the tool currently offers her the smallest
   part of what it computes.
-- **What**: the specs under `spec/`.
+- **What**: the acceptance below, discharged by the tests and proofs in the software repo.
 - **Why**: the arithmetic already exists and only the surface does not, so this
   is the cheapest large gain available.
 

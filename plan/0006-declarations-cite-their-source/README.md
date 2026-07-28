@@ -7,7 +7,7 @@ finding can point at code.
 - **Who**: [Marek](../../cast/marek.md), primary here. His written accommodation
   is a declaration that names the file and symbol it was extracted from, and the
   register format carries no such field, so the accommodation is unmet.
-- **What**: the specs under `spec/`.
+- **What**: the acceptance below, discharged by the tests and proofs in the software repo.
 - **Why**: [call/0003](../../call/0003-cast-modalities.md) sets what each
   modality is owed, and this is the part of Marek's share the schema never grew.
 

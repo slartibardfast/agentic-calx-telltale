@@ -4,7 +4,7 @@ The composition operators, and the witness that says where a maximum occurs.
 
 - **Who**: [Ines](../../cast/ines.md), who needs a worst case found without
   having guessed where to look for it.
-- **What**: the specs under `spec/`, which discharge accumulator fit and attainment.
+- **What**: the acceptance below, and the obligations it discharges: accumulator fit and attainment.
 - **Why**: this is the milestone that makes the tool worth more than a sweep.
 
 ## The increment
