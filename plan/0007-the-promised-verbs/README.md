@@ -61,8 +61,12 @@ to find. `deadline` and `overrun` then disagree about the same window: the
 blackout is inside the deadline and still overruns the buffer, which is the
 failure a latency figure never shows.
 
-**Outstanding**: `census`, which has its own milestone, and a composition that
-mixes units is refused by the arithmetic rather than named at parse time.
+`census` has since been built under
+[0008](../0008-census-adapter/README.md).
+
+**Outstanding**: a composition mixing units is refused by the arithmetic rather
+than named at parse time, so the message points at the operation rather than at
+the line that wrote it.
 
 ## Acceptance
 

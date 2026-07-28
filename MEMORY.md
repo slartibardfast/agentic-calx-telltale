@@ -250,3 +250,9 @@
 - **0008 census**: drafts a register from an image's function symbols with citations and `?` blanks.
   Emits candidates rather than waits, and **says so in its own header**, because what it misses without a
   disassembler it misses silently.
+
+- A clock now carries a citation too, which was the last of 0006's open work: the frequency is the value
+  most worth tracing, since everything timed by that clock rests on it.
+- **A `sed` on `.host-software` matched both stanzas** and gave host-lint a `-p calx-telltale` flag for a
+  package it does not have. `software --verify-build` caught it, which is the gate earning its keep.
+  **Edit that file by stanza, never by a pattern that appears in more than one.**

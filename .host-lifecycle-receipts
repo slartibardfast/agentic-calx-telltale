@@ -137,3 +137,9 @@
     evidence = v0.3.0@babfff8e409c7202455ab06e275154016b47f75ff123b547810783ecb5cedf56
     tool = host-lifecycle@0.47.1
     recorded = 2026-07-28
+
+[receipt "verify"]
+    disposition = done
+    evidence = goal complete: every plan item closed or recorded with its reason; validate ok; prose clean; refs clean; reconcile clean; 0 hazards; 88 tests and 20 harnesses; both builds reproduce at pin 9e02827
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28

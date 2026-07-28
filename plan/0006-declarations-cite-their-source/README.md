@@ -50,8 +50,9 @@ it, and the reporting layer has what it needs.
 A `?` in either field reaches the reader as absent rather than as a literal
 question mark, so a census that could not determine a site says so.
 
-**Outstanding**: the source declaration carries no citation yet. Only waits do,
-because only waits currently reach a verdict.
+A clock carries one too. Its frequency is the value most worth tracing, because
+everything timed by that clock rests on it, and a report names the site
+alongside the nominal rate and the tolerance.
 
 ## Acceptance
 

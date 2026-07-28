@@ -57,10 +57,9 @@ since one wants a decision and the other wants a correction.
 The schema holds the no-bare-rates rule itself: a tick count naming no clock is
 refused at parse time, so the arithmetic never has to catch it later.
 
-**Outstanding**: the census adapter. Walking an ELF for loops, back edges and
-interrupts-off regions needs a reader for the format, which is the first
-dependency this crate would take. It belongs outside the proof boundary and
-probably outside this crate, and that placement wants a decision before code.
+The census adapter that this milestone left outstanding has since been built
+under [0008](../0008-census-adapter/README.md), where the placement it was
+waiting on is settled.
 
 ## Acceptance
 
