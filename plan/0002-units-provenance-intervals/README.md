@@ -52,6 +52,18 @@ narrowed under composition would be claiming a precision its inputs never had.
 All three are small bounded harnesses with modest unwinding, so this milestone
 does not wait on loop contracts.
 
+## Where it stands
+
+**Built.** The `Quantity` core holds an interval, a unit and a provenance, and
+the three obligations are proved over everything their types admit. Every stored
+count is a `u128` behind a single alias, and arithmetic refuses rather than
+wraps.
+
+The width was reversed here after the fact, and the reasoning is kept in
+[call/0007](../../call/0007-rates-are-exact-rationals.md): a narrower store was
+chosen to make the proofs cheaper, the saving was measured and found not to
+exist, and the narrow store had meanwhile been capping how fine a base could be.
+
 ## Acceptance
 
 - A conversion applied without a declaration fails to compile or fails unit soundness.

@@ -1,7 +1,8 @@
 # 0008 census-adapter
 
 A register authored entirely by hand is a register nobody keeps current. The
-adapter drafts one from the image, leaving blanks where a human has to decide.
+adapter drafts one from the image and leaves a blank wherever a human has to
+decide.
 
 - **Who**: [Ines](../../cast/ines.md), who curates rather than authors, and
   [Marek](../../cast/marek.md), for whom a register large enough to maintain by
@@ -44,6 +45,29 @@ already recorded among the limits the tool states on every run.
   which is the difference between a review artefact and a stale document.
 - **Tarn** gains the loop this milestone was always for: run the adapter,
   fill what can be filled, check, repeat until the obligations discharge.
+
+## Where it stands
+
+**Built**: the adapter, as a workspace member beside the core. It reads an
+image's function symbols and drafts a register from them, with a citation on
+every entry and a `?` wherever a decision belongs to a human.
+
+The object-format reader is written here rather than taken as a dependency,
+which is [call/0011](../../call/0011-the-adapter-sits-beside-the-core.md)
+applied at the line that record drew: parsing an object file is bounded work
+against a published layout. Every field is read with a bounds check, because the
+input is a binary somebody else built and a census that panicked on a malformed
+image would be worse than one that declined. A file that is not an image, is the
+wrong width, or is truncated is declined by name.
+
+The core's dependency list is still empty and the canonical artifact is still
+built with `-p calx-telltale`, so the offline release build is untouched.
+
+**Outstanding, and stated on every draft**: these are candidates rather than
+waits. Finding the polling loops inside a function needs a disassembler, which
+is the unbounded half call/0011 keeps out, so what the adapter misses it misses
+silently. The draft says so in its own header rather than leaving a reader to
+discover it.
 
 ## Acceptance
 

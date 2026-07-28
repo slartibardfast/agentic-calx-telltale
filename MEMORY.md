@@ -224,3 +224,29 @@
 - **The non-disclosure constraint in call/0002 is lifted by operator ruling.** The note was already
   heavily redacted and was never committed. Acceptance criteria stay stated as properties anyway, because
   a property holds across images and a figure holds for one.
+
+### 2026-07-28 — every plan milestone closed, and v0.3.0
+
+- All eight open items closed. calx-telltale **v0.3.0** released, pin `ac3175d`, artifact `babfff8`.
+  91 tests, 20 harnesses, both lanes green, 0 hazards.
+- **call/0011**: the census adapter sits beside the core as a workspace member, out of the canonical
+  artifact, which is built with `-p calx-telltale`. The record drew the line at *parsing is bounded,
+  disassembly is not* — so the ELF reader is hand-written and the adapter ended up with **no external
+  dependencies either**, which is better than the record anticipated.
+- **0006 citations**: a wait carries `file=`/`symbol=`; a failing verdict now names a site rather than an
+  identifier. Citations sit *beside* the declarations so the verified types stay free of text.
+- **0007 verbs**: project, attain, deadline, overrun, diff, each with `--json`. The register grew
+  compositions (operands by reference, resolved top down), interrupts and windows.
+- **0005 remainder**: armed deadlines get their own `Unarmed` verdict — *an unbounded span is not a pass*
+  and counts with the withheld. Jitter widens the burst window. A handler declaring `reenables` is
+  interfered with by its own priority level. Two limits became model.
+- **Correlated failure carried into the arithmetic**: two clocks off one root are exact multiples, so the
+  root's error cancels in a comparison between them. `exact_ratio` returns the exact ratio where a root
+  is shared and `None` where it is not. The limit narrowed to *common-mode excursion*, which is the root
+  leaving its own tolerance — a genuinely different failure.
+- **0003 monotonicity**: established rather than searched where the cost cannot fall, resting on a
+  **proved** leaf case and propagating structurally. Conservative in the safe direction; a test holds the
+  established answer to what a search would have found.
+- **0008 census**: drafts a register from an image's function symbols with citations and `?` blanks.
+  Emits candidates rather than waits, and **says so in its own header**, because what it misses without a
+  disassembler it misses silently.

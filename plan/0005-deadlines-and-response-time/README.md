@@ -71,9 +71,24 @@ is a strict order, which is what lets the recurrence partition the set. The
 recurrence itself walks a heap-allocated set and is covered by tests, on the
 same reasoning as [call/0009](../../call/0009-multiplication-is-proved-at-the-boundaries.md).
 
-**Outstanding**: the armed-interval comparison below, release jitter, nesting
-within a priority level, and the arrival adapter that would populate rates from
-something other than a human's declaration.
+Arming, jitter and nesting have since landed, and each removed a limit the tool
+had been declaring rather than modelling.
+
+A deadline now carries the span it is in force over. A window outside that span
+gets its own verdict rather than a pass, because an unbounded stretch is worse
+than a bounded one and reporting it as met would say the opposite of what is
+true. It counts with the withheld rather than the passes.
+
+An arrival may declare how late a release can be. A source that is periodic in
+the long run still bunches, and a burst puts more arrivals into a window than
+even spacing would, which can overrun a ring the even case fits.
+
+A handler may declare that it re-enables interrupts inside itself, and the
+interference set then widens to its own priority level. A flat model misses that
+entirely.
+
+**Outstanding**: the arrival adapter that would populate rates from something
+other than a human's declaration.
 
 ## Acceptance
 
@@ -94,7 +109,9 @@ Recorded here so they cannot be mistaken for covered:
   back-edge census and still hangs a boot.
 - Unresolved indirect calls, which make any freeze set a lower bound.
 - Windows that open in one stack frame and close in another.
-- Correlated failure. Each wait's latency is modelled independently, and one
-  unclocked block makes every register behind it misbehave together.
+- A common-mode excursion. A comparison between clocks off one root is exact,
+  because the root's error moves both and cancels. What stays outside the model
+  is the root leaving its own declared tolerance, which would move every clock
+  beneath it at once.
 - Nested budgets. Each wait is priced in ignorance of what its callers have
   already spent.

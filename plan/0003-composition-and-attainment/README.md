@@ -59,8 +59,20 @@ one step later the whole composition unwinds, so an off-by-one there would move
 the worst case. The tree itself is heap-allocated and carried by tests, on the
 reasoning in [call/0009](../../call/0009-multiplication-is-proved-at-the-boundaries.md).
 
-**Outstanding**: monotonicity reported as a proved property where the tool can
-establish it, rather than the search running unconditionally.
+**Monotonicity is now established rather than assumed.** A composition reports
+whether its answer was established or searched for. Where the cost cannot fall,
+the worst case is at the top of the domain by construction and no search runs.
+
+The claim rests on the leaf, and the leaf is proved: a wait polls
+`min(latency, budget)` times, so its cost never falls as the world gets slower.
+From there it propagates structurally. A branch of monotone arms stays monotone,
+and a sequence, a retry or a short circuit takes the whole composition into the
+searched case, because each of them stops early.
+
+The rule is conservative in the safe direction: anything that might stop early
+is treated as stopping early, so monotonicity is never claimed for a composition
+that could break it. A test holds the established answer to what the search
+would have found.
 
 ## Acceptance
 
