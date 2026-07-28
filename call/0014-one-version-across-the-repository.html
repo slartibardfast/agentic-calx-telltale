@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>The repository carries one version, and the change class is judged over all of it - agentic-calx-telltale</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="../index.html">agentic-calx-telltale</a></li><li class="chapter-item expanded affix "><li class="part-title">Cast: who</li><li class="chapter-item expanded "><a href="../cast/index.html"><strong aria-hidden="true">1.</strong> Cast: the project's Who</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../cast/applying-personas.html"><strong aria-hidden="true">1.1.</strong> Applying personas during planning</a></li><li class="chapter-item expanded "><a href="../cast/ines.html"><strong aria-hidden="true">1.2.</strong> Ines: the Human Operator</a></li><li class="chapter-item expanded "><a href="../cast/marek.html"><strong aria-hidden="true">1.3.</strong> Marek: the Firmware Engineer</a></li><li class="chapter-item expanded "><a href="../cast/tarn.html"><strong aria-hidden="true">1.4.</strong> Tarn: the Agentic Model User</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Plan: what & when</li><li class="chapter-item expanded "><a href="../plan-index.html"><strong aria-hidden="true">2.</strong> Plan</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../plan/0001-register-schema-and-census/index.html"><strong aria-hidden="true">2.1.</strong> 0001 register-schema-and-census</a></li><li class="chapter-item expanded "><a href="../plan/0002-units-provenance-intervals/index.html"><strong aria-hidden="true">2.2.</strong> 0002 units-provenance-intervals</a></li><li class="chapter-item expanded "><a href="../plan/0003-composition-and-attainment/index.html"><strong aria-hidden="true">2.3.</strong> 0003 composition-and-attainment</a></li><li class="chapter-item expanded "><a href="../plan/0004-termination-and-counter-fit/index.html"><strong aria-hidden="true">2.4.</strong> 0004 termination-and-counter-fit</a></li><li class="chapter-item expanded "><a href="../plan/0005-deadlines-and-response-time/index.html"><strong aria-hidden="true">2.5.</strong> 0005 deadlines-and-response-time</a></li><li class="chapter-item expanded "><a href="../plan/0006-declarations-cite-their-source/index.html"><strong aria-hidden="true">2.6.</strong> 0006 declarations-cite-their-source</a></li><li class="chapter-item expanded "><a href="../plan/0007-the-promised-verbs/index.html"><strong aria-hidden="true">2.7.</strong> 0007 the-promised-verbs</a></li><li class="chapter-item expanded "><a href="../plan/0008-census-adapter/index.html"><strong aria-hidden="true">2.8.</strong> 0008 census-adapter</a></li><li class="chapter-item expanded "><a href="../plan/0009-units-refused-at-the-line/index.html"><strong aria-hidden="true">2.9.</strong> 0009 units-refused-at-the-line</a></li><li class="chapter-item expanded "><a href="../plan/0010-arrivals-from-the-clock-tree/index.html"><strong aria-hidden="true">2.10.</strong> 0010 arrivals-from-the-clock-tree</a></li><li class="chapter-item expanded "><a href="../plan/0011-branch-decoding/index.html"><strong aria-hidden="true">2.11.</strong> 0011 branch-decoding</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Software: where</li><li class="chapter-item expanded "><a href="../where.html"><strong aria-hidden="true">3.</strong> Software</a></li><li class="chapter-item expanded affix "><li class="part-title">Call: why</li><li class="chapter-item expanded "><a href="../call/0000-use-markdown-decision-records.html"><strong aria-hidden="true">4.</strong> Use Markdown decision records (MADR)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../call/0001-adopt-host-template.html"><strong aria-hidden="true">4.1.</strong> Adopt the host template at c8fc28c</a></li><li class="chapter-item expanded "><a href="../call/0002-design-note-stays-out-of-repo.html"><strong aria-hidden="true">4.2.</strong> The founding design note stays outside this repository</a></li><li class="chapter-item expanded "><a href="../call/0003-cast-modalities.html"><strong aria-hidden="true">4.3.</strong> calx-telltale owes an accommodation to each modality</a></li><li class="chapter-item expanded "><a href="../call/0004-nothing-to-release-yet.html"><strong aria-hidden="true">4.4.</strong> Neither component is released by this host</a></li><li class="chapter-item expanded "><a href="../call/0005-upgrade-to-the-reference-gate.html"><strong aria-hidden="true">4.5.</strong> Upgrade to 32e655f: the reference sweep joins the verify gate</a></li><li class="chapter-item expanded "><a href="../call/0006-sources-are-declared-and-delays-name-them.html"><strong aria-hidden="true">4.6.</strong> Timing sources are declared, and a delay names the source it rides on</a></li><li class="chapter-item expanded "><a href="../call/0007-rates-are-exact-rationals.html"><strong aria-hidden="true">4.7.</strong> A rate is an exact rational, and the division is deferred</a></li><li class="chapter-item expanded "><a href="../call/0008-interrupts-are-declared-and-answerability-is-a-verdict.html"><strong aria-hidden="true">4.8.</strong> Interrupts are declared, and whether a window can be judged is itself a verdict</a></li><li class="chapter-item expanded "><a href="../call/0009-multiplication-is-proved-at-the-boundaries.html"><strong aria-hidden="true">4.9.</strong> Multiplication is proved at the boundaries, and the rung is spent elsewhere</a></li><li class="chapter-item expanded "><a href="../call/0010-response-time-over-a-priority-ordered-set.html"><strong aria-hidden="true">4.10.</strong> Response time over a priority-ordered set</a></li><li class="chapter-item expanded "><a href="../call/0011-the-adapter-sits-beside-the-core.html"><strong aria-hidden="true">4.11.</strong> The census adapter sits beside the core, out of the canonical artifact</a></li><li class="chapter-item expanded "><a href="../call/0012-boundaries-are-delegated-to-the-listing.html"><strong aria-hidden="true">4.12.</strong> Boundaries are delegated to a toolchain listing</a></li><li class="chapter-item expanded "><a href="../call/0013-the-adapter-rides-the-core-release.html"><strong aria-hidden="true">4.13.</strong> The adapter is verified as a component and released with the core</a></li><li class="chapter-item expanded "><a href="../call/0014-one-version-across-the-repository.html" class="active"><strong aria-hidden="true">4.14.</strong> The repository carries one version, and the change class is judged over all of it</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Reference: how</li><li class="chapter-item expanded "><a href="../CLAUDE.html"><strong aria-hidden="true">5.</strong> CLAUDE.md: operating manual for an agentic project</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../STRUCTURE.html"><strong aria-hidden="true">5.1.</strong> Structure</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Memory</li><li class="chapter-item expanded "><a href="../MEMORY.html"><strong aria-hidden="true">6.</strong> Memory</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">agentic-calx-telltale</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="the-repository-carries-one-version-and-the-change-class-is-judged-over-all-of-it"><a class="header" href="#the-repository-carries-one-version-and-the-change-class-is-judged-over-all-of-it">The repository carries one version, and the change class is judged over all of it</a></h1>
+<ul>
+<li>Status: accepted</li>
+<li>Scope: software</li>
+<li>Date: 2026-07-28</li>
+</ul>
+<h2 id="context-and-problem-statement"><a class="header" href="#context-and-problem-statement">Context and Problem Statement</a></h2>
+<p><a href="0013-the-adapter-rides-the-core-release.html">call/0013</a> settled that one
+repository has one release cadence, and that the core's tag covers the adapter's
+source. It left a question open that the next release ran straight into: what
+does the number on that tag name?</p>
+<p>The delta since <code>v0.4.0</code> shows why the question has teeth. The adapter gained
+<code>loops</code>, which is the capability the census existed for. The core gained a help
+text that names five verbs it already answered to, and a test that holds it to
+that. Every verified module is unchanged.</p>
+<p>Read as the core package's version, that is a patch, and the adapter's new
+command reaches a reader under a number that says nothing happened. Read as the
+repository's version, it is an addition, and the core carries a minor bump that
+its own library did not earn.</p>
+<p>The release tool sharpens it rather than softens it. It takes a change class and
+derives the number, so an author never picks a semver level by hand. That is the
+right shape, and it means the class has to be a true statement about something.
+The open question is what.</p>
+<h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
+<p><strong>The repository carries one version, and both crates hold it.</strong> The core and
+the adapter are bumped together and always read the same. Two numbers moving
+independently would be a second cadence, which is the thing <code>call/0013</code> refused.</p>
+<p><strong>The change class is judged over the repository's whole surface.</strong> One tag
+covers both crates, so the question the class answers is what this tag adds for
+someone who takes the release, rather than what one package added. On this
+release the answer is a command, so the class is honest.</p>
+<p>The version reaches the adapter's manifest by hand until the tool bumps a
+workspace member of its own accord. That is the same shape as the trap
+<code>call/0013</code> recorded: the release phase bumps the root manifest, and a workspace
+member is not the root.</p>
+<h2 id="consequences"><a class="header" href="#consequences">Consequences</a></h2>
+<ul>
+<li>Good: the number means one checkable thing, and the class stays a true
+statement rather than a lever pulled to reach a number someone wanted.</li>
+<li>Good: an operator reads one version for the repository and does not have to
+hold two in mind, which is the simplicity this was asked for.</li>
+<li>Bad: the core's version can move without its library moving, so the number
+does not answer "did the arithmetic change?" A reader wanting that compares
+tags, and the release notes say which crate the change landed in.</li>
+<li>Bad: the adapter's version is set by hand, so it can drift from the core's
+until a release re-aligns it. <code>software --check</code> does not catch that today.</li>
+<li>Neutral: were the crates ever to split into separate repositories, each would
+take its own cadence and number, and this record would be superseded along
+with <code>call/0013</code>.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../call/0013-the-adapter-rides-the-core-release.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../CLAUDE.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../call/0013-the-adapter-rides-the-core-release.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../CLAUDE.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
