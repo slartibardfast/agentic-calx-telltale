@@ -340,6 +340,21 @@ first), the armed-interval comparison, and monotonicity reported as a proved pro
 <li>The gh account reverted mid-sequence again and the tag push failed as connollydavid. See
 [[gh-account-switching-for-slartibardfast-pushes]]; re-check identity before every outward step.</li>
 </ul>
+<h3 id="2026-07-28--pushing-to-this-pair-no-longer-depends-on-the-gh-account"><a class="header" href="#2026-07-28--pushing-to-this-pair-no-longer-depends-on-the-gh-account">2026-07-28 — pushing to this pair no longer depends on the gh account</a></h3>
+<ul>
+<li><code>git push</code> in this host and in <code>software/calx-telltale/main</code> now works whatever account <code>gh</code> thinks is
+active. The switch-and-inline-credential dance used through this session is retired.</li>
+<li><strong>Root cause</strong>: <code>~/.gitconfig</code> carries <code>credential.https://github.com.helper=</code> (empty, which clears the
+chain) followed by <code>!/usr/bin/gh auth git-credential</code>, so the global <code>store</code> helper was bypassed for
+every github.com push and gh's helper was the only one running. That helper reads gh's <em>active</em>
+account, which reverted on its own several times. <code>gh auth setup-git</code> writes this.</li>
+<li><strong>Fix</strong>, repo-local so it leaves <code>connollydavid</code> repositories alone: name the user in the remote
+(<code>https://slartibardfast@github.com/...</code>) so the credential store matches on username, then clear and
+restore <code>store</code> for github.com in each repo's own config. The software repo's config lives in the bare
+store, so every worktree inherits it.</li>
+<li><code>gh</code> itself still follows the active account, so anything needing <code>slartibardfast</code> identity through
+<code>gh</code> (creating a repo, say) still wants a switch and a check of <code>gh api user --jq .login</code> first.</li>
+</ul>
 
                     </main>
 
