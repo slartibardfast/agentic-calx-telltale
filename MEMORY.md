@@ -442,3 +442,31 @@
 - **This is what holding a change back is for.** Yesterday's three options were a red gate, a private
   fork of the methodology, or a stale spine. Staleness was the only reversible one, and it cost a day.
   Prefer it whenever the alternative is editing something you do not own.
+
+### 2026-07-29 — two false claims in the census, found by testing rather than reading
+
+- **A recursive call was reported as a wait.** Branch mnemonics were matched by *prefix*, and on most
+  of these architectures a call opens with a branch's letters: `bl` under `b`, `jal` under `j`. A `bl`
+  back to a function's own start satisfied "target at or before, inside the same function" and came
+  out as `wait id=0 ...`. That is precisely the false loop [[call/0012]] says is worse than a missing
+  one. RISC-V carried the same defect.
+- **The fix is asymmetric, and that asymmetry is the point.** Calls are matched **whole**, branches by
+  prefix, because ARC's `blt` also opens with `bl` and excluding calls by prefix would drop real loops.
+  Getting this wrong in either direction is easy; there are now tests for both.
+- **`lp` was inert and its comment claimed otherwise.** The ARC set named ARC's zero-overhead loop
+  instruction with a comment saying it was listed "so that it is found". It could never be: `lp` marks
+  a loop whose end lies *ahead* of it, so the back-edge rule rejects it. Verified with a listing before
+  removing it. The gap it pretended to close is the same gap 0011 already recorded.
+- **The lesson is about how these were found.** Both survived review because the code *said* it did the
+  right thing. A comment asserting a behaviour is not evidence of it, and neither is a mnemonic sitting
+  in a list. The reproductions took two minutes each.
+- The loop count in plan/0011 ("thousands across hundreds of functions") was measured **before** this
+  fix and counted calls, so it is now an upper bound until re-measured. The listing it came from is not
+  in the repository.
+- **Watch for stale binaries when testing.** `cargo build --release` at the workspace root does not
+  rebuild the census member; the first reproduction "failed to fix" because of it. Build with
+  `-p calx-telltale-census`. Same trap as the `--help` check earlier.
+- **A release now requires `--authorized <ref>`** (host-lifecycle, call/0050): a resolvable
+  `call/NNNN`, `plan/NNNN[#anchor]`, or `owner/repo#N`, recorded on the receipt, "because an approval
+  spoken in a session window is not a record". This release cited `plan/0011`. `receipt --record` takes
+  the matching `--authorization`.
