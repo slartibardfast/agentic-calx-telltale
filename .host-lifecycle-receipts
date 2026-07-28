@@ -210,3 +210,10 @@
     evidence = v0.5.2@79062fb1d63827e146996269e68c350ec20d76dccb7fdd9f341d744ddf40ce39
     tool = host-lifecycle@0.47.2
     recorded = 2026-07-28
+
+[receipt "release" "calx-telltale"]
+    disposition = done
+    evidence = v0.5.3@7a87a21d5e7e8c8c56de51299614e781b1a3d2b0d73e90d800880b7181e41e24
+    authorization = plan/0011
+    tool = host-lifecycle@0.48.1
+    recorded = 2026-07-28
