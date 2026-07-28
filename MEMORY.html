@@ -450,6 +450,31 @@ package it does not have. <code>software --verify-build</code> caught it, which 
 <strong>Edit that file by stanza, never by a pattern that appears in more than one.</strong></p>
 </li>
 </ul>
+<h3 id="2026-07-28--the-encoding-question-answered-against-a-real-part"><a class="header" href="#2026-07-28--the-encoding-question-answered-against-a-real-part">2026-07-28 — the encoding question, answered against a real part</a></h3>
+<ul>
+<li><strong>"Which architecture" was underspecified.</strong> The unit a branch decoder is written against is the
+<em>encoding</em>, not the instruction set: one set carries several encoding modes, width-changing extensions
+are the usual case rather than exotic, and endianness decides how a word is assembled.</li>
+<li><strong>The cost has three tiers, not two.</strong> Strided (fixed width); length in a fixed prefix of the first
+halfword (Thumb-2, compressed RISC-V); and <strong>length in the operand form</strong>, where a reader must decode
+most of an instruction to find the next. The third tier is where writing a decoder stops being cheap.</li>
+<li><strong>ARC EM is the worked case and sits in the third tier.</strong> Four widths; compact forms are the majority;
+a long-immediate word appended per the operand form gives the wider ones. <strong>The limm word is two
+little-endian halfwords, high half first</strong> — a flat 32-bit LE read finds nothing, and the failure looks
+like absence rather than error. Even a mature suite left roughly half its spans undecoded on a stripped
+image, clustering on a major opcode absent from the published set.</li>
+<li><strong>Delegation is a real alternative to decoding</strong>: parse a toolchain listing and take boundaries from its
+address column. Far cheaper, works today, but needs a toolchain and cannot run on a bare blob — <strong>and
+the register's soundness then rests on that toolchain's boundary-finding. A mis-lengthed instruction
+loses a back edge in a way nothing downstream can detect.</strong> Now a declared limit, stated on every run.</li>
+<li>The ELF reader handles <strong>both classes</strong>; ARC EM is ELF32 and 64-bit-only would have declined the domain.
+The layouts differ in more than field width: a symbol's info byte moves, which reads plausible values
+from wrong offsets rather than failing.</li>
+<li><strong>Edit <code>.host-software</code> by key within its stanza, never by expected value.</strong> Twice now a replacement
+keyed on an old literal silently matched nothing: once giving host-lint a flag it could not use, once
+leaving a stale pin so <code>verify-build</code> rebuilt the wrong commit and reported drift that was not there.
+There is a <code>setkey.py</code> pattern for this in the session scratchpad.</li>
+</ul>
 
                     </main>
 

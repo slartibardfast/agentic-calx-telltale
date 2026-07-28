@@ -1140,24 +1140,72 @@ hand drifts from it, and a drifted register is a review artefact nobody trusts.
 His other entry, "a tool that reports a hazard on a part it cannot reach", is a
 warning about how this milestone can go wrong rather than an argument for it.</p>
 <p>Neither persona asks for a disassembler. They ask for a register they did not
-have to write, and decoding is the means.</p>
+have to write, and decoding is one means among more than one.</p>
+<h2 id="boundaries-come-before-branches"><a class="header" href="#boundaries-come-before-branches">Boundaries come before branches</a></h2>
+<p>A back edge cannot be found without knowing where instructions start, and on the
+parts this tool is aimed at that is the larger half of the work. The cost falls
+into three tiers rather than two.</p>
+<p><strong>Strided.</strong> Every instruction is the same size, so a reader advances by a
+constant and inspects. Cheapest by a wide margin.</p>
+<p><strong>Length in a fixed prefix.</strong> Sizes vary and the first unit says how long the
+instruction is, so a reader advances without understanding it. Thumb-2 and the
+compressed RISC-V forms are both here.</p>
+<p><strong>Length in the operand form.</strong> Sizes vary and the length depends on what the
+instruction does, so a reader has to decode most of it before it can find the
+next one. This is where writing a decoder stops being cheap, and it is where the
+part in front of the operator sits.</p>
+<p>The adapter reports which tier an image falls into, taken from the instruction
+set its own header declares, so the cost is visible before anyone commits.</p>
+<h2 id="the-worked-case-and-why-it-is-the-hard-one"><a class="header" href="#the-worked-case-and-why-it-is-the-hard-one">The worked case, and why it is the hard one</a></h2>
+<p>An ARC EM part is the case to plan against, and it is worse than either of the
+usual examples.</p>
+<p>It carries four instruction widths rather than two, and the compact encodings
+are the majority rather than a minority. Two width-changing mechanisms operate
+independently: the compact forms, which play the part the compressed RISC-V
+encodings do, and a long-immediate word appended to an instruction, which
+produces the wider forms. Roughly a fifth of instructions carry one.</p>
+<p>That second mechanism is what puts this in the third tier. Thumb-2 and the
+compressed forms both let a reader take the length from a fixed prefix of the
+first halfword. Here, whether a long-immediate word follows is a property of the
+operand form, so the length function needs more of the instruction than either
+of those cases.</p>
+<p>The endianness answer misleads if taken flat. The image is little-endian, and a
+long-immediate word is not a plain little-endian thirty-two bit value: it is two
+little-endian halfwords with the high half first. Reading four bytes flat gets
+the halves the wrong way round and finds nothing, which is a failure that looks
+like absence rather than like an error.</p>
+<p>Nor is a mature decoder a guarantee. On a stripped image of such a part, a
+well-known reverse-engineering suite left roughly half its spans undecoded, and
+the failures clustered on a major opcode with no entry in the published
+instruction set at all. An encoding can be beyond the available tools rather
+than merely expensive.</p>
+<h2 id="two-ways-to-get-boundaries-and-the-price-of-each"><a class="header" href="#two-ways-to-get-boundaries-and-the-price-of-each">Two ways to get boundaries, and the price of each</a></h2>
+<p><strong>Decode them.</strong> Write the length function and the branch forms for one
+encoding. Self-contained, runs on a bare image with no symbols and no toolchain,
+and in the third tier a substantial piece of work that may not be finishable
+against an incompletely published encoding.</p>
+<p><strong>Delegate them.</strong> Parse the listing a toolchain disassembler produces and take
+boundaries from its address column, so the hard part falls to a decoder that
+exists. Far cheaper, and it works today for encodings this project could not
+decode soon.</p>
+<p>The delegated route carries a dependency and a caveat, and the caveat is the
+serious one. It needs a toolchain and a listing, so it cannot run on a bare
+blob. The register's soundness then rests on that toolchain finding boundaries
+correctly: a mis-lengthed instruction loses a back edge, and the freeze set is
+wrong in a way nothing downstream can detect. That is the shape of dependency
+this project exists to make visible, so it is now a declared limit and is stated
+on every run rather than left in a note.</p>
 <h2 id="the-decision-this-milestone-waits-on-1"><a class="header" href="#the-decision-this-milestone-waits-on-1">The decision this milestone waits on</a></h2>
-<p>Finding back edges needs branch targets, and branch targets need decoding.
-<a href="plan/0011-branch-decoding/../../call/0011-the-adapter-sits-beside-the-core.html">call/0011</a> keeps that out
-of the core while leaving the adapter free to take it, so what remains open is
-which decoder rather than whether to have one.</p>
-<p>A full disassembler is more than this needs. Back edges want branch instructions
-and their displacements, which for one architecture is a bounded subset of the
-encoding rather than the whole of it. That is the shape to aim for.</p>
-<p>Which architecture comes first is an operator decision, because it depends on
-the part in front of them and nothing in this project settles it. Whichever is
-chosen, the others are uncovered, and the freeze set becomes per-architecture,
-which has to reach the limits the tool states on every run rather than being
-left for a reader to infer.</p>
+<p>Which route, and for which encoding. Both depend on the part in front of the
+operator, and nothing in this project settles either.</p>
+<p>Where the answer is to delegate, the work is a listing parser and the limit is
+already declared. Where the answer is to decode, the tier decides the size of
+it, and a fixed-width encoding is the cheaper opening move even where it is not
+the part that prompted the question.</p>
 <h2 id="the-increment-9"><a class="header" href="#the-increment-9">The increment</a></h2>
-<p>For the chosen architecture, decode branch instructions inside a function's
-extent, take the ones whose target precedes them, and report the resulting loops
-as candidate waits with the citation the symbol already carries.</p>
+<p>For the chosen route, find the loops inside a function's extent, take the
+branches whose target precedes them, and report the result as candidate waits
+carrying the citation the symbol already provides.</p>
 <p>Everything the adapter cannot determine stays blank. A budget, a measure and a
 counter width are still human decisions, and this milestone does not change that.</p>
 <h2 id="acceptance-10"><a class="header" href="#acceptance-10">Acceptance</a></h2>
@@ -1166,8 +1214,11 @@ counter width are still human decisions, and this milestone does not change that
 wherever a decision belongs to a human.</li>
 <li>An instruction the decoder does not recognise stops the analysis of that
 function and says so, rather than being skipped as though it were not a branch.</li>
-<li>An image of an architecture the adapter does not decode is declined by name.</li>
-<li>The freeze set is reported as a lower bound, and the architectures covered are
+<li>Where boundaries are delegated, the run says so, and the limit that makes the
+freeze set only as sound as its source is reported with the rest.</li>
+<li>An image whose encoding the adapter cannot handle is declined by name, and the
+name comes from the image's own header rather than from a guess.</li>
+<li>The freeze set is reported as a lower bound, and the encodings covered are
 named among the limits stated on every run.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="software-where"><a class="header" href="#software-where">Software: where</a></h1>
@@ -1177,7 +1228,7 @@ named among the limits stated on every run.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>9e0282744871bb7bc89ed1797e2c1afeb1f6dd2e</code></li>
+<li>pin: <code>8994dad9ed4dd71b5a985ff2254d45e6a764323d</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -3250,6 +3301,31 @@ most worth tracing, since everything timed by that clock rests on it.</p>
 package it does not have. <code>software --verify-build</code> caught it, which is the gate earning its keep.
 <strong>Edit that file by stanza, never by a pattern that appears in more than one.</strong></p>
 </li>
+</ul>
+<h3 id="2026-07-28--the-encoding-question-answered-against-a-real-part"><a class="header" href="#2026-07-28--the-encoding-question-answered-against-a-real-part">2026-07-28 — the encoding question, answered against a real part</a></h3>
+<ul>
+<li><strong>"Which architecture" was underspecified.</strong> The unit a branch decoder is written against is the
+<em>encoding</em>, not the instruction set: one set carries several encoding modes, width-changing extensions
+are the usual case rather than exotic, and endianness decides how a word is assembled.</li>
+<li><strong>The cost has three tiers, not two.</strong> Strided (fixed width); length in a fixed prefix of the first
+halfword (Thumb-2, compressed RISC-V); and <strong>length in the operand form</strong>, where a reader must decode
+most of an instruction to find the next. The third tier is where writing a decoder stops being cheap.</li>
+<li><strong>ARC EM is the worked case and sits in the third tier.</strong> Four widths; compact forms are the majority;
+a long-immediate word appended per the operand form gives the wider ones. <strong>The limm word is two
+little-endian halfwords, high half first</strong> — a flat 32-bit LE read finds nothing, and the failure looks
+like absence rather than error. Even a mature suite left roughly half its spans undecoded on a stripped
+image, clustering on a major opcode absent from the published set.</li>
+<li><strong>Delegation is a real alternative to decoding</strong>: parse a toolchain listing and take boundaries from its
+address column. Far cheaper, works today, but needs a toolchain and cannot run on a bare blob — <strong>and
+the register's soundness then rests on that toolchain's boundary-finding. A mis-lengthed instruction
+loses a back edge in a way nothing downstream can detect.</strong> Now a declared limit, stated on every run.</li>
+<li>The ELF reader handles <strong>both classes</strong>; ARC EM is ELF32 and 64-bit-only would have declined the domain.
+The layouts differ in more than field width: a symbol's info byte moves, which reads plausible values
+from wrong offsets rather than failing.</li>
+<li><strong>Edit <code>.host-software</code> by key within its stanza, never by expected value.</strong> Twice now a replacement
+keyed on an old literal silently matched nothing: once giving host-lint a flag it could not use, once
+leaving a stale pin so <code>verify-build</code> rebuilt the wrong commit and reported drift that was not there.
+There is a <code>setkey.py</code> pattern for this in the session scratchpad.</li>
 </ul>
 
                     </main>
