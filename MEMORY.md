@@ -281,3 +281,21 @@
   keyed on an old literal silently matched nothing: once giving host-lint a flag it could not use, once
   leaving a stale pin so `verify-build` rebuilt the wrong commit and reported drift that was not there.
   There is a `setkey.py` pattern for this in the session scratchpad.
+
+### 2026-07-28 — cleared for release
+
+- Everything before a release is done. Pin `81d763e`, artifact `525915af`, gates green, both builds
+  reproduce. Three commits sit ahead of `v0.3.0` and the change class is **adds-flag**, checked rather
+  than assumed: the core delta is purely additive (`limits.rs`, `main.rs`, `register.rs`), nothing public
+  removed.
+- **The adapter's version is `0.0.0` and `publish = false`, deliberately.** It had drifted a release
+  behind the core, which reads as neglect. It has never been released, call/0011 keeps it out of the
+  canonical artifact, and call/0004 leaves open whether it is ever released alone. A number tracking the
+  core would imply lockstep it does not have; one left behind reads as drift. **Zero says neither and
+  needs no hand-sync at each release**, which is how the skew appeared. Recorded in call/0011.
+- The README had still advertised drafting a register as a *planned verb of the core binary*. It is
+  neither planned nor a verb: it is a separate built binary. Fixed, with a section describing what it
+  declines to claim.
+- Note for the next release: `host-lifecycle release` bumps only the package it is given, so a workspace
+  member's version is never touched. That is fine while the adapter stays at zero, and would need
+  handling if it ever gains a real version.

@@ -59,4 +59,8 @@ kind of reason.
 - Bad: an operator who wants the adapter builds it separately, which is a step
   the single-binary arrangement would not have needed.
 - Neutral: whether the adapter is ever released as its own artifact is left
-  open. It has no releasable claim until it has one.
+  open. It has no releasable claim until it has one, and its version records
+  that rather than disguising it. A number tracking the core would imply a
+  lockstep it does not have, and one left behind at an old release would read as
+  drift; zero says neither and needs no hand-synchronising when the core is
+  released. It is marked unpublishable for the same reason.
