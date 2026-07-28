@@ -503,6 +503,19 @@ chosen for.</li>
 <li><code>setkey.py</code> (set a field by key within a named <code>.host-software</code> stanza) was used for the re-pin and
 worked. Keep using it; the two defects this session both came from replacing by expected value.</li>
 </ul>
+<h3 id="2026-07-28--the-adapter-was-claiming-a-kind-it-had-not-established"><a class="header" href="#2026-07-28--the-adapter-was-claiming-a-kind-it-had-not-established">2026-07-28 — the adapter was claiming a kind it had not established</a></h3>
+<ul>
+<li>The draft emitted a <code>wait</code> declaration per <strong>function symbol</strong> — 1513 of them on a real image. A wait is
+a polling loop and a function symbol is not, so every line claimed a kind the adapter had never
+established, and the file did not parse anyway (it stopped at the first blank).</li>
+<li>Candidates are <strong>commented out</strong> now. A reader uncomments one once they have found a loop worth
+declaring, and until then the file parses as what it honestly is: a register declaring nothing.</li>
+<li><strong>What the adapter needs before it could be released</strong> is the capability, not the packaging: instruction
+boundaries, which is milestone 0011. Packaging is small by comparison — its own <code>.host-software</code> stanza
+with a build and artifact (it has no external dependencies, so the offline build works), a real version
+in place of the deliberate zero, and a release receipt. <strong>None of that is worth doing while the tool
+emits candidates rather than waits.</strong></li>
+</ul>
 
                     </main>
 

@@ -1019,10 +1019,15 @@ wrong width, or is truncated is declined by name.</p>
 <p>The core's dependency list is still empty and the canonical artifact is still
 built with <code>-p calx-telltale</code>, so the offline release build is untouched.</p>
 <p><strong>Outstanding, and stated on every draft</strong>: these are candidates rather than
-waits. Finding the polling loops inside a function needs a disassembler, which
-is the unbounded half call/0011 keeps out, so what the adapter misses it misses
-silently. The draft says so in its own header rather than leaving a reader to
-discover it.</p>
+waits, and the draft now says so by construction rather than only in prose.
+Every candidate line is commented out. A wait is a polling loop, a function
+symbol is not, and emitting a declaration per symbol claimed a kind the adapter
+had not established, once for every function in the image. A reader uncomments a
+line once they have looked and found a loop worth declaring.</p>
+<p>Finding those loops is what would make this a census, and it needs the
+instruction boundaries <a href="plan/0008-census-adapter/../0011-branch-decoding/README.html">0011</a> is about. What
+the adapter misses without them it misses silently, which is why the header says
+so.</p>
 <h2 id="acceptance-7"><a class="header" href="#acceptance-7">Acceptance</a></h2>
 <ul>
 <li>A skeleton carries <code>extracted</code> provenance with a citation on every value it
@@ -1228,7 +1233,7 @@ named among the limits stated on every run.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>f3fd27d97ace72244d424c7c16144d77b24ace85</code></li>
+<li>pin: <code>d03f7c42f7d06a0f22d13a63c839f40fc7a2e9bd</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -3358,6 +3363,19 @@ adapter at 0.0.0 untouched, with no hand-sync needed and no skew created. That i
 chosen for.</li>
 <li><code>setkey.py</code> (set a field by key within a named <code>.host-software</code> stanza) was used for the re-pin and
 worked. Keep using it; the two defects this session both came from replacing by expected value.</li>
+</ul>
+<h3 id="2026-07-28--the-adapter-was-claiming-a-kind-it-had-not-established"><a class="header" href="#2026-07-28--the-adapter-was-claiming-a-kind-it-had-not-established">2026-07-28 — the adapter was claiming a kind it had not established</a></h3>
+<ul>
+<li>The draft emitted a <code>wait</code> declaration per <strong>function symbol</strong> — 1513 of them on a real image. A wait is
+a polling loop and a function symbol is not, so every line claimed a kind the adapter had never
+established, and the file did not parse anyway (it stopped at the first blank).</li>
+<li>Candidates are <strong>commented out</strong> now. A reader uncomments one once they have found a loop worth
+declaring, and until then the file parses as what it honestly is: a register declaring nothing.</li>
+<li><strong>What the adapter needs before it could be released</strong> is the capability, not the packaging: instruction
+boundaries, which is milestone 0011. Packaging is small by comparison — its own <code>.host-software</code> stanza
+with a build and artifact (it has no external dependencies, so the offline build works), a real version
+in place of the deliberate zero, and a release receipt. <strong>None of that is worth doing while the tool
+emits candidates rather than waits.</strong></li>
 </ul>
 
                     </main>
