@@ -38,17 +38,42 @@ An `Interrupt` declares:
 - the **consequence of a drop**, recorded so a verdict can say what was lost
   rather than only that something was.
 
-### Two verdicts, and the sharper one is occupancy
+### Two verdicts, and the sharper one is overrun
 
 **Latency**: does the blackout exceed the deadline. This is the question people
 ask first.
 
-**Occupancy**: do the arrivals during the blackout exceed the buffer depth. This
+**Overrun**: do the arrivals during the blackout exceed the buffer depth. This
 is the question that actually bites, and it is the one the enquiry started from,
 because a handler that drops entries when its ring fills and only logs the fact
 fails without ever missing a latency figure anybody was watching. The arrival
 count over a blackout is the blackout's upper bound divided by the shortest
 interarrival time, which is arithmetic this project already has.
+
+### The word is overrun, and deliberately not occupancy
+
+An earlier draft called this occupancy. That word is taken, and taken by the one
+project a reader here is most likely to have open alongside this one.
+
+calx-mill uses occupancy for the saturation of a substrate's concurrency
+dimension. It is a percentage bounded to a hundred, it is steady-state, and it
+asks how much of the available parallelism is resident. The question here is a
+burst against a
+fixed depth, which is transient, counted rather than proportioned, and answered
+with a verdict rather than a ratio. The two share a word and nothing else. Since
+this project names calx-mill as its design sibling and follows its command
+idiom, a reader crossing between them would have been walked straight into the
+confusion rather than warned off it.
+
+The founding note's own word was overflow, and that is unavailable for a
+different reason: this crate already spends it on arithmetic that leaves the
+width. Reusing it would put the collision inside a single file rather than
+across two repositories, which is worse.
+
+So the verdict is overrun. It is ordinary vocabulary in the domain the operator
+already works in, it names a failure and therefore reads in parallel with a
+missed deadline, and nothing else here claims it. The quantity the verdict rests
+on is the backlog.
 
 ### Unanswerable is a verdict, not an error
 
@@ -76,7 +101,7 @@ names they were given and only the index moves.
 - Good: the piece the enquiry started from stops being a postscript, and the
   source model earns its keep twice over, once for converting a bound and once
   for deciding whether a bound can be compared at all.
-- Good: occupancy exposes a failure mode that latency analysis misses entirely.
+- Good: overrun exposes a failure mode that latency analysis misses entirely.
 - Bad: a register that wants response-time verdicts has to declare arrival rates
   and buffer depths that nobody currently writes down, and most of those will
   start out `Assumed`. The tool will say so on every verdict, which is the point

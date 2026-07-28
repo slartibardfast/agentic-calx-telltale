@@ -81,8 +81,8 @@
 
 ### 2026-07-28 — the interrupt verdicts
 
-- Built latency and occupancy in calx-telltale, pinned at `ce43c75`. 42 tests, 14 proof harnesses.
-- **Occupancy is the verdict that bites**, not latency: a handler dropping ring entries fails without
+- Built latency and overrun in calx-telltale, pinned at `ce43c75`. 42 tests, 14 proof harnesses.
+- **Overrun is the verdict that bites**, not latency: a handler dropping ring entries fails without
   ever missing a latency figure. A window of length `b` admits at most `floor(b / gap) + 1` arrivals,
   counting the one that lands as the window opens.
 - **A withheld verdict is a verdict, not an error** (call/0008), and it is the design's whole point. A
@@ -92,3 +92,17 @@
 - `PLAN.md` now runs 0002, 0005, 0001, 0003, 0004. The response-time work moved ahead of termination per
   call/0008: it needs composition rather than loop contracts. Folder numbers are identity, so only the
   index moved.
+
+### 2026-07-28 — naming, and a third persona
+
+- **The buffer verdict is `overrun`, never `occupancy`.** calx-mill spends `occupancy` on concurrency
+  saturation: a percentage, steady-state, about resident parallelism. This is a transient burst against a
+  fixed depth. Same word, different quantity, and this crate names calx-mill as its design sibling, so the
+  collision would have misled rather than helped. `overflow` was unavailable too: it already means
+  arithmetic leaving the width, in `Refusal` and `Missing`. Recorded in call/0008.
+- **Check a sibling project's vocabulary before taking a word.** This was caught by the operator, not by
+  a gate. host-lint sees naming tells, not cross-repository homonyms.
+- Cast gained [Marek](cast/marek.md), the firmware engineer, on a **role** axis rather than a modality
+  one. Marek shares Ines's modality and wants the opposite thing: Ines asks whether a projection can be
+  trusted, Marek asks what to change. A verdict can be trustworthy and still useless by naming no
+  declaration anyone can open. Recorded in call/0003.

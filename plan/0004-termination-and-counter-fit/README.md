@@ -3,8 +3,9 @@
 Well-foundedness for every declared wait, and a budget that fits the counter
 holding it.
 
-- **Who**: [Ines](../../cast/ines.md), who needs to know that a declared timeout
-  can actually fire.
+- **Who**: [Marek](../../cast/marek.md), who wrote the wait and will not act on a
+  verdict that names no declaration, and [Ines](../../cast/ines.md), who needs to
+  know that a declared timeout can actually fire.
 - **What**: the specs under `spec/`, which discharge termination and counter fit.
 - **Why**: a wait whose measure wraps has a bound in its documentation and none
   in its behaviour.

@@ -29,6 +29,16 @@ accommodation:
   machine-readable output shape carrying provenance as a field, the witness
   present in that structured output, exit codes that distinguish a failed
   obligation from a malformed register, and a line-oriented register format.
+- [Marek](../cast/marek.md), embodied and pressed, is owed a verdict that names
+  the declaration it rests on and a declaration that names the code it came
+  from, a census that drafts the register rather than leaving it to be authored,
+  and a comparison across builds so a moved bound reaches review.
+
+Marek joined the cast on a second axis. Modality was the first split, and role
+is the second, because Marek shares Ines's modality and wants the opposite thing
+from the same output: Ines asks whether a projection can be trusted, and Marek
+asks what to change. A verdict can satisfy the first and be useless to the
+second by being trustworthy and attached to nothing anyone can open.
 
 The binding rule across both: provenance and the witness are part of the data,
 not part of the prose. Any surface that reports a cost reports the provenance

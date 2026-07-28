@@ -8,8 +8,9 @@ milestone's spec. (Powell, Keenan & McDaid 2007, after Cooper & Reimann,
 Interaction Design.)
 
 calx-telltale is consumed in two modalities that need different accommodations,
-so the cast splits on modality rather than on domain. The domain scenarios are
-use-cases both personas engage:
+so the cast splits first on modality rather than on domain. It splits again on
+role, because two people can share a modality and still want opposite things
+from the same output. The domain scenarios are use-cases every persona engages:
 
 - declaring a register of waits and windows for an image, and getting a
   worst-case cost for each composition out of it;
@@ -28,12 +29,21 @@ calx-telltale owes each.
 - [Tarn](tarn.md), the agentic model user. **Primary** (textual, ephemeral):
   drives the CLI programmatically, and needs deterministic structured output and
   explicit failure.
+- [Marek](marek.md), the firmware engineer. **Primary** (embodied, pressed):
+  owns the code the register describes, and reads a verdict to find out what to
+  change and whether it matters before the release.
 
-Both are primary because an interface designed for one cannot satisfy the other
-(Cooper 2004). A human-facing surface of prose, examples and readable output
-does not serve an agent, and a stable structured surface does not serve a human
-reading by eye. calx-telltale therefore owes each its own accommodation, set as
-a rule in [call/0003](../call/0003-cast-modalities.md).
+All three are primary because an interface designed for one cannot satisfy the
+others (Cooper 2004). A human-facing surface of prose, examples and readable
+output does not serve an agent, and a stable structured surface does not serve a
+human reading by eye. calx-telltale therefore owes each its own accommodation,
+set as a rule in [call/0003](../call/0003-cast-modalities.md).
+
+Ines and Marek share a modality and still pull apart, which is why role is a
+second axis rather than a footnote. Ines reads a projection and asks whether to
+trust it. Marek reads the same projection and asks what to change. A verdict
+that satisfies the first can be useless to the second: trustworthy, and
+attached to nothing anyone can open.
 
 ## The shared substrate
 

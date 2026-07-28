@@ -4,7 +4,9 @@ Armed deadlines first, and then the response-time question the whole enquiry
 started from.
 
 - **Who**: [Ines](../../cast/ines.md), who needs to know whether a projection
-  breaches a deadline that is only armed for part of a run.
+  breaches a deadline that is only armed for part of a run, and
+  [Marek](../../cast/marek.md), who has to choose between deepening a buffer and
+  shortening the window that overruns it.
 - **What**: the specs under `spec/`.
 - **Why**: the interval a deadline is armed over changes the verdict, and prose
   has been carrying that distinction so far.
@@ -33,7 +35,7 @@ does not.
 
 An interrupt therefore declares an arrival model, a deadline, and the depth of
 the buffer behind it. Two verdicts follow. Latency asks whether the blackout
-outlasts the deadline. Occupancy asks whether more arrivals land during the
+outlasts the deadline. Overrun asks whether more arrivals land during the
 blackout than the buffer holds, where a window of length `b` admits at most
 `floor(b / gap) + 1` of them, one at the instant it opens and the rest no faster
 than the shortest declared gap.
