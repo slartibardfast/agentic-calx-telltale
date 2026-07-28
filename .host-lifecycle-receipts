@@ -198,3 +198,9 @@
     evidence = adapter finds loops and is verified as a component: validate ok; prose clean; refs clean; reconcile clean; 0 hazards; three artifacts reproduce; 102 tests
     tool = host-lifecycle@0.47.1
     recorded = 2026-07-28
+
+[receipt "release" "calx-telltale"]
+    disposition = done
+    evidence = v0.5.0@475854453ab68d5d864345c8797a9753717b9006d31bd911e8a7fe15e305d989
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28

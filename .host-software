@@ -7,12 +7,12 @@
 # offline build needs no vendored bundle.
 [software "calx-telltale"]
 	url       = https://github.com/slartibardfast/calx-telltale.git
-	pin       = 9f7da1847f65aff30cd821cb29df4d61f69c049f
+	pin       = 1bc9faeb50ad083e0f0c7be32a2e67da4a0563d4
 	worktrees =
 	toolchain = docker.io/clux/muslrust:1.95.0-stable@sha256:15a72a4abf1c593b0bea63a4a8f20e95c1e5a0696d7051eca87b9b850b2d7e43
 	build     = RUSTUP_TOOLCHAIN=stable CARGO_INCREMENTAL=0 cargo build --release --locked --offline --target x86_64-unknown-linux-musl -p calx-telltale
 	deploy    = calx-telltale
-	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale 60dfd9644d5cf85de0e1e0ba3a07808cd7ce1adebf25897ef4ab96a612a4745e
+	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale 475854453ab68d5d864345c8797a9753717b9006d31bd911e8a7fe15e305d989
 
 # The census adapter. A separate component rather than a second binary of the
 # core, because call/0011 keeps it out of the canonical artifact: the core's
@@ -21,12 +21,12 @@
 # format the core parses and the two cannot be allowed to drift.
 [software "calx-telltale-census"]
 	url       = https://github.com/slartibardfast/calx-telltale.git
-	pin       = 9f7da1847f65aff30cd821cb29df4d61f69c049f
+	pin       = 1bc9faeb50ad083e0f0c7be32a2e67da4a0563d4
 	worktrees =
 	toolchain = docker.io/clux/muslrust:1.95.0-stable@sha256:15a72a4abf1c593b0bea63a4a8f20e95c1e5a0696d7051eca87b9b850b2d7e43
 	build     = RUSTUP_TOOLCHAIN=stable CARGO_INCREMENTAL=0 cargo build --release --locked --offline --target x86_64-unknown-linux-musl -p calx-telltale-census
 	deploy    = calx-telltale-census
-	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale-census ea904f27bf2846f50a680acfaaf49f324ad9858b81f7b46ff17bf4960a3f331e
+	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale-census 25d91c815db3ce131f16aad4c3834188805ef108da8ae83be003dbafcb57ef1d
 
 # The gating tool, carried as a component rather than a tools/ submodule so that
 # one source serves both its skill and its binary (call/0001). Recorded here so
