@@ -386,3 +386,23 @@
   history is pushed, so rewriting it is a separate decision rather than a tidy-up.
 - The lesson: an account name and an author identity are different facts that happen to share a
   credential. Copying one from observed history propagated the wrong one.
+
+### 2026-07-28 — correction: we push as a collaborator, not as the owner
+
+- Supersedes the credential workaround recorded under *pushing to slartibardfast repositories* above,
+  and completes the author correction immediately before this entry.
+- **`connollydavid` is a collaborator on both repositories** (`push=true`, `admin=false`, checked
+  against the API). So there was never a need to borrow the owner's credential: the account already in
+  use could push all along.
+- The workaround is retired. Remotes carry the plain URL again
+  (`https://github.com/slartibardfast/...`), and the repo-local credential helper overrides are removed
+  from the host and both bare stores, so the global `gh` helper serves the active account. Write access
+  to each repository was proved by pushing a throwaway tag and deleting it, rather than assumed from a
+  dry run reporting "up-to-date".
+- **What the earlier entry got wrong** was the diagnosis, not the symptom. The push failure was real and
+  the URL-scoped helper in `~/.gitconfig` is exactly as described. The error text named a permission
+  problem, and the response was to satisfy it as the owner instead of checking whether the account in
+  hand already had access. The cheaper question comes first: ask what permission you hold before
+  engineering around not holding it.
+- The account and the author stay separate facts: the repositories live under `slartibardfast`, the
+  work is done by `connollydavid`, and commits are authored `David Connolly <david@connol.ly>`.
