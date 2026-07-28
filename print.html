@@ -1222,13 +1222,24 @@ functions, which is a freeze set rather than a symbol dump.</p>
 shape of an operand would find loops in arithmetic that happens to reference an
 address, and a false loop is worse than a missing one, because it is a
 declaration a reader will act on.</p>
+<p>That rule was stated here before the code kept it. Branches were matched by
+prefix, and a call opens with a branch's letters on most of these
+architectures, so a recursive call came out as a wait. Calls are now named per
+architecture and matched whole, since a conditional branch can share a call's
+opening letters and excluding by prefix would drop real loops. The count above
+was measured before the fix and includes calls, so it is an upper bound on that
+listing until it is measured again.</p>
 <p>Everything the adapter cannot determine stays blank. Whether a loop is a wait,
 what budget it carries and how its counter moves are decisions for someone who
 can read the source.</p>
 <p><strong>Outstanding</strong>: a loop with no backward branch is not a back edge, so a
 zero-overhead loop instruction is missed, and the freeze set says it is a lower
-bound for that reason among others. Coverage grows one architecture at a time,
-and the gaps are visible rather than assumed away.</p>
+bound for that reason among others. The ARC set once named <code>lp</code> with a comment
+saying it was there so such a loop would be found, which it never could, since
+<code>lp</code> marks a loop whose end lies ahead of it. The entry is gone and the gap is
+where it always was. Coverage grows one architecture at a time, and so does the
+set of spellings that call rather than branch; a calling spelling not yet named
+is still read as a branch.</p>
 <h2 id="acceptance-10"><a class="header" href="#acceptance-10">Acceptance</a></h2>
 <ul>
 <li>A loop is reported with the file and symbol containing it, and with blanks
