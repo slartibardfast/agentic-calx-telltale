@@ -89,3 +89,9 @@
     evidence = response-time analysis landed: validate ok; prose clean; refs --gate clean over 25 docs; reconcile clean; 0 hazards; 53 tests and 15 harnesses green at pin 9a6b352
     tool = host-lifecycle@0.47.0
     recorded = 2026-07-28
+
+[receipt "verify"]
+    disposition = done
+    evidence = composition and attainment landed: validate ok; prose clean; refs --gate clean; reconcile clean; 0 hazards; 63 tests and 17 harnesses green at pin 5538b4e
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28

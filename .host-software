@@ -7,7 +7,7 @@
 # the milestones.
 [software "calx-telltale"]
 	url       = https://github.com/slartibardfast/calx-telltale.git
-	pin       = 9a6b3528bac5f63f386d048100a52e0aa1a0fb98
+	pin       = 5538b4e771cb3ff7ddd1b4166e4e2998b19039fe
 	worktrees =
 
 # The gating tool, carried as a component rather than a tools/ submodule so that

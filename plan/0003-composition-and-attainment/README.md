@@ -40,6 +40,28 @@ tool checks that rather than hoping for it.
 The reported maximum is a true maximum over the declared domain. A solver earns
 its keep over a sweep precisely here.
 
+## Where it stands
+
+**Built**: the five expression forms, evaluation at a latency, and the search
+over the domain that returns both the worst case and the latency attaining it.
+A composition reports whether its maximum is interior, which is the finding a
+sweep of the extremes would have missed.
+
+The domain is bounded by the widest budget in the composition rather than by any
+cost, so the search stays small even where the costs run to millions. Past that
+bound every wait has already given up, and nothing further can change.
+
+**Proof coverage**: the harnesses hold the leaf semantics the whole tree rests
+on, which are that a wait succeeds exactly while the answer arrives inside its
+budget, and that it never polls past that budget. The short-circuit operator
+turns on that boundary: one step earlier the body runs and the cost compounds,
+one step later the whole composition unwinds, so an off-by-one there would move
+the worst case. The tree itself is heap-allocated and carried by tests, on the
+reasoning in [call/0009](../../call/0009-multiplication-is-proved-at-the-boundaries.md).
+
+**Outstanding**: monotonicity reported as a proved property where the tool can
+establish it, rather than the search running unconditionally.
+
 ## Acceptance
 
 - A `ShortCircuit` whose guard succeeds expensively reports the expensive

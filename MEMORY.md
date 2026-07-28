@@ -127,3 +127,21 @@
 - Proof coverage is deliberately partial: harnesses hold provenance flow, the never-judged case, and that
   priority is a strict order (which is what lets the recurrence partition the set). The recurrence itself
   walks a heap-allocated set and is test-covered, on call/0009's reasoning.
+
+### 2026-07-28 — composition and attainment
+
+- Built the five expression forms and the attainment search, pinned at `5538b4e`. 63 tests, 17 harnesses.
+- **Moved 0003 ahead of 0001** in PLAN.md: the register format has to serialise the expression tree, so
+  designing the schema first would have been guesswork. Same dependency argument that moved 0005 ahead
+  of 0004.
+- **Evaluation is parameterised by one latency**, meaning how long the outside world takes to answer.
+  Every wait in a composition sees the same world, so a cost is a function of that parameter. This is
+  what makes attainment a search rather than an arithmetic step.
+- **The search domain is bounded by the widest budget, never by cost.** Costs run to millions; the domain
+  stays a few hundred wide, because past the widest budget every wait has already given up. Do not
+  "optimise" this by sampling: the whole point is that the maximum is interior.
+- The short-circuit boundary is where a guard stops succeeding. One step earlier the body runs and the
+  cost compounds; one step later everything unwinds. **An off-by-one there moves the worst case**, which
+  is why the harnesses hold exactly that leaf boundary.
+- Rename leftover found: `PLAN.md` still said "Occupancy" after the overrun rename, because it was not in
+  the file list. **A rename sweep must include PLAN.md and MEMORY.md, not just call/ plan/*/ and src/.**

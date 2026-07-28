@@ -19,11 +19,13 @@ folders keep the names they were given and only this index moves.
   the `Quantity` core and its three obligations over units, provenance and
   intervals. **Built.**
 - [0005 deadlines-and-response-time](0005-deadlines-and-response-time/README.md),
-  the armed-deadline comparison, and the interrupt verdicts. **Occupancy and
-  latency built; the armed-interval comparison is outstanding.**
+  the interrupt verdicts and the schedulability analysis. **Built**, apart from
+  the armed-interval comparison.
+- [0003 composition-and-attainment](0003-composition-and-attainment/README.md),
+  the composition operators, accumulator fit, and the witness. **Built.** It
+  moved ahead of the register schema because the schema has to serialise the
+  expression tree, so designing the format first would have been guesswork.
 - [0001 register-schema-and-census](0001-register-schema-and-census/README.md),
   the declaration format and the ELF adapter that emits a skeleton of it.
-- [0003 composition-and-attainment](0003-composition-and-attainment/README.md),
-  the composition operators, accumulator fit, and the witness.
 - [0004 termination-and-counter-fit](0004-termination-and-counter-fit/README.md),
   well-foundedness and counter-type fit, which need loop contracts.
