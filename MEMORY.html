@@ -536,6 +536,37 @@ reproduces) and <strong>skips release</strong> — one repository, one cadence, 
 <li>The census stanza needed <code>Cargo.lock</code> refreshed after the version bump, or the offline <code>--locked</code> build
 refuses. Bump a workspace member's version and update the lock in the same commit.</li>
 </ul>
+<h3 id="2026-07-28--the-release-sweep-and-a-tool-that-under-described-itself"><a class="header" href="#2026-07-28--the-release-sweep-and-a-tool-that-under-described-itself">2026-07-28 — the release sweep, and a tool that under-described itself</a></h3>
+<ul>
+<li><strong>The binary dispatched ten verbs and its help listed five.</strong> <code>project</code>, <code>attain</code>, <code>deadline</code>,
+<code>overrun</code> and <code>diff</code> were unreachable from <code>calx-telltale help</code>. The README carried the full set, so
+anyone checking the documentation saw nothing wrong; only running the tool showed the gap. This is the
+inverse of the defect 0007 was written to fix, and 0007's own acceptance ("a command that exists is
+reachable from the tool's own help") was unmet while the milestone read <strong>Built</strong>.</li>
+<li><strong>The lesson is about where a claim is checked.</strong> <code>README</code> and <code>--help</code> restated the same list, and
+nothing compared them. The fix is a test that reads the dispatch arms out of <code>main.rs</code> and asserts each
+appears in <code>USAGE</code>, so the list is derived rather than restated twice. Verified by negative control:
+dropping a verb from the help fails the test by name.</li>
+<li><strong><code>main.rs</code> had no tests at all</strong> before this, which is why nothing caught it. A binary's own surface is
+worth a check even when the arithmetic beneath it is proved.</li>
+<li><strong>Eleven milestones pointed at empty <code>spec/</code> directories.</strong> Every README said "the specs under
+<code>spec/</code>" and all eleven held only a <code>.gitkeep</code>. Scaffold text nobody replaced. Removed: a spec belongs
+beside the software it constrains, so an empty room under <code>plan/</code> invites the quarantine the spine
+forbids. <code>host-lifecycle validate</code> does not require the directories.</li>
+<li><strong>PLAN.md contradicted four of its own milestones</strong>, all of which read Built in their own README. The
+index is the ordering authority, so it is the one file that must not be stale about the project's state.</li>
+<li><strong>Commit identity is not configured in either repo.</strong> The host's local config says <code>host-lifecycle</code>
+(scaffold default) and the software worktree had none, yet every commit is authored
+<code>slartibardfast &lt;david@connol.ly&gt;</code>. Now set repo-locally in the host and in
+<code>software/calx-telltale/.bare</code>, so it stops depending on a per-commit override. Related: the credential
+fix in the per-user store.</li>
+<li>The software worktree has <strong>no tracking upstream</strong>, so <code>git push</code> alone fails there; use
+<code>git push origin HEAD:main</code>.</li>
+<li><strong>Re-recording an artifact hash has no flag.</strong> <code>--lock</code> is for a <code>deps-bundle</code>, and <code>--verify-build</code>
+reports drift without recording. Rebuild the pin in the pinned container by hand and set <code>artifact</code> in
+<code>.host-software</code>. The census binary reproduced its old hash unchanged across the same commit, since the
+verbs that moved are not in it.</li>
+</ul>
 
                     </main>
 
