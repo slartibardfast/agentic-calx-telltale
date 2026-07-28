@@ -3707,6 +3707,34 @@ adopter-side verification recorded on it.</li>
 fork of the methodology, or a stale spine. Staleness was the only reversible one, and it cost a day.
 Prefer it whenever the alternative is editing something you do not own.</li>
 </ul>
+<h3 id="2026-07-29--two-false-claims-in-the-census-found-by-testing-rather-than-reading"><a class="header" href="#2026-07-29--two-false-claims-in-the-census-found-by-testing-rather-than-reading">2026-07-29 — two false claims in the census, found by testing rather than reading</a></h3>
+<ul>
+<li><strong>A recursive call was reported as a wait.</strong> Branch mnemonics were matched by <em>prefix</em>, and on most
+of these architectures a call opens with a branch's letters: <code>bl</code> under <code>b</code>, <code>jal</code> under <code>j</code>. A <code>bl</code>
+back to a function's own start satisfied "target at or before, inside the same function" and came
+out as <code>wait id=0 ...</code>. That is precisely the false loop [[call/0012]] says is worse than a missing
+one. RISC-V carried the same defect.</li>
+<li><strong>The fix is asymmetric, and that asymmetry is the point.</strong> Calls are matched <strong>whole</strong>, branches by
+prefix, because ARC's <code>blt</code> also opens with <code>bl</code> and excluding calls by prefix would drop real loops.
+Getting this wrong in either direction is easy; there are now tests for both.</li>
+<li><strong><code>lp</code> was inert and its comment claimed otherwise.</strong> The ARC set named ARC's zero-overhead loop
+instruction with a comment saying it was listed "so that it is found". It could never be: <code>lp</code> marks
+a loop whose end lies <em>ahead</em> of it, so the back-edge rule rejects it. Verified with a listing before
+removing it. The gap it pretended to close is the same gap 0011 already recorded.</li>
+<li><strong>The lesson is about how these were found.</strong> Both survived review because the code <em>said</em> it did the
+right thing. A comment asserting a behaviour is not evidence of it, and neither is a mnemonic sitting
+in a list. The reproductions took two minutes each.</li>
+<li>The loop count in plan/0011 ("thousands across hundreds of functions") was measured <strong>before</strong> this
+fix and counted calls, so it is now an upper bound until re-measured. The listing it came from is not
+in the repository.</li>
+<li><strong>Watch for stale binaries when testing.</strong> <code>cargo build --release</code> at the workspace root does not
+rebuild the census member; the first reproduction "failed to fix" because of it. Build with
+<code>-p calx-telltale-census</code>. Same trap as the <code>--help</code> check earlier.</li>
+<li><strong>A release now requires <code>--authorized &lt;ref&gt;</code></strong> (host-lifecycle, call/0050): a resolvable
+<code>call/NNNN</code>, <code>plan/NNNN[#anchor]</code>, or <code>owner/repo#N</code>, recorded on the receipt, "because an approval
+spoken in a session window is not a record". This release cited <code>plan/0011</code>. <code>receipt --record</code> takes
+the matching <code>--authorization</code>.</li>
+</ul>
 
                     </main>
 
