@@ -430,3 +430,15 @@
 - The general shape, worth remembering past this instance: the template's docs are not gated by the
   lane the template ships, so this class can recur at any spine change.
 - `connollydavid/host-template` has issues disabled; template defects go to `connollydavid/host`.
+
+### 2026-07-29 — the held-back spine section lands
+
+- Upstream reworded the flagged line at `e89d064` ("a branch that needs a controlling terminal the
+  probe cannot open"), so the section that would have reddened this gate yesterday came across
+  verbatim today. `host-lint --prose` at the pinned `cc3ec6a` now exits 0 on it.
+- The spine is byte-identical to the template's again, and
+  [connollydavid/host#20](https://github.com/connollydavid/host/issues/20) is closed with the
+  adopter-side verification recorded on it.
+- **This is what holding a change back is for.** Yesterday's three options were a red gate, a private
+  fork of the methodology, or a stale spine. Staleness was the only reversible one, and it cost a day.
+  Prefer it whenever the alternative is editing something you do not own.
