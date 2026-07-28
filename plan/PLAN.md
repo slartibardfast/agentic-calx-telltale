@@ -27,7 +27,8 @@ folders keep the names they were given and only this index moves.
   expression tree, so designing the format first would have been guesswork.
 - [0001 register-schema-and-census](0001-register-schema-and-census/README.md),
   the declaration format and the ELF adapter that emits a skeleton of it. **The
-  format and the command line are built**; the adapter is outstanding.
+  format and the command line are built**, and the adapter this one left
+  outstanding was built under 0008.
 - [0004 termination-and-counter-fit](0004-termination-and-counter-fit/README.md),
   well-foundedness and counter-type fit. **Built**, and without the loop
   contracts this entry expected: declaring how the counter moves turned the
@@ -35,21 +36,23 @@ folders keep the names they were given and only this index moves.
   loop.
 - [0006 declarations-cite-their-source](0006-declarations-cite-their-source/README.md),
   a declaration names the file and symbol it came from, so a verdict points at
-  code. Marek is primary, and the accommodation his persona records is unmet
-  until this lands.
+  code. **Built**, which meets the accommodation Marek's persona records.
 - [0007 the-promised-verbs](0007-the-promised-verbs/README.md), the five
-  subcommands the documentation describes and the binary does not answer to.
-  The arithmetic exists already, so this is a surface over settled work. It sits
-  behind 0006 so that a verdict carries its citation from the first version.
+  subcommands the documentation described and the binary did not answer to.
+  **Built**, and it sat behind 0006 so that a verdict carried its citation from
+  the first version.
 - [0008 census-adapter](0008-census-adapter/README.md), the skeleton register
   drafted from the image. **Built**, as a workspace member beside the core.
+- [0011 branch-decoding](0011-branch-decoding/README.md), the loops inside a
+  function, which is what makes the census a census. **Built**, by delegating
+  instruction boundaries to a toolchain listing rather than decoding them.
+  [call/0012](../call/0012-boundaries-are-delegated-to-the-listing.md) settles
+  that on the measured case rather than on the arithmetic of effort.
 
-The three that remain are ordered by what the cast asks for rather than by what
-is interesting to build. Tarn's loop is broken by a message that names no line,
-so that goes first and is small. Marek pays twice for hand-declared arrival
-rates, and the machinery to derive them already exists. Ines's persona describes
-a working mode the tool still cannot support, and closing that is the largest
-piece and the one waiting on a decision.
+The two that remain are ordered by what the cast asks for rather than by what is
+interesting to build. Tarn's loop is broken by a message that names no line, so
+that goes ahead of the other and is small. Marek pays twice for hand-declared
+arrival rates, and the machinery to derive them already exists.
 
 - [0009 units-refused-at-the-line](0009-units-refused-at-the-line/README.md), a
   composition mixing units named at the line that wrote it rather than at the
@@ -57,7 +60,3 @@ piece and the one waiting on a decision.
 - [0010 arrivals-from-the-clock-tree](0010-arrivals-from-the-clock-tree/README.md),
   a periodic interrupt deriving its period from the clock that drives it, so one
   fewer number is typed and the clock's provenance reaches the verdict.
-- [0011 branch-decoding](0011-branch-decoding/README.md), the loops inside a
-  function, which is what would make the census a census. It waits on an
-  operator decision about which architecture comes first, because that depends
-  on the part rather than on anything this project settles.
