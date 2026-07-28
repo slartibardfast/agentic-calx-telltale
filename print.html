@@ -3641,6 +3641,30 @@ engineering around not holding it.</li>
 <li>The account and the author stay separate facts: the repositories live under <code>slartibardfast</code>, the
 work is done by <code>connollydavid</code>, and commits are authored <code>David Connolly &lt;david@connol.ly&gt;</code>.</li>
 </ul>
+<h3 id="2026-07-28--following-the-template-forward-and-the-one-change-held-back"><a class="header" href="#2026-07-28--following-the-template-forward-and-the-one-change-held-back">2026-07-28 — following the template forward, and the one change held back</a></h3>
+<ul>
+<li>The template had moved twelve commits past the adopted <code>32e655f</code>. <code>host-lifecycle upgrade</code> reported
+<strong>nothing pending</strong>, correctly: the ledger's last entry is still <code>GATE-refs-in-verify</code>, our baseline,
+so none of the twelve is a ledger action. <strong>A quiet upgrade check does not mean the spine is current</strong> —
+pin bumps and spine prose ride along outside the ledger, and only a diff finds them.</li>
+<li><strong>host-lint moved to v0.16.6</strong> (<code>cc3ec6a</code>), the revision the template pins. That closed both hazards
+raised below: upstream had already recorded <code>lint-skill.sh</code> and <code>test-integration.sh</code> executable.
+Fixed at the source rather than patched here, which is the reference-don't-vendor rule paying off.</li>
+<li><strong>host-lifecycle upgraded itself 0.47.1 to 0.47.2 mid-session</strong>, and 0.47.2 added a check that a
+script invoked as <code>./name.sh</code> must be recorded <code>100755</code>. A gate reading zero hazards then read three.
+The conditions were as old as adoption. <strong>A moving gate can make yesterday's green meaningless</strong>, so
+read the tool version alongside the verdict.</li>
+<li><code>link-skills.sh</code> was one of them, in this repo, and <code>core.fileMode=false</code> here makes the on-disk bit
+a lie. Only <code>git ls-files -s</code> tells the truth; the fix is <code>git update-index --chmod=+x</code>.</li>
+<li><strong>The template's own <code>CLAUDE.md</code> warns under the prose lane of the host-lint it pins.</strong> Its new
+section carries "harness" (ai-diction). Adopting the spine verbatim would have re-opened our verify
+receipt, and rewording it locally would break copy-at-version. <strong>Held the spine at the older revision
+and raised it upstream</strong> (<a href="https://github.com/connollydavid/host/issues/20">connollydavid/host#20</a>),
+rather than take a red gate or a private fork of the methodology.</li>
+<li>The general shape, worth remembering past this instance: the template's docs are not gated by the
+lane the template ships, so this class can recur at any spine change.</li>
+<li><code>connollydavid/host-template</code> has issues disabled; template defects go to <code>connollydavid/host</code>.</li>
+</ul>
 
                     </main>
 
