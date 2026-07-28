@@ -373,3 +373,16 @@
   reports drift without recording. Rebuild the pin in the pinned container by hand and set `artifact` in
   `.host-software`. The census binary reproduced its old hash unchanged across the same commit, since the
   verbs that moved are not in it.
+
+### 2026-07-28 — correction: the commit author is a person, not the account
+
+- Corrects the identity bullet in *the release sweep* above. That entry recorded the repo-local
+  identity as `slartibardfast <david@connol.ly>`, matching the authorship of the existing history.
+  Wrong: `slartibardfast` is the **GitHub account the repositories live under**, and it is not how
+  commits are authored.
+- The author is **`David Connolly <david@connol.ly>`**, now set repo-locally in the host and in both
+  bare stores (`software/calx-telltale/.bare`, `software/calx-telltale-census/.bare`).
+- Commits before this entry carry `slartibardfast` as the author name and are **left alone**. The
+  history is pushed, so rewriting it is a separate decision rather than a tidy-up.
+- The lesson: an account name and an author identity are different facts that happen to share a
+  credential. Copying one from observed history propagated the wrong one.
