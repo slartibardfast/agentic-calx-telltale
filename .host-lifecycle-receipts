@@ -113,3 +113,9 @@
     evidence = self-describing surface landed: validate ok; prose clean; refs clean; reconcile clean; 0 hazards; 75 tests green; build reproduces at pin ccb62cd artifact 32875ac
     tool = host-lifecycle@0.47.1
     recorded = 2026-07-28
+
+[receipt "verify"]
+    disposition = done
+    evidence = plan extended after consulting the cast: three milestones scaffolded; validate ok; prose clean; refs clean; reconcile clean; 0 hazards; pin 7adebf4 artifact 32875ac unchanged by a docs-only change
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28

@@ -1,6 +1,6 @@
 # The founding design note stays outside this repository
 
-- Status: accepted
+- Status: accepted; the non-disclosure constraint lifted by operator ruling, 2026-07-28
 - Scope: host
 - Date: 2026-07-27
 
@@ -39,6 +39,16 @@ wrapping measure fails termination) rather than as expected numbers.
 
 If the note ever moves into a repository, it needs review against the
 non-disclosure terms first, and the operator makes that call.
+
+**That call has been made.** The operator records that the note was already
+heavily redacted before it reached this work, and that it has not been committed
+anywhere. The caution this record imposed on figures is therefore lifted, and a
+later session need not treat the note's worked numbers as untouchable.
+
+The acceptance criteria stay stated as properties even so, for the reason the
+next section gives rather than for the one that prompted it: a property holds
+across images and a figure holds for one. Nothing here needs rewriting to use
+numbers it was avoiding.
 
 ## Consequences
 

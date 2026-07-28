@@ -200,3 +200,27 @@
   component here manages.
 - Pin `ccb62cd`, artifact `32875ac`. **The pin is now ahead of the v0.2.0 tag**, and the added CLI surface
   is an `adds-flag` change, so the release phase wants re-running when the operator wants another tag.
+
+### 2026-07-28 — the plan extended, after consulting the cast
+
+- **The published README advertised seven subcommands and the binary answered to one of them.** census,
+  project, attain, deadline, overrun and diff were all documented and absent. **The fourth record/code
+  divergence in this project**, and the largest, since this one was public. The table now marks the
+  unbuilt verbs as planned.
+- The arithmetic behind four of them already exists unwired (`Expr::attain`, `Interrupt::latency`,
+  `Interrupt::overrun`, `Schedule::response_time`), so the gap is surface rather than substance. That is
+  why 0007 is cheap and high value.
+- **Consulting the cast found a fifth gap**: cast/marek.md promises "a declaration that names the file and
+  symbol it was extracted from", and the register format has no such field. `Provenance` says *how* a
+  value was arrived at and never *where*. The split was deliberate (call/0006 keeps free text outside the
+  proof boundary) and the consequence was overlooked, because the register never grew the fields the
+  reporting layer was meant to hold.
+- Plan now runs 0002, 0005, 0003, 0001, 0004, then **0006 citations, 0007 verbs, 0008 census**. Citations
+  come first so a verdict carries one from its first version rather than gaining one afterwards; building
+  the verbs first would mean reworking all of them.
+- 0008 waits on a decision, not on code: the object-format reader would be the core's **first
+  dependency**, and the empty dependency list is what makes the offline release build work with no
+  vendored bundle. The adapter belongs beside the core, and that placement wants a call/ record first.
+- **The non-disclosure constraint in call/0002 is lifted by operator ruling.** The note was already
+  heavily redacted and was never committed. Acceptance criteria stay stated as properties anyway, because
+  a property holds across images and a figure holds for one.

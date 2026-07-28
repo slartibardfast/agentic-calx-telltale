@@ -33,3 +33,15 @@ folders keep the names they were given and only this index moves.
   contracts this entry expected: declaring how the counter moves turned the
   question into a decision about the declaration rather than a search over the
   loop.
+- [0006 declarations-cite-their-source](0006-declarations-cite-their-source/README.md),
+  a declaration names the file and symbol it came from, so a verdict points at
+  code. Marek is primary, and the accommodation his persona records is unmet
+  until this lands.
+- [0007 the-promised-verbs](0007-the-promised-verbs/README.md), the five
+  subcommands the documentation describes and the binary does not answer to.
+  The arithmetic exists already, so this is a surface over settled work. It sits
+  behind 0006 so that a verdict carries its citation from the first version.
+- [0008 census-adapter](0008-census-adapter/README.md), the skeleton register
+  drafted from the image. It waits on a decision about where the object-format
+  reader lives, because that would be the core's first dependency and the empty
+  dependency list is what makes the offline release build work.
