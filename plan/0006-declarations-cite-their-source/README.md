@@ -36,6 +36,23 @@ number attached to an identifier only the register explains.
   over weeks, and a citation is what lets her check one she no longer remembers.
 - **Tarn** gains a field, and the structured surface carries it like any other.
 
+## Where it stands
+
+**Built.** A wait may carry `file=` and `symbol=`, and both report through the
+prose surface and the structured one. The grammar the tool prints documents
+them, so an agent learns the fields from the binary.
+
+Citations sit beside the declarations rather than inside them. The verified
+types stay free of text, which keeps the proof boundary where
+[call/0006](../../call/0006-sources-are-declared-and-delays-name-them.md) put
+it, and the reporting layer has what it needs.
+
+A `?` in either field reaches the reader as absent rather than as a literal
+question mark, so a census that could not determine a site says so.
+
+**Outstanding**: the source declaration carries no citation yet. Only waits do,
+because only waits currently reach a verdict.
+
 ## Acceptance
 
 - A declaration may carry a file and a symbol, and a verdict resting on it

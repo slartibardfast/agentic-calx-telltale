@@ -119,3 +119,9 @@
     evidence = plan extended after consulting the cast: three milestones scaffolded; validate ok; prose clean; refs clean; reconcile clean; 0 hazards; pin 7adebf4 artifact 32875ac unchanged by a docs-only change
     tool = host-lifecycle@0.47.1
     recorded = 2026-07-28
+
+[receipt "verify"]
+    disposition = done
+    evidence = citations and the promised verbs landed: validate ok; prose clean; refs clean; reconcile clean; 0 hazards; 78 tests green; pin 0249f93 artifact f89cd78
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28

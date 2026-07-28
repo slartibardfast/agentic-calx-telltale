@@ -47,6 +47,23 @@ This sits behind 0006 deliberately. Every verb here prints a verdict, and a
 verdict should carry its citation from the first version rather than gain one
 afterwards. Building the surface first would mean reworking all of it.
 
+## Where it stands
+
+**Built**: `project`, `attain`, `deadline`, `overrun` and `diff`, each answering
+to the structured surface as well as the prose one. The register grew the
+declarations they operate on, which are compositions, interrupts and blackout
+windows. A composition names its operands by reference and resolves top down, so
+a line-oriented file expresses a tree without nesting.
+
+The worked example earns its keep here. `attain` reports a maximum sitting one
+step inside a budget of 8192, which is the interior case the whole search exists
+to find. `deadline` and `overrun` then disagree about the same window: the
+blackout is inside the deadline and still overruns the buffer, which is the
+failure a latency figure never shows.
+
+**Outstanding**: `census`, which has its own milestone, and a composition that
+mixes units is refused by the arithmetic rather than named at parse time.
+
 ## Acceptance
 
 - Each of the five verbs runs, and each answers to the structured surface.
