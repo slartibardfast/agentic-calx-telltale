@@ -124,14 +124,26 @@ shape of an operand would find loops in arithmetic that happens to reference an
 address, and a false loop is worse than a missing one, because it is a
 declaration a reader will act on.
 
+That rule was stated here before the code kept it. Branches were matched by
+prefix, and a call opens with a branch's letters on most of these
+architectures, so a recursive call came out as a wait. Calls are now named per
+architecture and matched whole, since a conditional branch can share a call's
+opening letters and excluding by prefix would drop real loops. The count above
+was measured before the fix and includes calls, so it is an upper bound on that
+listing until it is measured again.
+
 Everything the adapter cannot determine stays blank. Whether a loop is a wait,
 what budget it carries and how its counter moves are decisions for someone who
 can read the source.
 
 **Outstanding**: a loop with no backward branch is not a back edge, so a
 zero-overhead loop instruction is missed, and the freeze set says it is a lower
-bound for that reason among others. Coverage grows one architecture at a time,
-and the gaps are visible rather than assumed away.
+bound for that reason among others. The ARC set once named `lp` with a comment
+saying it was there so such a loop would be found, which it never could, since
+`lp` marks a loop whose end lies ahead of it. The entry is gone and the gap is
+where it always was. Coverage grows one architecture at a time, and so does the
+set of spellings that call rather than branch; a calling spelling not yet named
+is still read as a branch.
 
 ## Acceptance
 
