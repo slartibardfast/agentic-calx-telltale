@@ -7,12 +7,12 @@
 # offline build needs no vendored bundle.
 [software "calx-telltale"]
 	url       = https://github.com/slartibardfast/calx-telltale.git
-	pin       = 9e0282744871bb7bc89ed1797e2c1afeb1f6dd2e
+	pin       = 8994dad9ed4dd71b5a985ff2254d45e6a764323d
 	worktrees =
 	toolchain = docker.io/clux/muslrust:1.95.0-stable@sha256:15a72a4abf1c593b0bea63a4a8f20e95c1e5a0696d7051eca87b9b850b2d7e43
 	build     = RUSTUP_TOOLCHAIN=stable CARGO_INCREMENTAL=0 cargo build --release --locked --offline --target x86_64-unknown-linux-musl -p calx-telltale
 	deploy    = calx-telltale
-	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale a5fffd4a416c610aacf94ffe760e0bd352891826bc18410a2c94912e23efdb67
+	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale 525915afb36980a2aa36c41d52e0199681f74605a085a94f0285a534ffb12684
 
 # The gating tool, carried as a component rather than a tools/ submodule so that
 # one source serves both its skill and its binary (call/0001). Recorded here so

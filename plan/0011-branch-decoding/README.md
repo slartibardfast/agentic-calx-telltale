@@ -24,30 +24,93 @@ His other entry, "a tool that reports a hazard on a part it cannot reach", is a
 warning about how this milestone can go wrong rather than an argument for it.
 
 Neither persona asks for a disassembler. They ask for a register they did not
-have to write, and decoding is the means.
+have to write, and decoding is one means among more than one.
+
+## Boundaries come before branches
+
+A back edge cannot be found without knowing where instructions start, and on the
+parts this tool is aimed at that is the larger half of the work. The cost falls
+into three tiers rather than two.
+
+**Strided.** Every instruction is the same size, so a reader advances by a
+constant and inspects. Cheapest by a wide margin.
+
+**Length in a fixed prefix.** Sizes vary and the first unit says how long the
+instruction is, so a reader advances without understanding it. Thumb-2 and the
+compressed RISC-V forms are both here.
+
+**Length in the operand form.** Sizes vary and the length depends on what the
+instruction does, so a reader has to decode most of it before it can find the
+next one. This is where writing a decoder stops being cheap, and it is where the
+part in front of the operator sits.
+
+The adapter reports which tier an image falls into, taken from the instruction
+set its own header declares, so the cost is visible before anyone commits.
+
+## The worked case, and why it is the hard one
+
+An ARC EM part is the case to plan against, and it is worse than either of the
+usual examples.
+
+It carries four instruction widths rather than two, and the compact encodings
+are the majority rather than a minority. Two width-changing mechanisms operate
+independently: the compact forms, which play the part the compressed RISC-V
+encodings do, and a long-immediate word appended to an instruction, which
+produces the wider forms. Roughly a fifth of instructions carry one.
+
+That second mechanism is what puts this in the third tier. Thumb-2 and the
+compressed forms both let a reader take the length from a fixed prefix of the
+first halfword. Here, whether a long-immediate word follows is a property of the
+operand form, so the length function needs more of the instruction than either
+of those cases.
+
+The endianness answer misleads if taken flat. The image is little-endian, and a
+long-immediate word is not a plain little-endian thirty-two bit value: it is two
+little-endian halfwords with the high half first. Reading four bytes flat gets
+the halves the wrong way round and finds nothing, which is a failure that looks
+like absence rather than like an error.
+
+Nor is a mature decoder a guarantee. On a stripped image of such a part, a
+well-known reverse-engineering suite left roughly half its spans undecoded, and
+the failures clustered on a major opcode with no entry in the published
+instruction set at all. An encoding can be beyond the available tools rather
+than merely expensive.
+
+## Two ways to get boundaries, and the price of each
+
+**Decode them.** Write the length function and the branch forms for one
+encoding. Self-contained, runs on a bare image with no symbols and no toolchain,
+and in the third tier a substantial piece of work that may not be finishable
+against an incompletely published encoding.
+
+**Delegate them.** Parse the listing a toolchain disassembler produces and take
+boundaries from its address column, so the hard part falls to a decoder that
+exists. Far cheaper, and it works today for encodings this project could not
+decode soon.
+
+The delegated route carries a dependency and a caveat, and the caveat is the
+serious one. It needs a toolchain and a listing, so it cannot run on a bare
+blob. The register's soundness then rests on that toolchain finding boundaries
+correctly: a mis-lengthed instruction loses a back edge, and the freeze set is
+wrong in a way nothing downstream can detect. That is the shape of dependency
+this project exists to make visible, so it is now a declared limit and is stated
+on every run rather than left in a note.
 
 ## The decision this milestone waits on
 
-Finding back edges needs branch targets, and branch targets need decoding.
-[call/0011](../../call/0011-the-adapter-sits-beside-the-core.md) keeps that out
-of the core while leaving the adapter free to take it, so what remains open is
-which decoder rather than whether to have one.
+Which route, and for which encoding. Both depend on the part in front of the
+operator, and nothing in this project settles either.
 
-A full disassembler is more than this needs. Back edges want branch instructions
-and their displacements, which for one architecture is a bounded subset of the
-encoding rather than the whole of it. That is the shape to aim for.
-
-Which architecture comes first is an operator decision, because it depends on
-the part in front of them and nothing in this project settles it. Whichever is
-chosen, the others are uncovered, and the freeze set becomes per-architecture,
-which has to reach the limits the tool states on every run rather than being
-left for a reader to infer.
+Where the answer is to delegate, the work is a listing parser and the limit is
+already declared. Where the answer is to decode, the tier decides the size of
+it, and a fixed-width encoding is the cheaper opening move even where it is not
+the part that prompted the question.
 
 ## The increment
 
-For the chosen architecture, decode branch instructions inside a function's
-extent, take the ones whose target precedes them, and report the resulting loops
-as candidate waits with the citation the symbol already carries.
+For the chosen route, find the loops inside a function's extent, take the
+branches whose target precedes them, and report the result as candidate waits
+carrying the citation the symbol already provides.
 
 Everything the adapter cannot determine stays blank. A budget, a measure and a
 counter width are still human decisions, and this milestone does not change that.
@@ -58,6 +121,9 @@ counter width are still human decisions, and this milestone does not change that
   wherever a decision belongs to a human.
 - An instruction the decoder does not recognise stops the analysis of that
   function and says so, rather than being skipped as though it were not a branch.
-- An image of an architecture the adapter does not decode is declined by name.
-- The freeze set is reported as a lower bound, and the architectures covered are
+- Where boundaries are delegated, the run says so, and the limit that makes the
+  freeze set only as sound as its source is reported with the rest.
+- An image whose encoding the adapter cannot handle is declined by name, and the
+  name comes from the image's own header rather than from a guess.
+- The freeze set is reported as a lower bound, and the encodings covered are
   named among the limits stated on every run.

@@ -256,3 +256,28 @@
 - **A `sed` on `.host-software` matched both stanzas** and gave host-lint a `-p calx-telltale` flag for a
   package it does not have. `software --verify-build` caught it, which is the gate earning its keep.
   **Edit that file by stanza, never by a pattern that appears in more than one.**
+
+### 2026-07-28 — the encoding question, answered against a real part
+
+- **"Which architecture" was underspecified.** The unit a branch decoder is written against is the
+  *encoding*, not the instruction set: one set carries several encoding modes, width-changing extensions
+  are the usual case rather than exotic, and endianness decides how a word is assembled.
+- **The cost has three tiers, not two.** Strided (fixed width); length in a fixed prefix of the first
+  halfword (Thumb-2, compressed RISC-V); and **length in the operand form**, where a reader must decode
+  most of an instruction to find the next. The third tier is where writing a decoder stops being cheap.
+- **ARC EM is the worked case and sits in the third tier.** Four widths; compact forms are the majority;
+  a long-immediate word appended per the operand form gives the wider ones. **The limm word is two
+  little-endian halfwords, high half first** — a flat 32-bit LE read finds nothing, and the failure looks
+  like absence rather than error. Even a mature suite left roughly half its spans undecoded on a stripped
+  image, clustering on a major opcode absent from the published set.
+- **Delegation is a real alternative to decoding**: parse a toolchain listing and take boundaries from its
+  address column. Far cheaper, works today, but needs a toolchain and cannot run on a bare blob — **and
+  the register's soundness then rests on that toolchain's boundary-finding. A mis-lengthed instruction
+  loses a back edge in a way nothing downstream can detect.** Now a declared limit, stated on every run.
+- The ELF reader handles **both classes**; ARC EM is ELF32 and 64-bit-only would have declined the domain.
+  The layouts differ in more than field width: a symbol's info byte moves, which reads plausible values
+  from wrong offsets rather than failing.
+- **Edit `.host-software` by key within its stanza, never by expected value.** Twice now a replacement
+  keyed on an old literal silently matched nothing: once giving host-lint a flag it could not use, once
+  leaving a stale pin so `verify-build` rebuilt the wrong commit and reported drift that was not there.
+  There is a `setkey.py` pattern for this in the session scratchpad.
