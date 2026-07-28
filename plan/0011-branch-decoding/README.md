@@ -96,24 +96,42 @@ wrong in a way nothing downstream can detect. That is the shape of dependency
 this project exists to make visible, so it is now a declared limit and is stated
 on every run rather than left in a note.
 
-## The decision this milestone waits on
+## The route, settled
 
-Which route, and for which encoding. Both depend on the part in front of the
-operator, and nothing in this project settles either.
+Delegation, recorded in
+[call/0012](../../call/0012-boundaries-are-delegated-to-the-listing.md). The
+measured case decided it rather than the arithmetic of effort: on the part that
+prompted this project a mature suite left roughly half its spans undecoded, so
+writing a decoder would not merely have been expensive, it would not have
+worked. A route that works is worth more than one that is self-contained.
 
-Where the answer is to delegate, the work is a listing parser and the limit is
-already declared. Where the answer is to decode, the tier decides the size of
-it, and a fixed-width encoding is the cheaper opening move even where it is not
-the part that prompted the question.
+The cast agreed for its own reasons. Marek already has the toolchain, so the
+dependency costs him nothing he lacks. Ines gets something to curate this month.
+Tarn loses a little, because an external process enters his loop, and is paid
+back with a tool that is plain about a listing that is missing or unreadable
+rather than one that quietly produces an empty draft.
 
-## The increment
+## Where it stands
 
-For the chosen route, find the loops inside a function's extent, take the
-branches whose target precedes them, and report the result as candidate waits
-carrying the citation the symbol already provides.
+**Built.** `calx-telltale-census loops` reads a listing, groups instructions by
+the function they sit in, recognises branches from a per-architecture mnemonic
+set, and reports those whose target sits at or before them inside the same
+function. On a real listing that is thousands of loops across hundreds of
+functions, which is a freeze set rather than a symbol dump.
 
-Everything the adapter cannot determine stays blank. A budget, a measure and a
-counter width are still human decisions, and this milestone does not change that.
+An architecture with no mnemonic set is declined by name. Guessing from the
+shape of an operand would find loops in arithmetic that happens to reference an
+address, and a false loop is worse than a missing one, because it is a
+declaration a reader will act on.
+
+Everything the adapter cannot determine stays blank. Whether a loop is a wait,
+what budget it carries and how its counter moves are decisions for someone who
+can read the source.
+
+**Outstanding**: a loop with no backward branch is not a back edge, so a
+zero-overhead loop instruction is missed, and the freeze set says it is a lower
+bound for that reason among others. Coverage grows one architecture at a time,
+and the gaps are visible rather than assumed away.
 
 ## Acceptance
 

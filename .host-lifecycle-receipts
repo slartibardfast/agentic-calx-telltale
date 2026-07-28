@@ -173,3 +173,28 @@
     evidence = adapter honesty fix: validate ok; prose clean; 0 hazards; 96 tests; both builds reproduce; artifact unchanged since the change is adapter-only
     tool = host-lifecycle@0.47.1
     recorded = 2026-07-28
+
+[receipt "materialize" "calx-telltale-census"]
+    disposition = done
+    evidence = 2 item(s) realized for calx-telltale-census at pin 4ddb47b41c1b (reference); toolchain docker.io/clux/muslrust:1.95.0-stable
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28
+
+[receipt "embed" "calx-telltale-census"]
+    disposition = done
+    evidence = same repository and pin as the core, since the adapter emits the register format the core parses; artifact ff2917a4f949 reproduces in the recorded toolchain
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28
+
+[receipt "release" "calx-telltale-census"]
+    disposition = skip
+    evidence = one repository, one release cadence; the core's tag covers the adapter's source and its artifact is verified through the component stanza
+    reason = call/0013
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28
+
+[receipt "verify"]
+    disposition = done
+    evidence = adapter finds loops and is verified as a component: validate ok; prose clean; refs clean; reconcile clean; 0 hazards; three artifacts reproduce; 102 tests
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28

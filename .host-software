@@ -7,12 +7,26 @@
 # offline build needs no vendored bundle.
 [software "calx-telltale"]
 	url       = https://github.com/slartibardfast/calx-telltale.git
-	pin       = d03f7c42f7d06a0f22d13a63c839f40fc7a2e9bd
+	pin       = 4ddb47b41c1bed23c1df5aefdbd51624ad66eee5
 	worktrees =
 	toolchain = docker.io/clux/muslrust:1.95.0-stable@sha256:15a72a4abf1c593b0bea63a4a8f20e95c1e5a0696d7051eca87b9b850b2d7e43
 	build     = RUSTUP_TOOLCHAIN=stable CARGO_INCREMENTAL=0 cargo build --release --locked --offline --target x86_64-unknown-linux-musl -p calx-telltale
 	deploy    = calx-telltale
 	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale 70288ffca0a6cff1635193871989ee5d6be77063e698db9d66fd63372f3c827c
+
+# The census adapter. A separate component rather than a second binary of the
+# core, because call/0011 keeps it out of the canonical artifact: the core's
+# empty dependency list is what lets its release build offline straight from
+# source. Same repository and same pin, since the adapter emits the register
+# format the core parses and the two cannot be allowed to drift.
+[software "calx-telltale-census"]
+	url       = https://github.com/slartibardfast/calx-telltale.git
+	pin       = 4ddb47b41c1bed23c1df5aefdbd51624ad66eee5
+	worktrees =
+	toolchain = docker.io/clux/muslrust:1.95.0-stable@sha256:15a72a4abf1c593b0bea63a4a8f20e95c1e5a0696d7051eca87b9b850b2d7e43
+	build     = RUSTUP_TOOLCHAIN=stable CARGO_INCREMENTAL=0 cargo build --release --locked --offline --target x86_64-unknown-linux-musl -p calx-telltale-census
+	deploy    = calx-telltale-census
+	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale-census ff2917a4f949cb965a0711d28358e32fa276ed5f718c56871ff4560dc5cbc20a
 
 # The gating tool, carried as a component rather than a tools/ submodule so that
 # one source serves both its skill and its binary (call/0001). Recorded here so

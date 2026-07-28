@@ -322,3 +322,23 @@
   with a build and artifact (it has no external dependencies, so the offline build works), a real version
   in place of the deliberate zero, and a release receipt. **None of that is worth doing while the tool
   emits candidates rather than waits.**
+
+### 2026-07-28 — the adapter finds loops
+
+- `calx-telltale-census loops <listing>` reads a disassembly listing, groups instructions by function,
+  recognises branches from a **per-architecture mnemonic set**, and takes those whose target sits at or
+  before them inside the same function. On a real listing: **2899 loops across 476 functions** — a freeze
+  set rather than a symbol dump.
+- **call/0012: boundaries are delegated, not decoded.** Settled by the measured case rather than effort:
+  on the part in hand a mature suite left half its spans undecoded, so a decoder would not merely have
+  been expensive, it would not have worked. The cast agreed for its own reasons — Marek already has the
+  toolchain, Ines gets something to curate, Tarn is owed clear failure when a listing is missing.
+- **Never guess a branch from operand shape.** A load referencing an earlier address would read as a
+  loop, and a false loop is worse than a missing one because it is a declaration a reader acts on.
+  Unknown architecture is declined by name; there is a test for the load case.
+- **call/0013: two crates in one repo defeat the release phase.** It materialises a checkout per
+  component and bumps the *root* manifest, so releasing the adapter bumped the **core** to 0.5.0 under a
+  census tag. Discarded before commit. The adapter keeps its component stanza (its artifact verifies and
+  reproduces) and **skips release** — one repository, one cadence, and the core's tag covers both.
+- The census stanza needed `Cargo.lock` refreshed after the version bump, or the offline `--locked` build
+  refuses. Bump a workspace member's version and update the lock in the same commit.
