@@ -342,3 +342,34 @@
   reproduces) and **skips release** — one repository, one cadence, and the core's tag covers both.
 - The census stanza needed `Cargo.lock` refreshed after the version bump, or the offline `--locked` build
   refuses. Bump a workspace member's version and update the lock in the same commit.
+
+### 2026-07-28 — the release sweep, and a tool that under-described itself
+
+- **The binary dispatched ten verbs and its help listed five.** `project`, `attain`, `deadline`,
+  `overrun` and `diff` were unreachable from `calx-telltale help`. The README carried the full set, so
+  anyone checking the documentation saw nothing wrong; only running the tool showed the gap. This is the
+  inverse of the defect 0007 was written to fix, and 0007's own acceptance ("a command that exists is
+  reachable from the tool's own help") was unmet while the milestone read **Built**.
+- **The lesson is about where a claim is checked.** `README` and `--help` restated the same list, and
+  nothing compared them. The fix is a test that reads the dispatch arms out of `main.rs` and asserts each
+  appears in `USAGE`, so the list is derived rather than restated twice. Verified by negative control:
+  dropping a verb from the help fails the test by name.
+- **`main.rs` had no tests at all** before this, which is why nothing caught it. A binary's own surface is
+  worth a check even when the arithmetic beneath it is proved.
+- **Eleven milestones pointed at empty `spec/` directories.** Every README said "the specs under
+  `spec/`" and all eleven held only a `.gitkeep`. Scaffold text nobody replaced. Removed: a spec belongs
+  beside the software it constrains, so an empty room under `plan/` invites the quarantine the spine
+  forbids. `host-lifecycle validate` does not require the directories.
+- **PLAN.md contradicted four of its own milestones**, all of which read Built in their own README. The
+  index is the ordering authority, so it is the one file that must not be stale about the project's state.
+- **Commit identity is not configured in either repo.** The host's local config says `host-lifecycle`
+  (scaffold default) and the software worktree had none, yet every commit is authored
+  `slartibardfast <david@connol.ly>`. Now set repo-locally in the host and in
+  `software/calx-telltale/.bare`, so it stops depending on a per-commit override. Related: the credential
+  fix in the per-user store.
+- The software worktree has **no tracking upstream**, so `git push` alone fails there; use
+  `git push origin HEAD:main`.
+- **Re-recording an artifact hash has no flag.** `--lock` is for a `deps-bundle`, and `--verify-build`
+  reports drift without recording. Rebuild the pin in the pinned container by hand and set `artifact` in
+  `.host-software`. The census binary reproduced its old hash unchanged across the same commit, since the
+  verbs that moved are not in it.
