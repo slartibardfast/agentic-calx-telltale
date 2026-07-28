@@ -547,6 +547,20 @@ the back edges, the interrupts-off regions and the accesses that reach
 peripheral space. It cannot supply a budget or a measure, so it emits those as
 blanks carrying no provenance, and a human fills them in. Everything the adapter
 does emit is marked <code>Extracted</code> with the file and symbol it came from.</p>
+<h2 id="where-it-stands"><a class="header" href="#where-it-stands">Where it stands</a></h2>
+<p><strong>Built</strong>: the register format with its parser, and the command line over it. A
+register is line-oriented because it is committed beside the image it describes,
+so it has to diff cleanly and review in a pull request, and a nested format
+would read better while diffing worse. Every value carries where it came from,
+so provenance enters at declaration rather than being attached afterwards. A
+blank an adapter left is reported as a blank rather than as a missing field,
+since one wants a decision and the other wants a correction.</p>
+<p>The schema holds the no-bare-rates rule itself: a tick count naming no clock is
+refused at parse time, so the arithmetic never has to catch it later.</p>
+<p><strong>Outstanding</strong>: the census adapter. Walking an ELF for loops, back edges and
+interrupts-off regions needs a reader for the format, which is the first
+dependency this crate would take. It belongs outside the proof boundary and
+probably outside this crate, and that placement wants a decision before code.</p>
 <h2 id="acceptance"><a class="header" href="#acceptance">Acceptance</a></h2>
 <ul>
 <li>A register round-trips through parse and print without losing a field.</li>
@@ -639,7 +653,7 @@ tool checks that rather than hoping for it.</p>
 <h3 id="attainment"><a class="header" href="#attainment">Attainment</a></h3>
 <p>The reported maximum is a true maximum over the declared domain. A solver earns
 its keep over a sweep precisely here.</p>
-<h2 id="where-it-stands"><a class="header" href="#where-it-stands">Where it stands</a></h2>
+<h2 id="where-it-stands-1"><a class="header" href="#where-it-stands-1">Where it stands</a></h2>
 <p><strong>Built</strong>: the five expression forms, evaluation at a latency, and the search
 over the domain that returns both the worst case and the latency attaining it.
 A composition reports whether its maximum is interior, which is the finding a
@@ -691,6 +705,15 @@ passes today, and sits one doubling away from wrapping in silence.</p>
 <p>This milestone needs loop contracts rather than unrolling, because realistic
 budgets run to thousands of iterations and unrolling them is not viable. That is
 why it sits after the two milestones whose harnesses are small and bounded.</p>
+<h2 id="where-it-stands-2"><a class="header" href="#where-it-stands-2">Where it stands</a></h2>
+<p><strong>Built</strong>, and more cheaply than this milestone expected. The entry assumed loop
+contracts, because proving termination of a loop is a statement about the loop.
+Declaring how the counter moves changes the question: a counter tested after it
+moves never sees zero, whatever it counts to, so the finding is a property of the
+declaration rather than a search over the iteration space. Both obligations
+therefore quantify over everything their types admit and discharge in seconds.</p>
+<p>The loop contracts are still the right tool for attainment, which searches a
+domain rather than reading a declaration. That is where the expectation belongs.</p>
 <h2 id="acceptance-3"><a class="header" href="#acceptance-3">Acceptance</a></h2>
 <ul>
 <li>A wait declaring a post-decrement measure with a zero test fails termination, and the
@@ -792,7 +815,7 @@ already spent.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>5538b4e771cb3ff7ddd1b4166e4e2998b19039fe</code></li>
+<li>pin: <code>191675b5ec70bc8f6e34a4f33f7dc40fa8932ac4</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -995,7 +1018,7 @@ siblings present the same way.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="neither-component-is-released-by-this-host"><a class="header" href="#neither-component-is-released-by-this-host">Neither component is released by this host</a></h1>
 <ul>
-<li>Status: accepted</li>
+<li>Status: accepted; the calx-telltale skip is discharged, see below</li>
 <li>Scope: host</li>
 <li>Date: 2026-07-27</li>
 </ul>
@@ -1006,11 +1029,17 @@ can carry a <code>done</code> receipt today, and the phase refuses a bare <code>
 decision to cite.</p>
 <h2 id="decision-4"><a class="header" href="#decision-4">Decision</a></h2>
 <p>Both <code>release</code> receipts are recorded as <code>skip</code>, and each cites this record.</p>
-<p><strong>calx-telltale</strong> is greenfield. The design is settled and no implementation
-exists, so there is no binary to tag, no artifact hash to re-derive, and nothing
-a version number would describe. Its <code>.host-software</code> stanza carries no <code>build</code>
-and no <code>artifact</code> for the same reason. The first milestone that produces a
-binary records the artifact, pins a toolchain, and takes this phase to <code>done</code>.</p>
+<p><strong>calx-telltale</strong> was greenfield when this was written. The design was settled,
+no implementation existed, so there was no binary to tag, no artifact hash to
+re-derive, and nothing a version number would describe.</p>
+<p><strong>That is discharged.</strong> The register format and the command line produced a
+binary, so the recipe now carries a pinned toolchain, a build, and an artifact
+hash, and the release phase records <code>v0.2.0</code> rather than a skip. The condition
+this record set for itself was the first milestone producing a binary, and that
+is exactly what lifted it.</p>
+<p>One thing fell out that is worth keeping. The crate has no dependencies, so the
+offline build inside the pinned container needed no vendored bundle at all,
+which is a reproducibility cost the other components here do pay.</p>
 <p><strong>host-lint</strong> is a consumed tool rather than software under development here. It
 is released by its own repository, which runs its own gates and cuts its own
 tags. This host pins it, rebuilds it in the recorded toolchain, and checks the
@@ -2665,6 +2694,26 @@ cost compounds; one step later everything unwinds. <strong>An off-by-one there m
 is why the harnesses hold exactly that leaf boundary.</li>
 <li>Rename leftover found: <code>PLAN.md</code> still said "Occupancy" after the overrun rename, because it was not in
 the file list. <strong>A rename sweep must include PLAN.md and MEMORY.md, not just call/ plan/*/ and src/.</strong></li>
+</ul>
+<h3 id="2026-07-28--the-plan-completed-to-the-lifecycle-and-v020"><a class="header" href="#2026-07-28--the-plan-completed-to-the-lifecycle-and-v020">2026-07-28 — the plan completed to the lifecycle, and v0.2.0</a></h3>
+<ul>
+<li>Milestones 0004 (termination, counter fit) and 0001's register format and command line are built.
+75 tests, 19 harnesses. <strong>calx-telltale v0.2.0 released</strong>, pin <code>191675b</code>, artifact <code>65001736</code>.</li>
+<li><strong>The release phase is <code>done</code></strong>, which discharges the calx-telltale skip in call/0004. Its own
+condition was "the first milestone producing a binary", and the CLI was that milestone.</li>
+<li><code>host-lifecycle release</code> <strong>computes the version from a change class</strong>, never a semver level chosen by
+hand: <code>adds-flag</code> mapped 0.1.0 to 0.2.0. It runs verify, bumps, builds in the pinned container, derives
+the canonical hash, then <strong>stops and prints the outward steps for a human</strong>. Tagging is operator-run by
+design; do not assume authority for it.</li>
+<li><strong>The zero-dependency design paid off at release time</strong>: the offline build inside the pinned container
+needed no vendored bundle, which host-lint and the other components do need.</li>
+<li>0004 came in cheaper than its milestone expected. It assumed loop contracts; declaring how the counter
+moves turned termination into a property of the declaration rather than a search over the loop. <strong>Loop
+contracts are still the right tool for attainment</strong>, which searches a domain.</li>
+<li>Outstanding: the ELF census adapter (needs the crate's first dependency, so placement wants a decision
+first), the armed-interval comparison, and monotonicity reported as a proved property.</li>
+<li>The gh account reverted mid-sequence again and the tag push failed as connollydavid. See
+[[gh-account-switching-for-slartibardfast-pushes]]; re-check identity before every outward step.</li>
 </ul>
 
                     </main>

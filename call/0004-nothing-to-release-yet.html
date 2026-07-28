@@ -175,7 +175,7 @@
                     <main>
                         <h1 id="neither-component-is-released-by-this-host"><a class="header" href="#neither-component-is-released-by-this-host">Neither component is released by this host</a></h1>
 <ul>
-<li>Status: accepted</li>
+<li>Status: accepted; the calx-telltale skip is discharged, see below</li>
 <li>Scope: host</li>
 <li>Date: 2026-07-27</li>
 </ul>
@@ -186,11 +186,17 @@ can carry a <code>done</code> receipt today, and the phase refuses a bare <code>
 decision to cite.</p>
 <h2 id="decision"><a class="header" href="#decision">Decision</a></h2>
 <p>Both <code>release</code> receipts are recorded as <code>skip</code>, and each cites this record.</p>
-<p><strong>calx-telltale</strong> is greenfield. The design is settled and no implementation
-exists, so there is no binary to tag, no artifact hash to re-derive, and nothing
-a version number would describe. Its <code>.host-software</code> stanza carries no <code>build</code>
-and no <code>artifact</code> for the same reason. The first milestone that produces a
-binary records the artifact, pins a toolchain, and takes this phase to <code>done</code>.</p>
+<p><strong>calx-telltale</strong> was greenfield when this was written. The design was settled,
+no implementation existed, so there was no binary to tag, no artifact hash to
+re-derive, and nothing a version number would describe.</p>
+<p><strong>That is discharged.</strong> The register format and the command line produced a
+binary, so the recipe now carries a pinned toolchain, a build, and an artifact
+hash, and the release phase records <code>v0.2.0</code> rather than a skip. The condition
+this record set for itself was the first milestone producing a binary, and that
+is exactly what lifted it.</p>
+<p>One thing fell out that is worth keeping. The crate has no dependencies, so the
+offline build inside the pinned container needed no vendored bundle at all,
+which is a reproducibility cost the other components here do pay.</p>
 <p><strong>host-lint</strong> is a consumed tool rather than software under development here. It
 is released by its own repository, which runs its own gates and cuts its own
 tags. This host pins it, rebuilds it in the recorded toolchain, and checks the
