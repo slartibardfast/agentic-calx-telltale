@@ -406,3 +406,27 @@
   engineering around not holding it.
 - The account and the author stay separate facts: the repositories live under `slartibardfast`, the
   work is done by `connollydavid`, and commits are authored `David Connolly <david@connol.ly>`.
+
+### 2026-07-28 — following the template forward, and the one change held back
+
+- The template had moved twelve commits past the adopted `32e655f`. `host-lifecycle upgrade` reported
+  **nothing pending**, correctly: the ledger's last entry is still `GATE-refs-in-verify`, our baseline,
+  so none of the twelve is a ledger action. **A quiet upgrade check does not mean the spine is current** —
+  pin bumps and spine prose ride along outside the ledger, and only a diff finds them.
+- **host-lint moved to v0.16.6** (`cc3ec6a`), the revision the template pins. That closed both hazards
+  raised below: upstream had already recorded `lint-skill.sh` and `test-integration.sh` executable.
+  Fixed at the source rather than patched here, which is the reference-don't-vendor rule paying off.
+- **host-lifecycle upgraded itself 0.47.1 to 0.47.2 mid-session**, and 0.47.2 added a check that a
+  script invoked as `./name.sh` must be recorded `100755`. A gate reading zero hazards then read three.
+  The conditions were as old as adoption. **A moving gate can make yesterday's green meaningless**, so
+  read the tool version alongside the verdict.
+- `link-skills.sh` was one of them, in this repo, and `core.fileMode=false` here makes the on-disk bit
+  a lie. Only `git ls-files -s` tells the truth; the fix is `git update-index --chmod=+x`.
+- **The template's own `CLAUDE.md` warns under the prose lane of the host-lint it pins.** Its new
+  section carries "harness" (ai-diction). Adopting the spine verbatim would have re-opened our verify
+  receipt, and rewording it locally would break copy-at-version. **Held the spine at the older revision
+  and raised it upstream** ([connollydavid/host#20](https://github.com/connollydavid/host/issues/20)),
+  rather than take a red gate or a private fork of the methodology.
+- The general shape, worth remembering past this instance: the template's docs are not gated by the
+  lane the template ships, so this class can recur at any spine change.
+- `connollydavid/host-template` has issues disabled; template defects go to `connollydavid/host`.
