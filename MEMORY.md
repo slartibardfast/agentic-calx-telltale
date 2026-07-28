@@ -180,3 +180,23 @@
   store, so every worktree inherits it.
 - `gh` itself still follows the active account, so anything needing `slartibardfast` identity through
   `gh` (creating a repo, say) still wants a switch and a check of `gh api user --jq .login` first.
+
+### 2026-07-28 — the tool describes itself
+
+- Asked whether calx-telltale was self-describing for agentic use. It was not, and the check was empirical
+  rather than assumed: `--help`, `-h` and `--version` all exited 2, so an agent's first three guesses all
+  failed.
+- **The serious gap was not the help flag.** call/0003 owed Tarn "a stable machine-readable output shape
+  carrying provenance as a field". The exit codes had been built and the structured output never was, so
+  every surface was prose. **That is the third record/code divergence of this kind found in this project**
+  — after the drop consequence and the stated exclusions. When a record promises a surface, check the
+  surface exists.
+- Now: `--json` emits one object with the same facts as fields, including per-finding provenance, the
+  weakest standing across the run, the exit code, and the limits. An unreadable register reports in the
+  same shape. A `grammar` command prints the register format, so an agent holding only the binary can
+  author a register without the repository.
+- The JSON encoder is hand-written. **Do not take a serialisation dependency**: the offline reproducible
+  build in the pinned container works precisely because the dependency list is empty, which no other
+  component here manages.
+- Pin `ccb62cd`, artifact `32875ac`. **The pin is now ahead of the v0.2.0 tag**, and the added CLI surface
+  is an `adds-flag` change, so the release phase wants re-running when the operator wants another tag.
