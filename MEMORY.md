@@ -309,3 +309,16 @@
   chosen for.
 - `setkey.py` (set a field by key within a named `.host-software` stanza) was used for the re-pin and
   worked. Keep using it; the two defects this session both came from replacing by expected value.
+
+### 2026-07-28 — the adapter was claiming a kind it had not established
+
+- The draft emitted a `wait` declaration per **function symbol** — 1513 of them on a real image. A wait is
+  a polling loop and a function symbol is not, so every line claimed a kind the adapter had never
+  established, and the file did not parse anyway (it stopped at the first blank).
+- Candidates are **commented out** now. A reader uncomments one once they have found a loop worth
+  declaring, and until then the file parses as what it honestly is: a register declaring nothing.
+- **What the adapter needs before it could be released** is the capability, not the packaging: instruction
+  boundaries, which is milestone 0011. Packaging is small by comparison — its own `.host-software` stanza
+  with a build and artifact (it has no external dependencies, so the offline build works), a real version
+  in place of the deliberate zero, and a release receipt. **None of that is worth doing while the tool
+  emits candidates rather than waits.**

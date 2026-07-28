@@ -64,10 +64,16 @@ The core's dependency list is still empty and the canonical artifact is still
 built with `-p calx-telltale`, so the offline release build is untouched.
 
 **Outstanding, and stated on every draft**: these are candidates rather than
-waits. Finding the polling loops inside a function needs a disassembler, which
-is the unbounded half call/0011 keeps out, so what the adapter misses it misses
-silently. The draft says so in its own header rather than leaving a reader to
-discover it.
+waits, and the draft now says so by construction rather than only in prose.
+Every candidate line is commented out. A wait is a polling loop, a function
+symbol is not, and emitting a declaration per symbol claimed a kind the adapter
+had not established, once for every function in the image. A reader uncomments a
+line once they have looked and found a loop worth declaring.
+
+Finding those loops is what would make this a census, and it needs the
+instruction boundaries [0011](../0011-branch-decoding/README.md) is about. What
+the adapter misses without them it misses silently, which is why the header says
+so.
 
 ## Acceptance
 
