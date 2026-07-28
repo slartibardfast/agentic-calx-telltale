@@ -624,6 +624,18 @@ rather than take a red gate or a private fork of the methodology.</li>
 lane the template ships, so this class can recur at any spine change.</li>
 <li><code>connollydavid/host-template</code> has issues disabled; template defects go to <code>connollydavid/host</code>.</li>
 </ul>
+<h3 id="2026-07-29--the-held-back-spine-section-lands"><a class="header" href="#2026-07-29--the-held-back-spine-section-lands">2026-07-29 — the held-back spine section lands</a></h3>
+<ul>
+<li>Upstream reworded the flagged line at <code>e89d064</code> ("a branch that needs a controlling terminal the
+probe cannot open"), so the section that would have reddened this gate yesterday came across
+verbatim today. <code>host-lint --prose</code> at the pinned <code>cc3ec6a</code> now exits 0 on it.</li>
+<li>The spine is byte-identical to the template's again, and
+<a href="https://github.com/connollydavid/host/issues/20">connollydavid/host#20</a> is closed with the
+adopter-side verification recorded on it.</li>
+<li><strong>This is what holding a change back is for.</strong> Yesterday's three options were a red gate, a private
+fork of the methodology, or a stale spine. Staleness was the only reversible one, and it cost a day.
+Prefer it whenever the alternative is editing something you do not own.</li>
+</ul>
 
                     </main>
 
