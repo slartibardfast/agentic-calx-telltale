@@ -42,6 +42,22 @@ folders keep the names they were given and only this index moves.
   The arithmetic exists already, so this is a surface over settled work. It sits
   behind 0006 so that a verdict carries its citation from the first version.
 - [0008 census-adapter](0008-census-adapter/README.md), the skeleton register
-  drafted from the image. It waits on a decision about where the object-format
-  reader lives, because that would be the core's first dependency and the empty
-  dependency list is what makes the offline release build work.
+  drafted from the image. **Built**, as a workspace member beside the core.
+
+The three that remain are ordered by what the cast asks for rather than by what
+is interesting to build. Tarn's loop is broken by a message that names no line,
+so that goes first and is small. Marek pays twice for hand-declared arrival
+rates, and the machinery to derive them already exists. Ines's persona describes
+a working mode the tool still cannot support, and closing that is the largest
+piece and the one waiting on a decision.
+
+- [0009 units-refused-at-the-line](0009-units-refused-at-the-line/README.md), a
+  composition mixing units named at the line that wrote it rather than at the
+  operation that failed.
+- [0010 arrivals-from-the-clock-tree](0010-arrivals-from-the-clock-tree/README.md),
+  a periodic interrupt deriving its period from the clock that drives it, so one
+  fewer number is typed and the clock's provenance reaches the verdict.
+- [0011 branch-decoding](0011-branch-decoding/README.md), the loops inside a
+  function, which is what would make the census a census. It waits on an
+  operator decision about which architecture comes first, because that depends
+  on the part rather than on anything this project settles.
