@@ -165,3 +165,18 @@
   first), the armed-interval comparison, and monotonicity reported as a proved property.
 - The gh account reverted mid-sequence again and the tag push failed as connollydavid. See
   [[gh-account-switching-for-slartibardfast-pushes]]; re-check identity before every outward step.
+
+### 2026-07-28 — pushing to this pair no longer depends on the gh account
+
+- `git push` in this host and in `software/calx-telltale/main` now works whatever account `gh` thinks is
+  active. The switch-and-inline-credential dance used through this session is retired.
+- **Root cause**: `~/.gitconfig` carries `credential.https://github.com.helper=` (empty, which clears the
+  chain) followed by `!/usr/bin/gh auth git-credential`, so the global `store` helper was bypassed for
+  every github.com push and gh's helper was the only one running. That helper reads gh's *active*
+  account, which reverted on its own several times. `gh auth setup-git` writes this.
+- **Fix**, repo-local so it leaves `connollydavid` repositories alone: name the user in the remote
+  (`https://slartibardfast@github.com/...`) so the credential store matches on username, then clear and
+  restore `store` for github.com in each repo's own config. The software repo's config lives in the bare
+  store, so every worktree inherits it.
+- `gh` itself still follows the active account, so anything needing `slartibardfast` identity through
+  `gh` (creating a repo, say) still wants a switch and a check of `gh api user --jq .login` first.
