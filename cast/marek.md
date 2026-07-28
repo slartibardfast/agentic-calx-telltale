@@ -42,9 +42,13 @@ Their scenarios:
   the declaration it rests on, and either fixing the firmware or fixing the
   declaration. They are the one who can tell which of the two was wrong.
 
-**Accommodations calx-telltale owes Marek:** a verdict that names the
-declaration it rests on, and a declaration that names the file and symbol it was
-extracted from; a census that drafts the register so it is curated rather than
+**Accommodations calx-telltale owes Marek:** a schedulability answer rather than
+only a window measurement, since a handler that cannot keep up with its own
+arrival rate fails with no blackout involved; the margin alongside every verdict,
+because holding by a hair and holding comfortably call for different decisions;
+the exclusions stated on every run, so a clean sweep reads as clean within a
+boundary rather than clean absolutely; a verdict that names the declaration it
+rests on, and a declaration that names the file and symbol it was extracted from; a census that drafts the register so it is curated rather than
 authored; `diff` across builds, so a change that moves a bound surfaces in
 review; the consequence of a drop recorded, so an overrun says what is lost
 rather than only that something was; exit codes and output that sit in a build

@@ -1,6 +1,6 @@
 # Interrupts are declared, and whether a window can be judged is itself a verdict
 
-- Status: accepted
+- Status: accepted; the priority exclusion superseded by [call/0010](0010-response-time-over-a-priority-ordered-set.md)
 - Scope: software
 - Date: 2026-07-27
 
@@ -107,4 +107,9 @@ names they were given and only the index moves.
   start out `Assumed`. The tool will say so on every verdict, which is the point
   and will still be unwelcome.
 - Neutral: interrupt priority, preemption and nested handlers stay outside the
-  model. A declared interrupt is judged against blackout windows alone.
+  model. A declared interrupt is judged against blackout windows alone. **This
+  no longer holds.** Consulting the cast against a real-time workload showed the
+  exclusion removed the middle of the subject rather than an edge of it, and
+  [call/0010](0010-response-time-over-a-priority-ordered-set.md) takes priority
+  and preemption into the model. Nesting within a single priority level stays
+  out, and is recorded with the other limits the tool states on every run.

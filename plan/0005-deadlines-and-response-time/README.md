@@ -46,13 +46,34 @@ A blackout counted in loop passes cannot be compared against a deadline in
 nanoseconds, and a run reports how many comparisons it withheld so that an
 exclusion never reads as a clean sweep.
 
-**Built**: both verdicts, the arrival count, the withheld cases, and the sweep
-that reports them. Two proof harnesses hold the parts that matter, which are
-that a window with no path to a time is never resolved either way, and that a
-verdict never outranks the weakest declaration it rests on.
+An interrupt also declares how long its handler runs, what priority it holds,
+and what a dropped arrival costs. That admits the standard fixed-priority
+analysis over the declared set
+([call/0010](../../call/0010-response-time-over-a-priority-ordered-set.md)):
+utilisation as the first-order check, then the response-time recurrence, whose
+blocking term is the blackout window this project already computes. A verdict
+carries its margin, because holding by a hair and holding comfortably are
+different facts.
 
-**Outstanding**: the armed-interval comparison below, and the arrival adapter
-that would populate rates from something other than a human's declaration.
+The handler cost is declared rather than derived. This tool computes no
+worst-case execution time and it does not pretend the quantity is absent either,
+so a cost somebody guessed makes every verdict resting on it a guess.
+
+**Built**: both window verdicts, the arrival count, utilisation, the
+response-time recurrence, the margin, the withheld cases, and the sweep that
+reports them. The exclusions are now enumerated in the crate and stated on every
+run, which the founding note asked for and nothing previously did.
+
+**Proof coverage is partial, and deliberately so.** Harnesses hold the parts
+that carry the design: a window with no path to a time is never resolved either
+way, a verdict never outranks the weakest declaration it rests on, and priority
+is a strict order, which is what lets the recurrence partition the set. The
+recurrence itself walks a heap-allocated set and is covered by tests, on the
+same reasoning as [call/0009](../../call/0009-multiplication-is-proved-at-the-boundaries.md).
+
+**Outstanding**: the armed-interval comparison below, release jitter, nesting
+within a priority level, and the arrival adapter that would populate rates from
+something other than a human's declaration.
 
 ## Acceptance
 

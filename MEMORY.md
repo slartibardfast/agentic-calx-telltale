@@ -106,3 +106,24 @@
   one. Marek shares Ines's modality and wants the opposite thing: Ines asks whether a projection can be
   trusted, Marek asks what to change. A verdict can be trustworthy and still useless by naming no
   declaration anyone can open. Recorded in call/0003.
+
+### 2026-07-28 — real-time metrics, after consulting the cast
+
+- Consulting the cast against a real-time workload found the register missing the term everything hangs
+  off: **handler execution time**. Without it there is no response time, no utilisation, and no
+  schedulability statement. The tool could say a burst overruns a ring; it could not say a handler taking
+  longer than its own period never catches up, which needs no blackout at all.
+- **The WCET objection dissolves**: the cost is *declared*, not derived, like every other number, and an
+  `Assumed` cost makes the verdict `Assumed`. Refusing to derive a quantity is not the same as pretending
+  it does not exist, and the second is the more damaging refusal. Recorded in call/0010.
+- call/0010 **supersedes the priority exclusion in call/0008**. Response time is the standard
+  fixed-priority fixed point `R = C + B + Σ ceil(R/T)·C`, and **the blocking term B is the blackout
+  window this project already computes** — that is where the two halves of the tool meet.
+- Priority is numbered **the way the hardware numbers it: lower preempts higher** (NVIC convention), not
+  the literature's opposite. A register transcribed from a datasheet must read correctly.
+- **Two record/code divergences were found and closed**, both the anti-pattern the operator named
+  earlier: call/0008 promised a drop consequence the struct never had, and the founding note required
+  exclusions stated on every run with nothing implementing it. `limits.rs` now enumerates nine.
+- Proof coverage is deliberately partial: harnesses hold provenance flow, the never-judged case, and that
+  priority is a strict order (which is what lets the recurrence partition the set). The recurrence itself
+  walks a heap-allocated set and is test-covered, on call/0009's reasoning.
