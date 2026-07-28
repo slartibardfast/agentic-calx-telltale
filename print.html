@@ -639,6 +639,23 @@ tool checks that rather than hoping for it.</p>
 <h3 id="attainment"><a class="header" href="#attainment">Attainment</a></h3>
 <p>The reported maximum is a true maximum over the declared domain. A solver earns
 its keep over a sweep precisely here.</p>
+<h2 id="where-it-stands"><a class="header" href="#where-it-stands">Where it stands</a></h2>
+<p><strong>Built</strong>: the five expression forms, evaluation at a latency, and the search
+over the domain that returns both the worst case and the latency attaining it.
+A composition reports whether its maximum is interior, which is the finding a
+sweep of the extremes would have missed.</p>
+<p>The domain is bounded by the widest budget in the composition rather than by any
+cost, so the search stays small even where the costs run to millions. Past that
+bound every wait has already given up, and nothing further can change.</p>
+<p><strong>Proof coverage</strong>: the harnesses hold the leaf semantics the whole tree rests
+on, which are that a wait succeeds exactly while the answer arrives inside its
+budget, and that it never polls past that budget. The short-circuit operator
+turns on that boundary: one step earlier the body runs and the cost compounds,
+one step later the whole composition unwinds, so an off-by-one there would move
+the worst case. The tree itself is heap-allocated and carried by tests, on the
+reasoning in <a href="plan/0003-composition-and-attainment/../../call/0009-multiplication-is-proved-at-the-boundaries.html">call/0009</a>.</p>
+<p><strong>Outstanding</strong>: monotonicity reported as a proved property where the tool can
+establish it, rather than the search running unconditionally.</p>
 <h2 id="acceptance-2"><a class="header" href="#acceptance-2">Acceptance</a></h2>
 <ul>
 <li>A <code>ShortCircuit</code> whose guard succeeds expensively reports the expensive
@@ -775,7 +792,7 @@ already spent.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>9a6b3528bac5f63f386d048100a52e0aa1a0fb98</code></li>
+<li>pin: <code>5538b4e771cb3ff7ddd1b4166e4e2998b19039fe</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -2630,6 +2647,24 @@ exclusions stated on every run with nothing implementing it. <code>limits.rs</co
 <li>Proof coverage is deliberately partial: harnesses hold provenance flow, the never-judged case, and that
 priority is a strict order (which is what lets the recurrence partition the set). The recurrence itself
 walks a heap-allocated set and is test-covered, on call/0009's reasoning.</li>
+</ul>
+<h3 id="2026-07-28--composition-and-attainment"><a class="header" href="#2026-07-28--composition-and-attainment">2026-07-28 — composition and attainment</a></h3>
+<ul>
+<li>Built the five expression forms and the attainment search, pinned at <code>5538b4e</code>. 63 tests, 17 harnesses.</li>
+<li><strong>Moved 0003 ahead of 0001</strong> in PLAN.md: the register format has to serialise the expression tree, so
+designing the schema first would have been guesswork. Same dependency argument that moved 0005 ahead
+of 0004.</li>
+<li><strong>Evaluation is parameterised by one latency</strong>, meaning how long the outside world takes to answer.
+Every wait in a composition sees the same world, so a cost is a function of that parameter. This is
+what makes attainment a search rather than an arithmetic step.</li>
+<li><strong>The search domain is bounded by the widest budget, never by cost.</strong> Costs run to millions; the domain
+stays a few hundred wide, because past the widest budget every wait has already given up. Do not
+"optimise" this by sampling: the whole point is that the maximum is interior.</li>
+<li>The short-circuit boundary is where a guard stops succeeding. One step earlier the body runs and the
+cost compounds; one step later everything unwinds. <strong>An off-by-one there moves the worst case</strong>, which
+is why the harnesses hold exactly that leaf boundary.</li>
+<li>Rename leftover found: <code>PLAN.md</code> still said "Occupancy" after the overrun rename, because it was not in
+the file list. <strong>A rename sweep must include PLAN.md and MEMORY.md, not just call/ plan/*/ and src/.</strong></li>
 </ul>
 
                     </main>

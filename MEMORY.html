@@ -302,6 +302,24 @@ exclusions stated on every run with nothing implementing it. <code>limits.rs</co
 priority is a strict order (which is what lets the recurrence partition the set). The recurrence itself
 walks a heap-allocated set and is test-covered, on call/0009's reasoning.</li>
 </ul>
+<h3 id="2026-07-28--composition-and-attainment"><a class="header" href="#2026-07-28--composition-and-attainment">2026-07-28 — composition and attainment</a></h3>
+<ul>
+<li>Built the five expression forms and the attainment search, pinned at <code>5538b4e</code>. 63 tests, 17 harnesses.</li>
+<li><strong>Moved 0003 ahead of 0001</strong> in PLAN.md: the register format has to serialise the expression tree, so
+designing the schema first would have been guesswork. Same dependency argument that moved 0005 ahead
+of 0004.</li>
+<li><strong>Evaluation is parameterised by one latency</strong>, meaning how long the outside world takes to answer.
+Every wait in a composition sees the same world, so a cost is a function of that parameter. This is
+what makes attainment a search rather than an arithmetic step.</li>
+<li><strong>The search domain is bounded by the widest budget, never by cost.</strong> Costs run to millions; the domain
+stays a few hundred wide, because past the widest budget every wait has already given up. Do not
+"optimise" this by sampling: the whole point is that the maximum is interior.</li>
+<li>The short-circuit boundary is where a guard stops succeeding. One step earlier the body runs and the
+cost compounds; one step later everything unwinds. <strong>An off-by-one there moves the worst case</strong>, which
+is why the harnesses hold exactly that leaf boundary.</li>
+<li>Rename leftover found: <code>PLAN.md</code> still said "Occupancy" after the overrun rename, because it was not in
+the file list. <strong>A rename sweep must include PLAN.md and MEMORY.md, not just call/ plan/*/ and src/.</strong></li>
+</ul>
 
                     </main>
 

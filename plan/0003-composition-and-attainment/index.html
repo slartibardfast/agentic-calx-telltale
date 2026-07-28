@@ -203,6 +203,23 @@ tool checks that rather than hoping for it.</p>
 <h3 id="attainment"><a class="header" href="#attainment">Attainment</a></h3>
 <p>The reported maximum is a true maximum over the declared domain. A solver earns
 its keep over a sweep precisely here.</p>
+<h2 id="where-it-stands"><a class="header" href="#where-it-stands">Where it stands</a></h2>
+<p><strong>Built</strong>: the five expression forms, evaluation at a latency, and the search
+over the domain that returns both the worst case and the latency attaining it.
+A composition reports whether its maximum is interior, which is the finding a
+sweep of the extremes would have missed.</p>
+<p>The domain is bounded by the widest budget in the composition rather than by any
+cost, so the search stays small even where the costs run to millions. Past that
+bound every wait has already given up, and nothing further can change.</p>
+<p><strong>Proof coverage</strong>: the harnesses hold the leaf semantics the whole tree rests
+on, which are that a wait succeeds exactly while the answer arrives inside its
+budget, and that it never polls past that budget. The short-circuit operator
+turns on that boundary: one step earlier the body runs and the cost compounds,
+one step later the whole composition unwinds, so an off-by-one there would move
+the worst case. The tree itself is heap-allocated and carried by tests, on the
+reasoning in <a href="../../call/0009-multiplication-is-proved-at-the-boundaries.html">call/0009</a>.</p>
+<p><strong>Outstanding</strong>: monotonicity reported as a proved property where the tool can
+establish it, rather than the search running unconditionally.</p>
 <h2 id="acceptance"><a class="header" href="#acceptance">Acceptance</a></h2>
 <ul>
 <li>A <code>ShortCircuit</code> whose guard succeeds expensively reports the expensive
