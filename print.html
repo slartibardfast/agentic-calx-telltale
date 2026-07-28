@@ -815,7 +815,7 @@ already spent.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>191675b5ec70bc8f6e34a4f33f7dc40fa8932ac4</code></li>
+<li>pin: <code>ccb62cde47fa0bc1e4d2d3d6a86ff57e50afaaa9</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -2729,6 +2729,26 @@ restore <code>store</code> for github.com in each repo's own config. The softwar
 store, so every worktree inherits it.</li>
 <li><code>gh</code> itself still follows the active account, so anything needing <code>slartibardfast</code> identity through
 <code>gh</code> (creating a repo, say) still wants a switch and a check of <code>gh api user --jq .login</code> first.</li>
+</ul>
+<h3 id="2026-07-28--the-tool-describes-itself"><a class="header" href="#2026-07-28--the-tool-describes-itself">2026-07-28 — the tool describes itself</a></h3>
+<ul>
+<li>Asked whether calx-telltale was self-describing for agentic use. It was not, and the check was empirical
+rather than assumed: <code>--help</code>, <code>-h</code> and <code>--version</code> all exited 2, so an agent's first three guesses all
+failed.</li>
+<li><strong>The serious gap was not the help flag.</strong> call/0003 owed Tarn "a stable machine-readable output shape
+carrying provenance as a field". The exit codes had been built and the structured output never was, so
+every surface was prose. <strong>That is the third record/code divergence of this kind found in this project</strong>
+— after the drop consequence and the stated exclusions. When a record promises a surface, check the
+surface exists.</li>
+<li>Now: <code>--json</code> emits one object with the same facts as fields, including per-finding provenance, the
+weakest standing across the run, the exit code, and the limits. An unreadable register reports in the
+same shape. A <code>grammar</code> command prints the register format, so an agent holding only the binary can
+author a register without the repository.</li>
+<li>The JSON encoder is hand-written. <strong>Do not take a serialisation dependency</strong>: the offline reproducible
+build in the pinned container works precisely because the dependency list is empty, which no other
+component here manages.</li>
+<li>Pin <code>ccb62cd</code>, artifact <code>32875ac</code>. <strong>The pin is now ahead of the v0.2.0 tag</strong>, and the added CLI surface
+is an <code>adds-flag</code> change, so the release phase wants re-running when the operator wants another tag.</li>
 </ul>
 
                     </main>
