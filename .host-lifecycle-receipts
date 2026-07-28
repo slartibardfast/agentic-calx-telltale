@@ -155,3 +155,15 @@
     evidence = pre-release sweep: validate ok; prose clean; refs clean; reconcile clean; book renders; setup complete; 0 hazards; 96 tests and 20 harnesses; both builds reproduce at pin 81d763e
     tool = host-lifecycle@0.47.1
     recorded = 2026-07-28
+
+[receipt "release" "calx-telltale"]
+    disposition = done
+    evidence = v0.4.0@70288ffca0a6cff1635193871989ee5d6be77063e698db9d66fd63372f3c827c
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28
+
+[receipt "verify"]
+    disposition = done
+    evidence = v0.4.0 released: validate ok; prose clean; refs clean; reconcile clean; 0 hazards; both builds reproduce at pin f3fd27d artifact 70288ff
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28

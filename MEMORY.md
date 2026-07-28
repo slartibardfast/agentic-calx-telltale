@@ -299,3 +299,13 @@
 - Note for the next release: `host-lifecycle release` bumps only the package it is given, so a workspace
   member's version is never touched. That is fine while the adapter stays at zero, and would need
   handling if it ever gains a real version.
+
+### 2026-07-28 — v0.4.0
+
+- Released **v0.4.0**, pin `f3fd27d`, artifact `70288ff`. Change class `adds-flag`, verified additive
+  before running the gate rather than asserted.
+- **The zero-version decision held its first test**: the release bumped the core to 0.4.0 and left the
+  adapter at 0.0.0 untouched, with no hand-sync needed and no skew created. That is the behaviour it was
+  chosen for.
+- `setkey.py` (set a field by key within a named `.host-software` stanza) was used for the re-pin and
+  worked. Keep using it; the two defects this session both came from replacing by expected value.
