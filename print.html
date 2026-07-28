@@ -514,7 +514,7 @@ line-oriented.</p>
 <li><strong>Who</strong>: <a href="plan/0001-register-schema-and-census/../../cast/ines.html">Ines</a>, who curates a register rather than
 authoring one from nothing, and <a href="plan/0001-register-schema-and-census/../../cast/tarn.html">Tarn</a>, who edits and
 re-checks it in a loop.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>.</li>
+<li><strong>What</strong>: the acceptance below, discharged by the tests and proofs in the software repo.</li>
 <li><strong>Why</strong>: <a href="plan/0001-register-schema-and-census/../../call/0002-design-note-stays-out-of-repo.html">call/0002</a> records
 where the design this milestone implements is held.
 <a href="plan/0001-register-schema-and-census/../../call/0006-sources-are-declared-and-delays-name-them.html">call/0006</a> adds
@@ -580,7 +580,7 @@ obligations that hold them together.</p>
 <ul>
 <li><strong>Who</strong>: <a href="plan/0002-units-provenance-intervals/../../cast/ines.html">Ines</a>, who needs to tell a derived number from a
 guess while reading one result.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>, which discharge unit soundness, provenance monotonicity and interval soundness.</li>
+<li><strong>What</strong>: the acceptance below, and the obligations it discharges: unit soundness, provenance monotonicity and interval soundness.</li>
 <li><strong>Why</strong>: <a href="plan/0002-units-provenance-intervals/../../call/0003-cast-modalities.html">call/0003</a> requires the
 provenance to reach both the printed report and the structured output.</li>
 </ul>
@@ -636,7 +636,7 @@ exist, and the narrow store had meanwhile been capping how fine a base could be.
 <ul>
 <li><strong>Who</strong>: <a href="plan/0003-composition-and-attainment/../../cast/ines.html">Ines</a>, who needs a worst case found without
 having guessed where to look for it.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>, which discharge accumulator fit and attainment.</li>
+<li><strong>What</strong>: the acceptance below, and the obligations it discharges: accumulator fit and attainment.</li>
 <li><strong>Why</strong>: this is the milestone that makes the tool worth more than a sweep.</li>
 </ul>
 <h2 id="the-increment-2"><a class="header" href="#the-increment-2">The increment</a></h2>
@@ -703,7 +703,7 @@ holding it.</p>
 <li><strong>Who</strong>: <a href="plan/0004-termination-and-counter-fit/../../cast/marek.html">Marek</a>, who wrote the wait and will not act on a
 verdict that names no declaration, and <a href="plan/0004-termination-and-counter-fit/../../cast/ines.html">Ines</a>, who needs to
 know that a declared timeout can actually fire.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>, which discharge termination and counter fit.</li>
+<li><strong>What</strong>: the acceptance below, and the obligations it discharges: termination and counter fit.</li>
 <li><strong>Why</strong>: a wait whose measure wraps has a bound in its documentation and none
 in its behaviour.</li>
 </ul>
@@ -748,7 +748,7 @@ started from.</p>
 breaches a deadline that is only armed for part of a run, and
 <a href="plan/0005-deadlines-and-response-time/../../cast/marek.html">Marek</a>, who has to choose between deepening a buffer and
 shortening the window that overruns it.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>.</li>
+<li><strong>What</strong>: the acceptance below, discharged by the tests and proofs in the software repo.</li>
 <li><strong>Why</strong>: the interval a deadline is armed over changes the verdict, and prose
 has been carrying that distinction so far.</li>
 </ul>
@@ -847,7 +847,7 @@ finding can point at code.</p>
 <li><strong>Who</strong>: <a href="plan/0006-declarations-cite-their-source/../../cast/marek.html">Marek</a>, primary here. His written accommodation
 is a declaration that names the file and symbol it was extracted from, and the
 register format carries no such field, so the accommodation is unmet.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>.</li>
+<li><strong>What</strong>: the acceptance below, discharged by the tests and proofs in the software repo.</li>
 <li><strong>Why</strong>: <a href="plan/0006-declarations-cite-their-source/../../call/0003-cast-modalities.html">call/0003</a> sets what each
 modality is owed, and this is the part of Marek's share the schema never grew.</li>
 </ul>
@@ -904,7 +904,7 @@ gap by building what was promised.</p>
 <li><strong>Who</strong>: <a href="plan/0007-the-promised-verbs/../../cast/ines.html">Ines</a>, primary here. The verbs she works
 through are the ones missing, so the tool currently offers her the smallest
 part of what it computes.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>.</li>
+<li><strong>What</strong>: the acceptance below, discharged by the tests and proofs in the software repo.</li>
 <li><strong>Why</strong>: the arithmetic already exists and only the surface does not, so this
 is the cheapest large gain available.</li>
 </ul>
@@ -972,7 +972,7 @@ decide.</p>
 <li><strong>Who</strong>: <a href="plan/0008-census-adapter/../../cast/ines.html">Ines</a>, who curates rather than authors, and
 <a href="plan/0008-census-adapter/../../cast/marek.html">Marek</a>, for whom a register large enough to maintain by
 hand becomes its own job and therefore stops being maintained.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>.</li>
+<li><strong>What</strong>: the acceptance below, discharged by the tests and proofs in the software repo.</li>
 <li><strong>Why</strong>: every other milestone assumes a register exists. This is where one
 comes from.</li>
 </ul>
@@ -1043,7 +1043,7 @@ names the operation that failed and not the line that wrote it.</p>
 <ul>
 <li><strong>Who</strong>: <a href="plan/0009-units-refused-at-the-line/../../cast/tarn.html">Tarn</a> is primary, with
 <a href="plan/0009-units-refused-at-the-line/../../cast/ines.html">Ines</a> behind him.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>.</li>
+<li><strong>What</strong>: the acceptance below, discharged by the tests and proofs in the software repo.</li>
 <li><strong>Why</strong>: the refusal is right and unactionable, which is a diagnostics fault
 rather than a modelling one.</li>
 </ul>
@@ -1081,7 +1081,7 @@ property holds for a caller that never parsed a register.</li>
 already declares the clock that produces it.</p>
 <ul>
 <li><strong>Who</strong>: <a href="plan/0010-arrivals-from-the-clock-tree/../../cast/marek.html">Marek</a>, primary here.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>.</li>
+<li><strong>What</strong>: the acceptance below, discharged by the tests and proofs in the software repo.</li>
 <li><strong>Why</strong>: the derivation machinery this needs already exists, and it is aimed
 at the frustration the cast records most sharply.</li>
 </ul>
@@ -1129,7 +1129,7 @@ polling loops inside those functions is what would make it a census.</p>
 <ul>
 <li><strong>Who</strong>: <a href="plan/0011-branch-decoding/../../cast/ines.html">Ines</a> is primary, with
 <a href="plan/0011-branch-decoding/../../cast/marek.html">Marek</a> behind her.</li>
-<li><strong>What</strong>: the specs under <code>spec/</code>.</li>
+<li><strong>What</strong>: the acceptance below, discharged by the tests and proofs in the software repo.</li>
 <li><strong>Why</strong>: every milestone so far assumes a register exists, and this is the one
 that would produce a real one.</li>
 </ul>
