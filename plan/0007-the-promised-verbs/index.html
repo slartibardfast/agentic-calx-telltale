@@ -226,8 +226,11 @@ step inside a budget of 8192, which is the interior case the whole search exists
 to find. <code>deadline</code> and <code>overrun</code> then disagree about the same window: the
 blackout is inside the deadline and still overruns the buffer, which is the
 failure a latency figure never shows.</p>
-<p><strong>Outstanding</strong>: <code>census</code>, which has its own milestone, and a composition that
-mixes units is refused by the arithmetic rather than named at parse time.</p>
+<p><code>census</code> has since been built under
+<a href="../0008-census-adapter/README.html">0008</a>.</p>
+<p><strong>Outstanding</strong>: a composition mixing units is refused by the arithmetic rather
+than named at parse time, so the message points at the operation rather than at
+the line that wrote it.</p>
 <h2 id="acceptance"><a class="header" href="#acceptance">Acceptance</a></h2>
 <ul>
 <li>Each of the five verbs runs, and each answers to the structured surface.</li>

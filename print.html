@@ -557,10 +557,9 @@ blank an adapter left is reported as a blank rather than as a missing field,
 since one wants a decision and the other wants a correction.</p>
 <p>The schema holds the no-bare-rates rule itself: a tick count naming no clock is
 refused at parse time, so the arithmetic never has to catch it later.</p>
-<p><strong>Outstanding</strong>: the census adapter. Walking an ELF for loops, back edges and
-interrupts-off regions needs a reader for the format, which is the first
-dependency this crate would take. It belongs outside the proof boundary and
-probably outside this crate, and that placement wants a decision before code.</p>
+<p>The census adapter that this milestone left outstanding has since been built
+under <a href="plan/0001-register-schema-and-census/../0008-census-adapter/README.html">0008</a>, where the placement it was
+waiting on is settled.</p>
 <h2 id="acceptance"><a class="header" href="#acceptance">Acceptance</a></h2>
 <ul>
 <li>A register round-trips through parse and print without losing a field.</li>
@@ -883,8 +882,9 @@ types stay free of text, which keeps the proof boundary where
 it, and the reporting layer has what it needs.</p>
 <p>A <code>?</code> in either field reaches the reader as absent rather than as a literal
 question mark, so a census that could not determine a site says so.</p>
-<p><strong>Outstanding</strong>: the source declaration carries no citation yet. Only waits do,
-because only waits currently reach a verdict.</p>
+<p>A clock carries one too. Its frequency is the value most worth tracing, because
+everything timed by that clock rests on it, and a report names the site
+alongside the nominal rate and the tolerance.</p>
 <h2 id="acceptance-5"><a class="header" href="#acceptance-5">Acceptance</a></h2>
 <ul>
 <li>A declaration may carry a file and a symbol, and a verdict resting on it
@@ -949,8 +949,11 @@ step inside a budget of 8192, which is the interior case the whole search exists
 to find. <code>deadline</code> and <code>overrun</code> then disagree about the same window: the
 blackout is inside the deadline and still overruns the buffer, which is the
 failure a latency figure never shows.</p>
-<p><strong>Outstanding</strong>: <code>census</code>, which has its own milestone, and a composition that
-mixes units is refused by the arithmetic rather than named at parse time.</p>
+<p><code>census</code> has since been built under
+<a href="plan/0007-the-promised-verbs/../0008-census-adapter/README.html">0008</a>.</p>
+<p><strong>Outstanding</strong>: a composition mixing units is refused by the arithmetic rather
+than named at parse time, so the message points at the operation rather than at
+the line that wrote it.</p>
 <h2 id="acceptance-6"><a class="header" href="#acceptance-6">Acceptance</a></h2>
 <ul>
 <li>Each of the five verbs runs, and each answers to the structured surface.</li>
@@ -1036,7 +1039,7 @@ the adapter could not determine is silently invented.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>ac3175d1a09501bf6eb22313d04d434660eb7687</code></li>
+<li>pin: <code>9e0282744871bb7bc89ed1797e2c1afeb1f6dd2e</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -3061,29 +3064,54 @@ a property holds across images and a figure holds for one.</li>
 </ul>
 <h3 id="2026-07-28--every-plan-milestone-closed-and-v030"><a class="header" href="#2026-07-28--every-plan-milestone-closed-and-v030">2026-07-28 — every plan milestone closed, and v0.3.0</a></h3>
 <ul>
-<li>All eight open items closed. calx-telltale <strong>v0.3.0</strong> released, pin <code>ac3175d</code>, artifact <code>babfff8</code>.
-91 tests, 20 harnesses, both lanes green, 0 hazards.</li>
-<li><strong>call/0011</strong>: the census adapter sits beside the core as a workspace member, out of the canonical
+<li>
+<p>All eight open items closed. calx-telltale <strong>v0.3.0</strong> released, pin <code>ac3175d</code>, artifact <code>babfff8</code>.
+91 tests, 20 harnesses, both lanes green, 0 hazards.</p>
+</li>
+<li>
+<p><strong>call/0011</strong>: the census adapter sits beside the core as a workspace member, out of the canonical
 artifact, which is built with <code>-p calx-telltale</code>. The record drew the line at <em>parsing is bounded,
 disassembly is not</em> — so the ELF reader is hand-written and the adapter ended up with <strong>no external
-dependencies either</strong>, which is better than the record anticipated.</li>
-<li><strong>0006 citations</strong>: a wait carries <code>file=</code>/<code>symbol=</code>; a failing verdict now names a site rather than an
-identifier. Citations sit <em>beside</em> the declarations so the verified types stay free of text.</li>
-<li><strong>0007 verbs</strong>: project, attain, deadline, overrun, diff, each with <code>--json</code>. The register grew
-compositions (operands by reference, resolved top down), interrupts and windows.</li>
-<li><strong>0005 remainder</strong>: armed deadlines get their own <code>Unarmed</code> verdict — <em>an unbounded span is not a pass</em>
+dependencies either</strong>, which is better than the record anticipated.</p>
+</li>
+<li>
+<p><strong>0006 citations</strong>: a wait carries <code>file=</code>/<code>symbol=</code>; a failing verdict now names a site rather than an
+identifier. Citations sit <em>beside</em> the declarations so the verified types stay free of text.</p>
+</li>
+<li>
+<p><strong>0007 verbs</strong>: project, attain, deadline, overrun, diff, each with <code>--json</code>. The register grew
+compositions (operands by reference, resolved top down), interrupts and windows.</p>
+</li>
+<li>
+<p><strong>0005 remainder</strong>: armed deadlines get their own <code>Unarmed</code> verdict — <em>an unbounded span is not a pass</em>
 and counts with the withheld. Jitter widens the burst window. A handler declaring <code>reenables</code> is
-interfered with by its own priority level. Two limits became model.</li>
-<li><strong>Correlated failure carried into the arithmetic</strong>: two clocks off one root are exact multiples, so the
+interfered with by its own priority level. Two limits became model.</p>
+</li>
+<li>
+<p><strong>Correlated failure carried into the arithmetic</strong>: two clocks off one root are exact multiples, so the
 root's error cancels in a comparison between them. <code>exact_ratio</code> returns the exact ratio where a root
 is shared and <code>None</code> where it is not. The limit narrowed to <em>common-mode excursion</em>, which is the root
-leaving its own tolerance — a genuinely different failure.</li>
-<li><strong>0003 monotonicity</strong>: established rather than searched where the cost cannot fall, resting on a
+leaving its own tolerance — a genuinely different failure.</p>
+</li>
+<li>
+<p><strong>0003 monotonicity</strong>: established rather than searched where the cost cannot fall, resting on a
 <strong>proved</strong> leaf case and propagating structurally. Conservative in the safe direction; a test holds the
-established answer to what a search would have found.</li>
-<li><strong>0008 census</strong>: drafts a register from an image's function symbols with citations and <code>?</code> blanks.
+established answer to what a search would have found.</p>
+</li>
+<li>
+<p><strong>0008 census</strong>: drafts a register from an image's function symbols with citations and <code>?</code> blanks.
 Emits candidates rather than waits, and <strong>says so in its own header</strong>, because what it misses without a
-disassembler it misses silently.</li>
+disassembler it misses silently.</p>
+</li>
+<li>
+<p>A clock now carries a citation too, which was the last of 0006's open work: the frequency is the value
+most worth tracing, since everything timed by that clock rests on it.</p>
+</li>
+<li>
+<p><strong>A <code>sed</code> on <code>.host-software</code> matched both stanzas</strong> and gave host-lint a <code>-p calx-telltale</code> flag for a
+package it does not have. <code>software --verify-build</code> caught it, which is the gate earning its keep.
+<strong>Edit that file by stanza, never by a pattern that appears in more than one.</strong></p>
+</li>
 </ul>
 
                     </main>

@@ -222,10 +222,9 @@ blank an adapter left is reported as a blank rather than as a missing field,
 since one wants a decision and the other wants a correction.</p>
 <p>The schema holds the no-bare-rates rule itself: a tick count naming no clock is
 refused at parse time, so the arithmetic never has to catch it later.</p>
-<p><strong>Outstanding</strong>: the census adapter. Walking an ELF for loops, back edges and
-interrupts-off regions needs a reader for the format, which is the first
-dependency this crate would take. It belongs outside the proof boundary and
-probably outside this crate, and that placement wants a decision before code.</p>
+<p>The census adapter that this milestone left outstanding has since been built
+under <a href="../0008-census-adapter/README.html">0008</a>, where the placement it was
+waiting on is settled.</p>
 <h2 id="acceptance"><a class="header" href="#acceptance">Acceptance</a></h2>
 <ul>
 <li>A register round-trips through parse and print without losing a field.</li>
