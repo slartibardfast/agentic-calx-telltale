@@ -1,6 +1,6 @@
 # Neither component is released by this host
 
-- Status: accepted
+- Status: accepted; the calx-telltale skip is discharged, see below
 - Scope: host
 - Date: 2026-07-27
 
@@ -15,11 +15,19 @@ decision to cite.
 
 Both `release` receipts are recorded as `skip`, and each cites this record.
 
-**calx-telltale** is greenfield. The design is settled and no implementation
-exists, so there is no binary to tag, no artifact hash to re-derive, and nothing
-a version number would describe. Its `.host-software` stanza carries no `build`
-and no `artifact` for the same reason. The first milestone that produces a
-binary records the artifact, pins a toolchain, and takes this phase to `done`.
+**calx-telltale** was greenfield when this was written. The design was settled,
+no implementation existed, so there was no binary to tag, no artifact hash to
+re-derive, and nothing a version number would describe.
+
+**That is discharged.** The register format and the command line produced a
+binary, so the recipe now carries a pinned toolchain, a build, and an artifact
+hash, and the release phase records `v0.2.0` rather than a skip. The condition
+this record set for itself was the first milestone producing a binary, and that
+is exactly what lifted it.
+
+One thing fell out that is worth keeping. The crate has no dependencies, so the
+offline build inside the pinned container needed no vendored bundle at all,
+which is a reproducibility cost the other components here do pay.
 
 **host-lint** is a consumed tool rather than software under development here. It
 is released by its own repository, which runs its own gates and cuts its own

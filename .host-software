@@ -2,13 +2,17 @@
 # component. The trees are gitignored (materialised locally by
 # `host-lifecycle software --materialize`); this recipe is the audit anchor.
 
-# The software under development. A library so far, with no binary to deploy, so
-# the stanza carries no artifact until there is one to re-derive. See plan/ for
-# the milestones.
+# The software under development. It now ships a binary, so the stanza carries
+# the recipe that re-derives it. The crate has no dependencies, which is why the
+# offline build needs no vendored bundle.
 [software "calx-telltale"]
 	url       = https://github.com/slartibardfast/calx-telltale.git
-	pin       = 5538b4e771cb3ff7ddd1b4166e4e2998b19039fe
+	pin       = 191675b5ec70bc8f6e34a4f33f7dc40fa8932ac4
 	worktrees =
+	toolchain = docker.io/clux/muslrust:1.95.0-stable@sha256:15a72a4abf1c593b0bea63a4a8f20e95c1e5a0696d7051eca87b9b850b2d7e43
+	build     = RUSTUP_TOOLCHAIN=stable CARGO_INCREMENTAL=0 cargo build --release --locked --offline --target x86_64-unknown-linux-musl
+	deploy    = calx-telltale
+	artifact  = target/x86_64-unknown-linux-musl/release/calx-telltale 65001736d4f39b434bac4b72a3b7cdf89d2aeb023b93ad00bb4e41cc0fd06a56
 
 # The gating tool, carried as a component rather than a tools/ submodule so that
 # one source serves both its skill and its binary (call/0001). Recorded here so

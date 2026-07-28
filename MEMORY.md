@@ -145,3 +145,23 @@
   is why the harnesses hold exactly that leaf boundary.
 - Rename leftover found: `PLAN.md` still said "Occupancy" after the overrun rename, because it was not in
   the file list. **A rename sweep must include PLAN.md and MEMORY.md, not just call/ plan/*/ and src/.**
+
+### 2026-07-28 — the plan completed to the lifecycle, and v0.2.0
+
+- Milestones 0004 (termination, counter fit) and 0001's register format and command line are built.
+  75 tests, 19 harnesses. **calx-telltale v0.2.0 released**, pin `191675b`, artifact `65001736`.
+- **The release phase is `done`**, which discharges the calx-telltale skip in call/0004. Its own
+  condition was "the first milestone producing a binary", and the CLI was that milestone.
+- `host-lifecycle release` **computes the version from a change class**, never a semver level chosen by
+  hand: `adds-flag` mapped 0.1.0 to 0.2.0. It runs verify, bumps, builds in the pinned container, derives
+  the canonical hash, then **stops and prints the outward steps for a human**. Tagging is operator-run by
+  design; do not assume authority for it.
+- **The zero-dependency design paid off at release time**: the offline build inside the pinned container
+  needed no vendored bundle, which host-lint and the other components do need.
+- 0004 came in cheaper than its milestone expected. It assumed loop contracts; declaring how the counter
+  moves turned termination into a property of the declaration rather than a search over the loop. **Loop
+  contracts are still the right tool for attainment**, which searches a domain.
+- Outstanding: the ELF census adapter (needs the crate's first dependency, so placement wants a decision
+  first), the armed-interval comparison, and monotonicity reported as a proved property.
+- The gh account reverted mid-sequence again and the tag push failed as connollydavid. See
+  [[gh-account-switching-for-slartibardfast-pushes]]; re-check identity before every outward step.

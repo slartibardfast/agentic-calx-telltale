@@ -95,3 +95,15 @@
     evidence = composition and attainment landed: validate ok; prose clean; refs --gate clean; reconcile clean; 0 hazards; 63 tests and 17 harnesses green at pin 5538b4e
     tool = host-lifecycle@0.47.1
     recorded = 2026-07-28
+
+[receipt "release" "calx-telltale"]
+    disposition = done
+    evidence = v0.2.0@65001736d4f39b434bac4b72a3b7cdf89d2aeb023b93ad00bb4e41cc0fd06a56
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28
+
+[receipt "verify"]
+    disposition = done
+    evidence = plan complete to the lifecycle: validate ok; prose clean; refs --gate clean over 25 docs; reconcile clean; 0 hazards; 75 tests and 19 harnesses green; both builds reproduce at pin 191675b
+    tool = host-lifecycle@0.47.1
+    recorded = 2026-07-28

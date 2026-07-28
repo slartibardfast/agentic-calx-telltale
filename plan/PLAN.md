@@ -26,6 +26,10 @@ folders keep the names they were given and only this index moves.
   moved ahead of the register schema because the schema has to serialise the
   expression tree, so designing the format first would have been guesswork.
 - [0001 register-schema-and-census](0001-register-schema-and-census/README.md),
-  the declaration format and the ELF adapter that emits a skeleton of it.
+  the declaration format and the ELF adapter that emits a skeleton of it. **The
+  format and the command line are built**; the adapter is outstanding.
 - [0004 termination-and-counter-fit](0004-termination-and-counter-fit/README.md),
-  well-foundedness and counter-type fit, which need loop contracts.
+  well-foundedness and counter-type fit. **Built**, and without the loop
+  contracts this entry expected: declaring how the counter moves turned the
+  question into a decision about the declaration rather than a search over the
+  loop.

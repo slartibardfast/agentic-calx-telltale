@@ -44,6 +44,24 @@ peripheral space. It cannot supply a budget or a measure, so it emits those as
 blanks carrying no provenance, and a human fills them in. Everything the adapter
 does emit is marked `Extracted` with the file and symbol it came from.
 
+## Where it stands
+
+**Built**: the register format with its parser, and the command line over it. A
+register is line-oriented because it is committed beside the image it describes,
+so it has to diff cleanly and review in a pull request, and a nested format
+would read better while diffing worse. Every value carries where it came from,
+so provenance enters at declaration rather than being attached afterwards. A
+blank an adapter left is reported as a blank rather than as a missing field,
+since one wants a decision and the other wants a correction.
+
+The schema holds the no-bare-rates rule itself: a tick count naming no clock is
+refused at parse time, so the arithmetic never has to catch it later.
+
+**Outstanding**: the census adapter. Walking an ELF for loops, back edges and
+interrupts-off regions needs a reader for the format, which is the first
+dependency this crate would take. It belongs outside the proof boundary and
+probably outside this crate, and that placement wants a decision before code.
+
 ## Acceptance
 
 - A register round-trips through parse and print without losing a field.

@@ -32,6 +32,18 @@ This milestone needs loop contracts rather than unrolling, because realistic
 budgets run to thousands of iterations and unrolling them is not viable. That is
 why it sits after the two milestones whose harnesses are small and bounded.
 
+## Where it stands
+
+**Built**, and more cheaply than this milestone expected. The entry assumed loop
+contracts, because proving termination of a loop is a statement about the loop.
+Declaring how the counter moves changes the question: a counter tested after it
+moves never sees zero, whatever it counts to, so the finding is a property of the
+declaration rather than a search over the iteration space. Both obligations
+therefore quantify over everything their types admit and discharge in seconds.
+
+The loop contracts are still the right tool for attainment, which searches a
+domain rather than reading a declaration. That is where the expectation belongs.
+
 ## Acceptance
 
 - A wait declaring a post-decrement measure with a zero test fails termination, and the
