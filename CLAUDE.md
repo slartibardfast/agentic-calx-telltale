@@ -229,6 +229,30 @@ Build at least one persona by discussion with the human before planning the work
 it serves. `cast/applying-personas.md` gives the cited process for doing this.
 Follow it.
 
+### Name the means, not only the outcome
+
+Text that tells somebody what to do next (an error, a remedy line, a gate's
+verdict) is a thing to **test**, not a thing to review. Put the message in front
+of a model materially weaker than the one writing it, give it the run's output and
+its exit code, and ask for one next action. What comes back is what the message
+actually says, as distinct from what its author believes it says.
+
+The finding that survived every round of this: **an instruction that names an
+outcome without naming the means leaves the means to be invented, and a small
+model invents confidently.** "Install one (for example A or B)" produced a package
+manager that does not distribute A and a command that does not exist. A remedy
+offering the tail of a pipeline produced the tail of a pipeline, and then a local
+path that the run being remedied never creates.
+
+So: name a URL, because a URL cannot be invented. Quote the whole command, because
+a fragment gets completed by guessing. Neither message changed in substance, and
+every repeat that had failed then answered correctly.
+
+Two constraints on the probe itself. Change **one** thing between rounds, or a
+result cannot be attributed to a cause. And record what the probe did not reach: a
+branch that needs a controlling terminal the probe cannot open is unmeasured, not
+passing.
+
 ## The verification ladder
 
 Different kinds of property need different checkers, and different *strengths* of
