@@ -2416,6 +2416,25 @@ modalities; replace them with your project's own.</p>
 <p>Build at least one persona by discussion with the human before planning the work
 it serves. <code>cast/applying-personas.md</code> gives the cited process for doing this.
 Follow it.</p>
+<h3 id="name-the-means-not-only-the-outcome"><a class="header" href="#name-the-means-not-only-the-outcome">Name the means, not only the outcome</a></h3>
+<p>Text that tells somebody what to do next (an error, a remedy line, a gate's
+verdict) is a thing to <strong>test</strong>, not a thing to review. Put the message in front
+of a model materially weaker than the one writing it, give it the run's output and
+its exit code, and ask for one next action. What comes back is what the message
+actually says, as distinct from what its author believes it says.</p>
+<p>The finding that survived every round of this: <strong>an instruction that names an
+outcome without naming the means leaves the means to be invented, and a small
+model invents confidently.</strong> "Install one (for example A or B)" produced a package
+manager that does not distribute A and a command that does not exist. A remedy
+offering the tail of a pipeline produced the tail of a pipeline, and then a local
+path that the run being remedied never creates.</p>
+<p>So: name a URL, because a URL cannot be invented. Quote the whole command, because
+a fragment gets completed by guessing. Neither message changed in substance, and
+every repeat that had failed then answered correctly.</p>
+<p>Two constraints on the probe itself. Change <strong>one</strong> thing between rounds, or a
+result cannot be attributed to a cause. And record what the probe did not reach: a
+branch that needs a controlling terminal the probe cannot open is unmeasured, not
+passing.</p>
 <h2 id="the-verification-ladder"><a class="header" href="#the-verification-ladder">The verification ladder</a></h2>
 <p>Different kinds of property need different checkers, and different <em>strengths</em> of
 checker. Route each claim to the lane, and to the rung, that can prove it. The base
