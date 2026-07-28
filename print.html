@@ -1228,7 +1228,7 @@ named among the limits stated on every run.</li>
 <h2 id="calx-telltale"><a class="header" href="#calx-telltale">calx-telltale</a></h2>
 <ul>
 <li>url: https://github.com/slartibardfast/calx-telltale.git</li>
-<li>pin: <code>8994dad9ed4dd71b5a985ff2254d45e6a764323d</code></li>
+<li>pin: <code>81d763ebd64711d019d01760b1f303df273aad3a</code></li>
 <li>worktrees: none (single canonical line)</li>
 </ul>
 <h2 id="host-lint"><a class="header" href="#host-lint">host-lint</a></h2>
@@ -2025,7 +2025,11 @@ so it cannot drift.</li>
 <li>Bad: an operator who wants the adapter builds it separately, which is a step
 the single-binary arrangement would not have needed.</li>
 <li>Neutral: whether the adapter is ever released as its own artifact is left
-open. It has no releasable claim until it has one.</li>
+open. It has no releasable claim until it has one, and its version records
+that rather than disguising it. A number tracking the core would imply a
+lockstep it does not have, and one left behind at an old release would read as
+drift; zero says neither and needs no hand-synchronising when the core is
+released. It is marked unpublishable for the same reason.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="claudemd-operating-manual-for-an-agentic-project"><a class="header" href="#claudemd-operating-manual-for-an-agentic-project">CLAUDE.md: operating manual for an agentic project</a></h1>
 <p>This file tells you, the agent, how to work in this repository. Follow it
@@ -3326,6 +3330,24 @@ from wrong offsets rather than failing.</li>
 keyed on an old literal silently matched nothing: once giving host-lint a flag it could not use, once
 leaving a stale pin so <code>verify-build</code> rebuilt the wrong commit and reported drift that was not there.
 There is a <code>setkey.py</code> pattern for this in the session scratchpad.</li>
+</ul>
+<h3 id="2026-07-28--cleared-for-release"><a class="header" href="#2026-07-28--cleared-for-release">2026-07-28 — cleared for release</a></h3>
+<ul>
+<li>Everything before a release is done. Pin <code>81d763e</code>, artifact <code>525915af</code>, gates green, both builds
+reproduce. Three commits sit ahead of <code>v0.3.0</code> and the change class is <strong>adds-flag</strong>, checked rather
+than assumed: the core delta is purely additive (<code>limits.rs</code>, <code>main.rs</code>, <code>register.rs</code>), nothing public
+removed.</li>
+<li><strong>The adapter's version is <code>0.0.0</code> and <code>publish = false</code>, deliberately.</strong> It had drifted a release
+behind the core, which reads as neglect. It has never been released, call/0011 keeps it out of the
+canonical artifact, and call/0004 leaves open whether it is ever released alone. A number tracking the
+core would imply lockstep it does not have; one left behind reads as drift. <strong>Zero says neither and
+needs no hand-sync at each release</strong>, which is how the skew appeared. Recorded in call/0011.</li>
+<li>The README had still advertised drafting a register as a <em>planned verb of the core binary</em>. It is
+neither planned nor a verb: it is a separate built binary. Fixed, with a section describing what it
+declines to claim.</li>
+<li>Note for the next release: <code>host-lifecycle release</code> bumps only the package it is given, so a workspace
+member's version is never touched. That is fine while the adapter stays at zero, and would need
+handling if it ever gains a real version.</li>
 </ul>
 
                     </main>
