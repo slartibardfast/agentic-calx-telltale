@@ -113,11 +113,19 @@ rather than one that quietly produces an empty draft.
 
 ## Where it stands
 
-**Built.** `calx-telltale-census loops` reads a listing, groups instructions by
-the function they sit in, recognises branches from a per-architecture mnemonic
-set, and reports those whose target sits at or before them inside the same
-function. On a real listing that is thousands of loops across hundreds of
-functions, which is a freeze set rather than a symbol dump.
+**Built.** `calx-telltale-census loop-candidates` reads a listing, groups
+instructions by the function they sit in, recognises branches from a
+per-architecture mnemonic set, and reports those whose target sits at or before
+them inside the same function. On a real listing that is thousands of branches
+across hundreds of functions, which is a set to curate rather than a symbol dump.
+
+The command was called `loops` until the name was measured against what it
+returns. A backward branch is evidence of a loop rather than a loop, and the
+set is a lower bound besides, so the old name claimed something the command
+does not establish. Under it the zero-overhead gap below read as a bug rather
+than as the shape of the thing. The old spelling stays dispatched and names its
+replacement, since a caller that learned it is owed the new name rather than an
+unknown-command error to interpret.
 
 An architecture with no mnemonic set is declined by name. Guessing from the
 shape of an operand would find loops in arithmetic that happens to reference an
