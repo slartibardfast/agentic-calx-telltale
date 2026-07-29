@@ -689,6 +689,28 @@ dispatched verb is in the help, or is listed retired and must be absent from it.
 <code>--workspace</code>, which is what CI does. Third time this shape has bitten; the binary equivalent bit
 twice before.</li>
 </ul>
+<h3 id="2026-07-29--correction-the-template-never-failed-its-own-prose-lane"><a class="header" href="#2026-07-29--correction-the-template-never-failed-its-own-prose-lane">2026-07-29 — correction: the template never failed its own prose lane</a></h3>
+<ul>
+<li>Corrects <em>following the template forward</em> and <em>the held-back spine section lands</em> above. Both say the
+template's <code>CLAUDE.md</code> warned under the prose lane of the host-lint it pins. <strong>It did not.</strong></li>
+<li><code>host-template/LEXICON</code> declares <code>harness</code> as a genuine domain noun, and linted from inside the
+template the pre-fix document exits 0. I had run the linter <strong>from this project's root</strong> against
+<code>host-template/CLAUDE.md</code>.</li>
+<li><strong>host-lint resolves <code>LEXICON</code> from the working directory, not from the linted file's repository.</strong>
+Linting a submodule's file from the parent applies the parent's lexicon. That is the whole of the
+error, and it is an easy one to repeat: the command looked right and the path was explicit.</li>
+<li><strong>The real gap is a propagation one, and it survives.</strong> The <code>LEXICON</code> is per-project and is not
+carried by copy-at-version. This project's entries are contextual phrases (<code>kani:&lt;harness&gt;</code>,
+<code>vendor harness</code>, <code>operator on a harness</code>); the template's is the bare word. A spine sentence
+leaning on the template's broader entry warns for an adopter whose lexicon is narrower, and nothing
+warns either side. <strong>The correct fix was to widen this project's lexicon</strong>, not to hold the spine
+back and not to ask upstream to reword.</li>
+<li>Consequence: <code>e89d064</code> upstream was an unnecessary reword, prompted by my report.
+<a href="https://github.com/connollydavid/host/issues/20">connollydavid/host#20</a> carries the correction.</li>
+<li><strong>The lesson is about where a check runs, not what it checks.</strong> A linter, a build, a test: each
+reads configuration from somewhere, and "somewhere" is rarely the file you pointed it at. Verify a
+cross-repository finding from inside the repository that owns the file.</li>
+</ul>
 
                     </main>
 
