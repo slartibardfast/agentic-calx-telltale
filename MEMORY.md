@@ -495,3 +495,25 @@
 - **`cargo test` at the workspace root does not run the census tests** (default members). Use
   `--workspace`, which is what CI does. Third time this shape has bitten; the binary equivalent bit
   twice before.
+
+### 2026-07-29 — correction: the template never failed its own prose lane
+
+- Corrects *following the template forward* and *the held-back spine section lands* above. Both say the
+  template's `CLAUDE.md` warned under the prose lane of the host-lint it pins. **It did not.**
+- `host-template/LEXICON` declares `harness` as a genuine domain noun, and linted from inside the
+  template the pre-fix document exits 0. I had run the linter **from this project's root** against
+  `host-template/CLAUDE.md`.
+- **host-lint resolves `LEXICON` from the working directory, not from the linted file's repository.**
+  Linting a submodule's file from the parent applies the parent's lexicon. That is the whole of the
+  error, and it is an easy one to repeat: the command looked right and the path was explicit.
+- **The real gap is a propagation one, and it survives.** The `LEXICON` is per-project and is not
+  carried by copy-at-version. This project's entries are contextual phrases (`kani:<harness>`,
+  `vendor harness`, `operator on a harness`); the template's is the bare word. A spine sentence
+  leaning on the template's broader entry warns for an adopter whose lexicon is narrower, and nothing
+  warns either side. **The correct fix was to widen this project's lexicon**, not to hold the spine
+  back and not to ask upstream to reword.
+- Consequence: `e89d064` upstream was an unnecessary reword, prompted by my report.
+  [connollydavid/host#20](https://github.com/connollydavid/host/issues/20) carries the correction.
+- **The lesson is about where a check runs, not what it checks.** A linter, a build, a test: each
+  reads configuration from somewhere, and "somewhere" is rarely the file you pointed it at. Verify a
+  cross-repository finding from inside the repository that owns the file.
