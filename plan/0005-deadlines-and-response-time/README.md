@@ -87,8 +87,16 @@ A handler may declare that it re-enables interrupts inside itself, and the
 interference set then widens to its own priority level. A flat model misses that
 entirely.
 
+## Where it stands
+
+**Built**, and the armed-interval comparison this milestone was written around
+is part of it, as the two sections above record rather than restate here. The
+index carried "apart from the armed-interval comparison" long after arming
+landed, which is what this heading exists to stop.
+
 **Outstanding**: the arrival adapter that would populate rates from something
-other than a human's declaration.
+other than a human's declaration, which is
+[0010](../0010-arrivals-from-the-clock-tree/README.md).
 
 ## Acceptance
 

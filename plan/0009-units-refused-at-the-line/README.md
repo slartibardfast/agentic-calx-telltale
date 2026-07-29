@@ -36,6 +36,11 @@ The arithmetic keeps its own refusal. The parser catching a case earlier does
 not make the later check redundant, since the library is usable without the
 register and the property belongs to the arithmetic.
 
+## Where it stands
+
+**Not started.** The refusal is correct today and the message names the
+operation rather than the line, which is the whole of the gap.
+
 ## Acceptance
 
 - A composition naming waits of differing units is refused at parse time, and

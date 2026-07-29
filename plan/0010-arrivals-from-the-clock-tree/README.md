@@ -43,6 +43,12 @@ Where two interrupts derive from one clock, they are correlated in the sense the
 source table already computes, so a comparison between them carries no tolerance
 at all.
 
+## Where it stands
+
+**Not started.** The derivation this needs already runs for clocks themselves;
+what is missing is applying it one level out, to an interrupt that names the
+clock driving it.
+
 ## Acceptance
 
 - An interrupt declaring a clock and a divisor needs no period, and the period

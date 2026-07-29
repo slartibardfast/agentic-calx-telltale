@@ -19,8 +19,10 @@ folders keep the names they were given and only this index moves.
   the `Quantity` core and its three obligations over units, provenance and
   intervals. **Built.**
 - [0005 deadlines-and-response-time](0005-deadlines-and-response-time/README.md),
-  the interrupt verdicts and the schedulability analysis. **Built**, apart from
-  the armed-interval comparison.
+  the interrupt verdicts and the schedulability analysis. **Built**, the
+  armed-interval comparison among them. Priority entered through
+  [call/0010](../call/0010-response-time-over-a-priority-ordered-set.md), which
+  supersedes the exclusion the earlier decision recorded.
 - [0003 composition-and-attainment](0003-composition-and-attainment/README.md),
   the composition operators, accumulator fit, and the witness. **Built.** It
   moved ahead of the register schema because the schema has to serialise the
