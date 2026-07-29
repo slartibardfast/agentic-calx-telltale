@@ -217,3 +217,10 @@
     authorization = plan/0011
     tool = host-lifecycle@0.48.1
     recorded = 2026-07-28
+
+[receipt "release" "calx-telltale"]
+    disposition = done
+    evidence = v0.6.0@651cfbbfaa436aea5a0da1304d02c9a2f646a3276bb4e5b65b488eaf778ba7ba
+    authorization = plan/0011
+    tool = host-lifecycle@0.48.3
+    recorded = 2026-07-29

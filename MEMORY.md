@@ -470,3 +470,28 @@
   `call/NNNN`, `plan/NNNN[#anchor]`, or `owner/repo#N`, recorded on the receipt, "because an approval
   spoken in a session window is not a record". This release cited `plan/0011`. `receipt --record` takes
   the matching `--authorization`.
+
+### 2026-07-29 — the command is named for what it establishes (v0.6.0)
+
+- `loops` became **`loop-candidates`**. The old name claimed the set; the command returns the backward
+  branches it could see, which is *evidence* of a loop rather than a loop, and a lower bound besides.
+  Under the old name the zero-overhead gap read as a bug rather than as the shape of the thing.
+- **The cast chose the name, and it chose neither of my two proposals.** `back-edges` is precise and
+  opaque to Ines, who "perceives calx-telltale through its README, its CLI help, and the numbers it
+  prints" and has no stated compiler background. `loops` overclaims, which is Marek's whole risk
+  ("one bad verdict costs the tool more standing than ten good ones earn it"). `loop-candidates` is
+  honest and legible, and reuses the word `draft` already uses for something a human must confirm.
+- **A retired name stays dispatched and names its replacement.** `loops` now exits 2 with
+  "`loops` is now `loop-candidates`, because a backward branch is evidence of a loop rather than a
+  loop." That serves Tarn, whose frustration is "output whose shape shifts between releases", better
+  than either silence or an alias that would have kept the overclaim alive. It is also the spine's
+  new *name the means, not only the outcome* rule applied to our own surface.
+- **Three more false statements fell out of the rename**, all in the file being edited: the module doc
+  and `draft` both said finding loops needs a disassembler this project keeps out, which is what the
+  sibling command does; and an unreadable image was reported as "only 64-bit images are read", untrue
+  since ELF32 landed. Renaming forced a read of the surrounding prose, which is how they surfaced.
+- The census now carries **its own verb-versus-help check**, the core's with retirement added: a
+  dispatched verb is in the help, or is listed retired and must be absent from it. Negative-controlled.
+- **`cargo test` at the workspace root does not run the census tests** (default members). Use
+  `--workspace`, which is what CI does. Third time this shape has bitten; the binary equivalent bit
+  twice before.
