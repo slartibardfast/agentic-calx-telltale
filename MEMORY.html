@@ -664,6 +664,31 @@ rebuild the census member; the first reproduction "failed to fix" because of it.
 spoken in a session window is not a record". This release cited <code>plan/0011</code>. <code>receipt --record</code> takes
 the matching <code>--authorization</code>.</li>
 </ul>
+<h3 id="2026-07-29--the-command-is-named-for-what-it-establishes-v060"><a class="header" href="#2026-07-29--the-command-is-named-for-what-it-establishes-v060">2026-07-29 — the command is named for what it establishes (v0.6.0)</a></h3>
+<ul>
+<li><code>loops</code> became <strong><code>loop-candidates</code></strong>. The old name claimed the set; the command returns the backward
+branches it could see, which is <em>evidence</em> of a loop rather than a loop, and a lower bound besides.
+Under the old name the zero-overhead gap read as a bug rather than as the shape of the thing.</li>
+<li><strong>The cast chose the name, and it chose neither of my two proposals.</strong> <code>back-edges</code> is precise and
+opaque to Ines, who "perceives calx-telltale through its README, its CLI help, and the numbers it
+prints" and has no stated compiler background. <code>loops</code> overclaims, which is Marek's whole risk
+("one bad verdict costs the tool more standing than ten good ones earn it"). <code>loop-candidates</code> is
+honest and legible, and reuses the word <code>draft</code> already uses for something a human must confirm.</li>
+<li><strong>A retired name stays dispatched and names its replacement.</strong> <code>loops</code> now exits 2 with
+"<code>loops</code> is now <code>loop-candidates</code>, because a backward branch is evidence of a loop rather than a
+loop." That serves Tarn, whose frustration is "output whose shape shifts between releases", better
+than either silence or an alias that would have kept the overclaim alive. It is also the spine's
+new <em>name the means, not only the outcome</em> rule applied to our own surface.</li>
+<li><strong>Three more false statements fell out of the rename</strong>, all in the file being edited: the module doc
+and <code>draft</code> both said finding loops needs a disassembler this project keeps out, which is what the
+sibling command does; and an unreadable image was reported as "only 64-bit images are read", untrue
+since ELF32 landed. Renaming forced a read of the surrounding prose, which is how they surfaced.</li>
+<li>The census now carries <strong>its own verb-versus-help check</strong>, the core's with retirement added: a
+dispatched verb is in the help, or is listed retired and must be absent from it. Negative-controlled.</li>
+<li><strong><code>cargo test</code> at the workspace root does not run the census tests</strong> (default members). Use
+<code>--workspace</code>, which is what CI does. Third time this shape has bitten; the binary equivalent bit
+twice before.</li>
+</ul>
 
                     </main>
 
